@@ -7,7 +7,7 @@
 <title>헬스장지점</title>
 </head>
 <body>
-ZZ
+ZZ moon
 <!-- 예시용 코드 -->
 <!-- <div onclick="mapPoint(37.54249183739355,126.84413751734012,23)"  -->
 <!-- style="cursor:pointer"><div><span class="blcl_num">1</span> -->
