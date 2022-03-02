@@ -27,7 +27,7 @@
 .back {
     width: 33%;
     height: 200px;
-    float: left;
+/*     float: left; */
     background-color: #eeeeee;
     border: 10px;
     border-color: #ffffff;
@@ -37,6 +37,7 @@
     -moz-box-sizing: border-box;
     counter-increment: bc;
     padding: 0px 5px 5px 5px;
+    text-align: center;
 }
 
 
@@ -75,7 +76,7 @@
 }
 
 .b01 {
-    color: #000000;
+    color: #000000;	
     border: #000000 solid 1px;
     padding: 10px;
     background-color: #ffffff;
@@ -86,25 +87,51 @@
     background-color: #000000;
 }
 .m_container{
-	margin-top:250px;
+	margin-top:200px;
+	text-align: center;
 }
 </style> 
 <body>
 <jsp:include page="../header.jsp"/>
 <div class=m_container>
-아이디: <input type=text id=id name=id value="${userid.userid }"><br>
-닉네임: <input type=text id=nname name=nname value="${userid.nickname }"><br>
-이메일: <input type=text id=email name=email value="${userid.email }"><br>
-전화번호: <input type=text id=phone name=phone value="${userid.mobile }"><br>
-주소: <input type=text id=address name=address value="${userid.address }"><br>
+아이디: <input type=text id=id name=id value="${userid.userid }" readonly><br>
+닉네임: <input type=text id=nname name=nname value="${userid.nickname }" readonly><br>
+이메일: <input type=text id=email name=email value="${userid.email }" readonly><br>
+전화번호: <input type=text id=phone name=phone value="${userid.mobile }" readonly><br>
+주소: <input type=text id=address name=address value="${userid.address }" readonly><br>
 	<div class="back">
-	<div class="button_base b01" id=m_update name=m_update>수정하기</div>
-<!-- 	<input type=button id=m_update name=m_update value=수정하기> -->
+	<div class="button_base b01" id=m_update name=m_update >수정하기</div><br><br>
+	<div class="button_base b01" id=m_quit name=m_quit >회원탈퇴</div>
 	</div>
 	</div>
 <!-- 프로필사진 다른거 다하고 시간이좀 남았을때 시도해보기,키-몸무게수정,입력된 몸무게에 대한 bmi지수 -->
 <!-- 회원탈퇴,회원정보수정(닉네임(중복확인),비밀번호,이메일,전화번호,주소) -->
 </body>
+<script src='https://code.jquery.com/jquery-3.5.0.js'></script>
+<script>
+$(document)
+.on('click','#m_update',function(){
+	passw=prompt("비밀번호를 입력하세요");
+	$.ajax({url:'/fit/pwCheck',
+		data:{id:$('#id').val()},
+		dataType:'json',
+		method:'GET',
+		success:function(data){
+			if(passw==data[0]['pw']){
+				alert("확인되었습니다.");
+				document.location='/fit/M_update';
+				return true;
+			} else{
+				alert("비밀번호가 맞지 않습니다.");
+				return false;
+			}
+		}
+		})
+})
+.on('click','#m_quit',function(){
+	document.location='/fit/M_quit';
+})
+</script>
 <script src="<c:url value='/resources/js/scripts.js' />"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->

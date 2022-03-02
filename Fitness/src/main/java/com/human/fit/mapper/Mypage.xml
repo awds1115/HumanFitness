@@ -5,4 +5,22 @@
 <select id="getView" resultType="com.human.fit.Mypage">
 	select * from Members where userid=#{param1};
 </select>
+<update id="Mupdate">
+	update Members set password=#{param2}, nickname=#{param3}, email=#{param4},
+	mobile=#{param5},address=#{param6} 
+	where userid=#{param1};
+</update>
+<update id="Nupdate">
+	update Members set nickname=#{param2} where userid=#{param1};
+</update>
+<select id="getpwCheck" resultType="com.human.fit.Mypage">
+	select password from Members where userid=#{param1};
+</select>
+<select id="getMCheck" resultType="com.human.fit.Mypage">
+	select name,userid,password,mobile,nickname from Members;
+</select>
+<delete id="quitMember">
+	delete from Members where userid=#{param1};
+</delete>
+
 </mapper>
