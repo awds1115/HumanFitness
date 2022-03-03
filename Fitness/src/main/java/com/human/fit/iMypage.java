@@ -16,6 +16,7 @@ public interface iMypage {
 
 	void Nupdate(String id, String nname);
 
-	
+	void bmicheck(String userid, int weight, int height);
 
+	Mypage getWeight(String userid);
 }

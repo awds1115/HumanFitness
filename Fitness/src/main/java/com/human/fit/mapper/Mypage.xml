@@ -22,5 +22,10 @@
 <delete id="quitMember">
 	delete from Members where userid=#{param1};
 </delete>
-
+<update id="bmicheck">
+	update mypage set weight=#{param2}, height=#{param3} where userid=#{param1};
+</update>
+<select id="getWeight" resultType="com.human.fit.Mypage">
+	select userid,weight,height from mypage where userid=#{param1};
+</select>
 </mapper>

@@ -14,10 +14,13 @@ public class Mypage {
 	private String email;
 	private int question;
 	private String answer;
+	private int weight;
+	private int height;
 	public Mypage() {
 	}
 	public Mypage(String userid, String password, String nickname, String human_id, int age, String name, int type,
-			String gender, String mobile, String address, String email, int question, String answer) {
+			String gender, String mobile, String address, String email, int question, String answer, int weight,
+			int height) {
 		this.userid = userid;
 		this.password = password;
 		this.nickname = nickname;
@@ -31,6 +34,8 @@ public class Mypage {
 		this.email = email;
 		this.question = question;
 		this.answer = answer;
+		this.weight = weight;
+		this.height = height;
 	}
 	public String getUserid() {
 		return userid;
@@ -109,6 +114,18 @@ public class Mypage {
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setHeight(int height) {
+		this.height = height;
 	}
 	
 }

@@ -90,6 +90,9 @@
 	margin-top:200px;
 	text-align: center;
 }
+.b_container{
+	text-align: center;
+}
 </style> 
 <body>
 <jsp:include page="../header.jsp"/>
@@ -104,12 +107,52 @@
 	<div class="button_base b01" id=m_quit name=m_quit >회원탈퇴</div>
 	</div>
 	</div>
+	<div class=b_container>
+	 <c:if test="${userid2.weight!=0 }">
+	몸무게:<input type=text id=weight name=weight value="${userid2.weight }"><br>
+		키: <input type=text id=height name=height value="${userid2.height }">
+     </c:if>
+     <c:if test="${userid2.weight ==0 }">
+	몸무게:<input type=text id=weight name=weight placeholder="몸무게를 입력해주세요."><br>
+	키: <input type=text id=height name=height placeholder="키를 입력해주세요.">
+     </c:if>
+		<input type=button id=bmi name=bmi value=등록하기><br>
+		BMI: <input type=number id=bmicheck name=bmicheck readonly>&nbsp;<input type=text id=bmicheck2 name=bmicheck2>
+	</div>
 <!-- 프로필사진 다른거 다하고 시간이좀 남았을때 시도해보기,키-몸무게수정,입력된 몸무게에 대한 bmi지수 -->
 <!-- 회원탈퇴,회원정보수정(닉네임(중복확인),비밀번호,이메일,전화번호,주소) -->
 </body>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script>
 $(document)
+.on('click','#bmi',function(){
+	$.ajax({url:'/fit/weight',
+		data:{id:$('#id').val(),weight:$('#weight').val(),height:$('#height').val()},
+		dataType:'text',
+		method:'GET',
+		success:function(txt){
+			alert("등록되었습니다.");
+// 			 (몸무게) / (키)2
+			let ki=parseInt($('#height').val())*0.01;
+				console.log(ki);
+			let height=(ki*ki);
+			let jisu=(parseInt($('#weight').val())/height);
+			$('#bmicheck').val(Math.round(jisu * 100)/100);
+			let bmi=$('#bmicheck').val();
+			if(bmi<=18.5){
+				$('#bmicheck2').val("저체중 입니다.");
+			} else if(bmi<=23){
+				$('#bmicheck2').val("정상체중 입니다.");
+			} else if(bmi<=25){
+				$('#bmicheck2').val("과체중 입니다.");
+			} else if(bmi<=30){
+				$('#bmicheck2').val("비만 입니다.");
+			} else {
+				$('#bmicheck2').val("고도비만 입니다.");
+			}
+		}
+	})
+})
 .on('click','#m_update',function(){
 	passw=prompt("비밀번호를 입력하세요");
 	$.ajax({url:'/fit/pwCheck',

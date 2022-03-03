@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -29,11 +28,30 @@ public class MypageController {
 	
 	private ServletRequest session;
 	
+	@ResponseBody
+	@RequestMapping(value="/weight",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+	public String weight(Model model, HttpServletRequest request) {
+		String retval="";
+	       try {
+	    	   String userid=request.getParameter("id");
+	    	   int weight=Integer.parseInt(request.getParameter("weight"));
+	    	   int height=Integer.parseInt(request.getParameter("height"));
+	    	   iMypage member=sqlSession.getMapper(iMypage.class);
+	    	   member.bmicheck(userid,weight,height);
+	    	   
+	    	   retval="ok";
+	          
+	       } catch(Exception e) {
+	    	   retval="fail";
+	       }
+	       return retval;
+	}
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage(Model model, HttpServletRequest request) {
 //		HttpSession session = request.getSession(true);
 //		String type1="";
 //		String userid="";
+//		String nickname="";
 //		
 //		if(session.getAttribute("userid")==null) {
 //			userid="null";
@@ -48,15 +66,20 @@ public class MypageController {
 //		int type=Integer.parseInt(type1);
 //		model.addAttribute("type",type);
 //		model.addAttribute("userid",userid);
-		String userid="ora_user";
-	    iMypage mpy=sqlSession.getMapper(iMypage.class); 
+		String userid="xaexal";
+	    
+		iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 
+	    Mypage view2=mpy.getWeight(userid);
 		model.addAttribute("userid",view);
+		model.addAttribute("userid2",view2);
 		return "Member/Mypage";
 	}
 	@RequestMapping(value="/M_update",method=RequestMethod.GET)
 	public String M_update(HttpServletRequest request, Model model) {
+		
 		String userid="ora_user";
+		
 	    iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 
 		model.addAttribute("userid",view);

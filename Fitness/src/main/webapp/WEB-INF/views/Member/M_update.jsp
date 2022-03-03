@@ -85,26 +85,27 @@
 	margin-top:200px;
 
 }
+
 </style>
 <body>
 <jsp:include page="../header.jsp"/>	
 
-<div class=m_container align=center>
-아이디: <input type=text id=id name=id value="${userid.userid }" readonly><br>
-비밀번호: <input type=password id=pw name=pw><br>
-비밀번호 확인: <input type=password id=pw2 name=pw2><br>
-닉네임: <input type=text id=nname name=nname value="${userid.nickname }" readonly>
-	  <input type=button id=change name=change value="닉네임변경" onclick="document.location='/fit/change'"><br>
-이메일: <input type=text id=email name=email value="${userid.email }" ><br>
-전화번호: <input type=text id=phone name=phone value="${userid.mobile }" ><br>
-<input type="text" id="postcode" placeholder="우편번호">
-<input type="button" id=findPost value="우편번호 찾기"><br>
-주소: <input type="text" id="road" placeholder="도로명주소" size="60" value="${userid.address }" ><br>
-<span id="guide" style="color:#999;display:none"></span>
-		<div class="back">
+<table class=m_container align=center>
+<tr><th></th><th><h1>회원정보 수정</h1></th></tr>
+<tr><td align=right>아이디</td><td><input type=text id=id name=id value="${userid.userid }" readonly></td></tr>
+<tr><td align=right>비밀번호</td><td><input type=password id=pw name=pw value="${userid.password }"></td></tr>
+<tr><td align=right>비밀번호 확인</td><td><input type=password id=pw2 name=pw2 value="${userid.password }"></td></tr>
+<tr><td align=right>닉네임</td><td><input type=text id=nname name=nname value="${userid.nickname }" size="10" readonly>
+	  				   <input type=button id=change name=change value="닉네임변경" onclick="document.location='/fit/change'"></td></tr>
+<tr><td align=right>이메일 </td><td><input type=text id=email name=email value="${userid.email }" ></td></tr>
+<tr><td align=right>전화번호</td><td> <input type=text id=phone name=phone value="${userid.mobile }" ></td></tr>
+<tr><td align=right></td><td><input type="text" id="postcode" placeholder="우편번호" size="5"><input type="button" id=findPost value="우편번호 찾기"></td></tr>
+<tr><td align=right>주소 </td><td><input type="text" id="road" placeholder="도로명주소" size="30" value="${userid.address }" ></td></tr>
+</table>
+	<div class="back">
 	<div class="button_base b01" id=mupdate name=mupdate >수정완료</div>
 	</div>
-</div>
+
 
 </body>
 
@@ -119,10 +120,10 @@
 <script>
 $(document)
 .on('click','#mupdate',function(){
-	if($('#id').val()=="" || $('#pw').val()=="" || $('#nname').val()=="" || $('#email').val()=="" ||
-	   $('#phone').val()=="" || $('#road').val()==""){
-		alert("채워지지 않은 값이 있습니다.")
-	}
+if($('#pw').val()!=$('#pw2').val()){
+	alert('비밀번호가 일치하지 않습니다.');
+	return false;
+}
 	$.ajax({url:'/fit/Mupdate',
 		data:{id:$('#id').val(),pw:$('#pw').val(),nname:$('#nname').val(),email:$('#email').val(),phone:$('#phone').val(),address:$('#road').val()},
 		datatype:'text',
@@ -137,29 +138,27 @@ return true;
 .on('click','#findPost',function(){
 	execDaumPostcode();
 })
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+   
     function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
 
-                var roadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 참고 항목 변수
+                var roadAddr = data.roadAddress; 
+                var extraRoadAddr = ''; 
 
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
                     extraRoadAddr += data.bname;
                 }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
+              
                 if(data.buildingName !== '' && data.apartment === 'Y'){
                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                 }
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+              
                 if(extraRoadAddr !== ''){
                     extraRoadAddr = ' (' + extraRoadAddr + ')';
                 }
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+              
                 $('#postcode').val(data.zonecode); 
                 $("#road").val(roadAddr);
             }
