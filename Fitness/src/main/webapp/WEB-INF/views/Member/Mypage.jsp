@@ -24,6 +24,13 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
+input{
+　border-left-width:0;
+　border-right-width:0;
+　border-top-width:0;
+　border-bottom-width:1;
+}
+
 .back {
     width: 33%;
     height: 200px;
@@ -38,6 +45,8 @@
     counter-increment: bc;
     padding: 0px 5px 5px 5px;
     text-align: center;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 
@@ -87,40 +96,98 @@
     background-color: #000000;
 }
 .m_container{
+	margin-left:auto;
+	margin-right:auto;
 	margin-top:200px;
-	text-align: center;
+	text-align:center;
+	width:1200px;
+	color:white;
 }
-.b_container{
-	text-align: center;
-}
+
 </style> 
-<body>
+<body class='bg-dark' class="page-section text-white">
 <jsp:include page="../header.jsp"/>
-<div class=m_container>
-아이디: <input type=text id=id name=id value="${userid.userid }" readonly><br>
-닉네임: <input type=text id=nname name=nname value="${userid.nickname }" readonly><br>
-이메일: <input type=text id=email name=email value="${userid.email }" readonly><br>
-전화번호: <input type=text id=phone name=phone value="${userid.mobile }" readonly><br>
-주소: <input type=text id=address name=address value="${userid.address }" readonly><br>
-	<div class="back">
-	<div class="button_base b01" id=m_update name=m_update >수정하기</div><br><br>
-	<div class="button_base b01" id=m_quit name=m_quit >회원탈퇴</div>
+
+<div class=m_container >
+
+<div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" value="${userid.userid }">아이디</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=id name=id >
+</div>
+<div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" value="${userid.nickname }">닉네임</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=nname name=nname>
+</div>
+<div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" value="${userid.email }">이메일</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=email name=email>
+</div>
+<div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" value="${userid.mobile }" >전화번호</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=phone name=phone>
+</div>
+<div class="input-group mb-3" style="width:500px; margin:auto;" >
+     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;" value="${userid.address }">주소</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=address name=address>
+</div>
+
+		<div style="margin-bottom:15px; ">
+               <input type="button" class="btn btn-secondary" value="수정하기" id=m_update name=m_update >
+               <button type="button" class="btn btn-secondary" id=m_quit name=m_quit style="margin-left:70px;">회원탈퇴</button>
+               
+      	</div>
+
+	
+	
+<c:if test="${userid2.weight!=0 }">
+<div class="input-group mb-3" style="width:500px; margin:auto;" >
+     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">몸무게</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=weight name=weight value="${userid2.weight }">
+	 <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">키</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=height name=height value="${userid2.height }">           
+</div>
+
+</c:if>
+<c:if test="${userid2.weight ==0 }">
+<div class="input-group mb-3" style="width:500px; margin:auto;" >
+     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">몸무게</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=weight name=weight>
+	 <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">키</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=height name=height>           
+</div>
+</c:if>
+		<input type="button" class="btn btn-secondary" value="등록하기" id=bmi name=bmi ><br>
+		
+		<div class="input-group mb-3" style="width:500px; margin:auto; margin-top:20px; height:60px;" >
+     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">BMI</span>
+     <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=bmicheck name=bmicheck readonly>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=bmicheck2 name=bmicheck2 readonly>           
+</div>
+<!-- 		BMI: <input type=number id=bmicheck name=bmicheck readonly>&nbsp;<input type=text id=bmicheck2 name=bmicheck2> -->
+
+   
+<%-- 아이디: <input type=text id=id name=id value="${userid.userid }" readonly><br> --%>
+<%-- 닉네임: <input type=text id=nname name=nname value="${userid.nickname }" readonly><br> --%>
+<%-- 이메일: <input type=text id=email name=email value="${userid.email }" readonly><br> --%>
+<%-- 전화번호: <input type=text id=phone name=phone value="${userid.mobile }" readonly><br> --%>
+<%-- 주소: <input type=text id=address name=address value="${userid.address }" readonly><br> --%>
+	
 	</div>
-	</div>
-	<div class=b_container>
-	 <c:if test="${userid2.weight!=0 }">
-	몸무게:<input type=text id=weight name=weight value="${userid2.weight }"><br>
-		키: <input type=text id=height name=height value="${userid2.height }">
-     </c:if>
-     <c:if test="${userid2.weight ==0 }">
-	몸무게:<input type=text id=weight name=weight placeholder="몸무게를 입력해주세요."><br>
-	키: <input type=text id=height name=height placeholder="키를 입력해주세요.">
-     </c:if>
-		<input type=button id=bmi name=bmi value=등록하기><br>
-		BMI: <input type=number id=bmicheck name=bmicheck readonly>&nbsp;<input type=text id=bmicheck2 name=bmicheck2>
-	</div>
+	
 <!-- 프로필사진 다른거 다하고 시간이좀 남았을때 시도해보기,키-몸무게수정,입력된 몸무게에 대한 bmi지수 -->
 <!-- 회원탈퇴,회원정보수정(닉네임(중복확인),비밀번호,이메일,전화번호,주소) -->
+
 </body>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script>
