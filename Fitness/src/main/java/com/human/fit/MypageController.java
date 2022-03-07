@@ -28,6 +28,15 @@ public class MypageController {
 	
 	private ServletRequest session;
 	
+	@RequestMapping(value="delInfo")
+	public String delInfo(Model model,HttpServletRequest request){
+		String userid="ora_user";
+	    
+		iMypage mpy=sqlSession.getMapper(iMypage.class); 
+	    Mypage view=mpy.getView(userid); 
+		model.addAttribute("userid",view);
+		return "Member/delinfo";
+	}
 	@ResponseBody
 	@RequestMapping(value="/weight",method=RequestMethod.GET,produces="application/json;charset=utf-8")
 	public String weight(Model model, HttpServletRequest request) {
@@ -66,7 +75,7 @@ public class MypageController {
 //		int type=Integer.parseInt(type1);
 //		model.addAttribute("type",type);
 //		model.addAttribute("userid",userid);
-		String userid="xaexal";
+		String userid="ora_user";
 	    
 		iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 
@@ -99,14 +108,6 @@ public class MypageController {
 		
 		return "Member/Mypage";
 	}
-	@RequestMapping(value="/change")
-	public String change(HttpServletRequest request, Model model) {
-		String userid="ora_user";
-	    iMypage mpy=sqlSession.getMapper(iMypage.class); 
-	    Mypage view=mpy.getView(userid); 
-		model.addAttribute("userid",view);
-		return "Member/Change";
-	}
 	
 	@RequestMapping(value="/N_update",method=RequestMethod.GET)
 	public String Nupdate(HttpServletRequest request, Model model) {
@@ -130,10 +131,7 @@ public class MypageController {
 	       }
 	    return ja.toString(); 
 }
-	@RequestMapping(value="/M_quit",method=RequestMethod.GET)
-	public String Mquit(HttpServletRequest request, Model model) {
-		return "Member/M_quit";
-	}
+
 	@ResponseBody
 	@RequestMapping(value="/quit",method=RequestMethod.POST,produces="application/json;charset=utf-8")
 	public String quitcheck(HttpServletRequest request, Model model) {
@@ -143,10 +141,8 @@ public class MypageController {
 	       JSONArray ja= new JSONArray();
 	       for(int i=0; i<MCheck.size(); i++) { 
 	          JSONObject jo=new JSONObject();
-	          jo.put("name",MCheck.get(i).getName());
 	          jo.put("id",MCheck.get(i).getUserid());
 	          jo.put("pw",MCheck.get(i).getPassword());
-	          jo.put("mobile",MCheck.get(i).getMobile());
 	          ja.add(jo);
 	       }
 	    return ja.toString(); 

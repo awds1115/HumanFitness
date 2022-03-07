@@ -16,7 +16,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css" />
-
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <!-- Bootstrap core CSS -->
     <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>회원정보수정</title>
@@ -85,28 +85,101 @@
 	margin-top:200px;
 
 }
-
+.input-group mb-3{
+	width:500px; 
+	margin:auto;
+}
 </style>
-<body>
-<jsp:include page="../header.jsp"/>	
+<body class='bg-dark' class="page-section text-white">
+<jsp:include page="../header.jsp"/>
 
-<table class=m_container align=center>
-<tr><th></th><th><h1>회원정보 수정</h1></th></tr>
-<tr><td align=right>아이디</td><td><input type=text id=id name=id value="${userid.userid }" readonly></td></tr>
-<tr><td align=right>비밀번호</td><td><input type=password id=pw name=pw value="${userid.password }"></td></tr>
-<tr><td align=right>비밀번호 확인</td><td><input type=password id=pw2 name=pw2 value="${userid.password }"></td></tr>
-<tr><td align=right>닉네임</td><td><input type=text id=nname name=nname value="${userid.nickname }" size="10" readonly>
-	  				   <input type=button id=change name=change value="닉네임변경" onclick="document.location='/fit/change'"></td></tr>
-<tr><td align=right>이메일 </td><td><input type=text id=email name=email value="${userid.email }" ></td></tr>
-<tr><td align=right>전화번호</td><td> <input type=text id=phone name=phone value="${userid.mobile }" ></td></tr>
-<tr><td align=right></td><td><input type="text" id="postcode" placeholder="우편번호" size="5"><input type="button" id=findPost value="우편번호 찾기"></td></tr>
-<tr><td align=right>주소 </td><td><input type="text" id="road" placeholder="도로명주소" size="30" value="${userid.address }" ></td></tr>
-</table>
-	<div class="back">
-	<div class="button_base b01" id=mupdate name=mupdate >수정완료</div>
+
+	<div class=m_container>
+		<div class="input-group mb-3" style="width: 500px; margin: auto;">
+			<span class="input-group-text" id="inputGroup-sizing-default"
+				style="width: 113px;">아이디</span> <input type="text"
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" id=id name=id
+				value="${userid.userid }" readonly>
+		</div>
+		<div class="input-group mb-3" style="width: 500px; margin: auto;">
+			<span class="input-group-text" id="inputGroup-sizing-default"
+				style="width: 113px;">비밀번호</span> <input type="password"
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" id=pw name=pw
+				value="${userid.password }">
+		</div>
+		<div class="input-group mb-3" style="width: 500px; margin: auto;">
+			<span class="input-group-text" id="inputGroup-sizing-default"
+				style="width: 113px;">비밀번호확인</span> <input type="password"
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" id=pw2 name=pw2
+				value="${userid.password }">
+		</div>
+		<div class="input-group mb-3" style="width: 500px; margin: auto;">
+			<span class="input-group-text" id="inputGroup-sizing-default"
+				style="width: 113px;">닉네임</span> <input type="text"
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" id=nname name=nname
+				value="${userid.nickname }"> <input type=button id=change
+				name=change value="닉네임변경">
+		</div>
+		<div class="input-group mb-3" style="width: 500px; margin: auto;">
+			<span class="input-group-text" id="inputGroup-sizing-default"
+				style="width: 113px;">이메일</span> <input type="text"
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" id=email name=email
+				value="${userid.email }">
+		</div>
+		<div class="input-group mb-3" style="width: 500px; margin: auto;">
+			<span class="input-group-text" id="inputGroup-sizing-default" style="width: 113px;">전화번호</span>
+			<input type="text" class="form-control"
+				aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" id=phone name=phone
+				value="${userid.mobile }">
+		</div>
+		<div class="input-group mb-3" style="width: 500px; margin: auto;">
+			<span class="input-group-text" id="inputGroup-sizing-default"
+				style="width: 113px;">주소</span> <input type="text"
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" style="text-overflow: ellipsis;" id=road name=road
+				value="${userid.address }">
+				<input type="button" id=findPost value="주소 찾기">
+		</div>
+		<div style="margin-bottom: 15px;" align=center>
+			<input type="button" class="btn btn-secondary" value="수정하기"
+				id=mupdate name=mupdate>
+			<input type=button class="btn btn-secondary" value=뒤로가기 
+				onclick="document.location='mypage'">
+		</div>
 	</div>
-
-
+	
+	
+	
+	
+	<div id=dlgMenu title=닉네임변경 style="display:none;">
+    <div class="input-group mb-3" style="width: 500px; margin: auto;">
+			<span class="input-group-text" id="inputGroup-sizing-default"
+				style="width: 113px;">닉네임</span> <input type="text"
+				class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" id=nname2 name=nname2
+				value="${userid.nickname }"> <input type=button class="btn btn-secondary" id=dubcheck
+				name=dubcheck value="중복확인">
+		</div>
+			<div style="margin-bottom: 15px; margin-right: 30px;" align=right>
+				<input type=button id=N_update name=N_update class="btn btn-secondary" value="수정완료">
+			</div>
+    </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 
 <script src="<c:url value='/resources/js/scripts.js' />"></script>
@@ -117,8 +190,15 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
+<script src='https://code.jquery.com/ui/1.13.0/jquery-ui.js'></script>
 <script>
+dub="false";
 $(document)
+.on('click','#change',function(){
+	   $('#dlgMenu').dialog({
+	        width: 600
+	        })
+	    })
 .on('click','#mupdate',function(){
 if($('#pw').val()!=$('#pw2').val()){
 	alert('비밀번호가 일치하지 않습니다.');
@@ -138,7 +218,54 @@ return true;
 .on('click','#findPost',function(){
 	execDaumPostcode();
 })
-   
+.on('click','#dubcheck',function(){
+	let flag="true";
+	$.ajax({url:'/fit/dubcheck',
+		data:{},
+		dataType:'json',
+		method:'GET',
+		success:function(txt){
+			
+			for(i=0;i<txt.length;i++){
+				if($('#nname2').val()==txt[i]['nickname']){
+					console.log(txt[i]['nickname']);
+					flag="false"
+					break;
+				} else{
+					console.log(txt[i]['nickname']);
+					flag="true";
+					
+				}	
+			}
+		if(flag=="true"){
+			alert("해당 닉네임은 사용이 가능합니다.");
+			dub="true";
+		} else {
+			alert("이미 사용중인 닉네임 입니다.");
+		}
+		}
+	})
+})
+.on('click','#N_update',function(){
+	if($('#nname2').val()==""){
+				alert("닉네임을 작성하세요")
+				return false;
+			} else if(dub=="false"){
+				alert("닉네임 중복확인을 해야 합니다.");
+				return false;
+			} else{
+			$.ajax({url:'/fit/N_update',
+				data:{id:$('#id').val(),nname:$('#nname2').val()},
+				datatype:'text',
+				method:'GET',
+				success:function(txt){
+					alert('수정되었습니다.');
+					document.location='/fit/mypage';
+				}
+				})
+			}
+	return true;
+})
     function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

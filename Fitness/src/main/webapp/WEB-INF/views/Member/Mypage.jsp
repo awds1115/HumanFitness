@@ -96,14 +96,17 @@ input{
     background-color: #000000;
 }
 .m_container{
-	margin-left:auto;
-	margin-right:auto;
 	margin-top:200px;
 	text-align:center;
-	width:1200px;
+	width:50%;
 	color:white;
+	float:right;
 }
-
+.b_container{
+	float: left;
+	margin-top:200px;
+	margin-left:100px;
+}
 </style> 
 <body class='bg-dark' class="page-section text-white">
 <jsp:include page="../header.jsp"/>
@@ -111,29 +114,29 @@ input{
 <div class=m_container >
 
 <div class="input-group mb-3" style="width:500px; margin:auto;">
-     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" value="${userid.userid }">아이디</span>
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >아이디</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=id name=id >
+           id=id name=id value="${userid.userid }" readonly>
 </div>
 <div class="input-group mb-3" style="width:500px; margin:auto;">
-     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" value="${userid.nickname }">닉네임</span>
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >닉네임</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=nname name=nname>
+           id=nname name=nname value="${userid.nickname }" readonly>
 </div>
 <div class="input-group mb-3" style="width:500px; margin:auto;">
-     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" value="${userid.email }">이메일</span>
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >이메일</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=email name=email>
+           id=email name=email value="${userid.email }" readonly>
 </div>
 <div class="input-group mb-3" style="width:500px; margin:auto;">
-     <span class="input-group-text" id="inputGroup-sizing-default" value="${userid.mobile }" >전화번호</span>
+     <span class="input-group-text" id="inputGroup-sizing-default"  >전화번호</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=phone name=phone>
+           id=phone name=phone value="${userid.mobile }" readonly>
 </div>
 <div class="input-group mb-3" style="width:500px; margin:auto;" >
-     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;" value="${userid.address }">주소</span>
+     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;" >주소</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=address name=address>
+           id=address name=address value="${userid.address }" style="text-overflow: ellipsis;" readonly>
 </div>
 
 		<div style="margin-bottom:15px; ">
@@ -141,15 +144,15 @@ input{
                <button type="button" class="btn btn-secondary" id=m_quit name=m_quit style="margin-left:70px;">회원탈퇴</button>
                
       	</div>
-
-	
+</div>
+	<div class=b_container>
 	
 <c:if test="${userid2.weight!=0 }">
 <div class="input-group mb-3" style="width:500px; margin:auto;" >
-     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">몸무게</span>
+     <span class="input-group-text" id="inputGroup-sizing-default"style="width:97px;">몸무게(kg)</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
            id=weight name=weight value="${userid2.weight }">
-	 <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">키</span>
+	 <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">키(cm)</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
            id=height name=height value="${userid2.height }">           
 </div>
@@ -157,16 +160,14 @@ input{
 </c:if>
 <c:if test="${userid2.weight ==0 }">
 <div class="input-group mb-3" style="width:500px; margin:auto;" >
-     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">몸무게</span>
+     <span class="input-group-text" id="inputGroup-sizing-default"style="width:97px;">몸무게(kg)</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=weight name=weight>
-	 <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">키</span>
+           id=weight name=weight placeholder="입력란">
+	 <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">키(cm)</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=height name=height>           
+           id=height name=height placeholder="입력란">           
 </div>
 </c:if>
-		<input type="button" class="btn btn-secondary" value="등록하기" id=bmi name=bmi ><br>
-		
 		<div class="input-group mb-3" style="width:500px; margin:auto; margin-top:20px; height:60px;" >
      <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">BMI</span>
      <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
@@ -174,17 +175,11 @@ input{
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
            id=bmicheck2 name=bmicheck2 readonly>           
 </div>
-<!-- 		BMI: <input type=number id=bmicheck name=bmicheck readonly>&nbsp;<input type=text id=bmicheck2 name=bmicheck2> -->
-
-   
-<%-- 아이디: <input type=text id=id name=id value="${userid.userid }" readonly><br> --%>
-<%-- 닉네임: <input type=text id=nname name=nname value="${userid.nickname }" readonly><br> --%>
-<%-- 이메일: <input type=text id=email name=email value="${userid.email }" readonly><br> --%>
-<%-- 전화번호: <input type=text id=phone name=phone value="${userid.mobile }" readonly><br> --%>
-<%-- 주소: <input type=text id=address name=address value="${userid.address }" readonly><br> --%>
+		<div style="margin-bottom: 15px;" align=center>
+		<input type="button" class="btn btn-secondary" value="등록하기" id=bmi name=bmi ><br>
+		</div>
 	
 	</div>
-	
 <!-- 프로필사진 다른거 다하고 시간이좀 남았을때 시도해보기,키-몸무게수정,입력된 몸무게에 대한 bmi지수 -->
 <!-- 회원탈퇴,회원정보수정(닉네임(중복확인),비밀번호,이메일,전화번호,주소) -->
 
@@ -201,7 +196,6 @@ $(document)
 			alert("등록되었습니다.");
 // 			 (몸무게) / (키)2
 			let ki=parseInt($('#height').val())*0.01;
-				console.log(ki);
 			let height=(ki*ki);
 			let jisu=(parseInt($('#weight').val())/height);
 			$('#bmicheck').val(Math.round(jisu * 100)/100);
@@ -239,7 +233,7 @@ $(document)
 		})
 })
 .on('click','#m_quit',function(){
-	document.location='/fit/M_quit';
+	document.location='/fit/delInfo';
 })
 </script>
 <script src="<c:url value='/resources/js/scripts.js' />"></script>
