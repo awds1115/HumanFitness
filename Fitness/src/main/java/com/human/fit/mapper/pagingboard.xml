@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.human.fit.Iboard">
+
+<insert id="enroll">
+	insert into board(title, content, writer) values (#{title}, #{content}, #{writer})
+</insert>
+
+<!-- 게시판 목록 -->
+<select id="getBList" resultType="com.human.fit.BoardVO">
+	select * from board
+</select>
+
+<select id="getPage" resultType="com.human.fit.BoardVO">
+    
+    select * from board where bno = #{bno}
+    
+</select>
+<!-- 수정부터 하기 -->
+<update id="modify">
+		update board set title = #{title}, content = #{content}, updatedate = now()
+        where bno = #{bno}
+</update>
+<delete id="delete"> 
+        delete from board where bno = #{bno}
+</delete>
+
+
+
+<!-- 검색 조건문 -->
+    <sql id="criteria">
+        <trim prefix="where (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            title like concat('%',#{keyword},'%') 
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            content like concat('%',#{keyword},'%') 
+                        </when>
+                        <when test="type == 'W'.toString()">
+                            writer like concat('%',#{keyword},'%' )
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    
+    </sql>
+ 
+ 
+ 
+    <!-- 게시물 목록(페이징) -->
+    <select id="getListPaging" resultType="com.human.fit.BoardVO">
+    
+        select * from (
+                select bno, title, writer, regdate, updatedate  
+                from board 
+                <if test="keyword != null">
+                    <include refid="criteria"></include>
+                </if>
+                order by bno desc) as T1
+        limit #{skip},#{amount}
+    
+    </select>
+ 
+ 
+    <!-- 게시물 총 개숫 -->
+    <select id="getTotal" resultType="int">
+    
+        select count(*) from board
+        
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>    
+    
+    </select>    
+ 
+</mapper>
