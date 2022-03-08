@@ -1,5 +1,8 @@
 package com.human.fit;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +34,7 @@ public class nBoardController {
 //    }
     
     @RequestMapping("/list")
-    public String boardListGET(Model model,Criteria cri) {
+    public String boardListGET(Model model,Criteria cri,HttpServletRequest hsr) {
         
 //        log.info("게시판 목록 페이지 진입");
         Iboard board=sqlSession.getMapper(Iboard.class);
@@ -43,15 +46,31 @@ public class nBoardController {
         
         model.addAttribute("pageMaker", pageMake);
         
+    	HttpSession session = hsr.getSession(true);
+        String userid = (String)session.getAttribute("userid");
+       
+        model.addAttribute("userid",board.getuserid(userid));
+        
+        System.out.println("userid : "+userid);
+        
         return "Notice/list";
         
     }
     
     @RequestMapping("/enroll")
     // => @RequestMapping(value="enroll", method=RequestMethod.GET)
-    public String boardEnrollGET() {
+    public String boardEnrollGET(Model model,HttpServletRequest hsr) {
         
 //        log.info("게시판 등록 페이지 진입");
+    	
+       	HttpSession session = hsr.getSession(true);
+       	
+       	Iboard board=sqlSession.getMapper(Iboard.class);
+        String userid = (String)session.getAttribute("userid");
+       
+        model.addAttribute("userid",board.getuserid(userid));
+        
+        System.out.println("userid : "+userid);
     	return "Notice/enroll";
     }
 //    
@@ -70,7 +89,7 @@ public class nBoardController {
     }
     
     @RequestMapping("/get")
-    public String boardGetPageGET(int bno,Model model,Criteria cri) {
+    public String boardGetPageGET(int bno,Model model,Criteria cri,HttpServletRequest hsr) {
     	
     	Iboard board=sqlSession.getMapper(Iboard.class);
     	
@@ -78,6 +97,13 @@ public class nBoardController {
     	
     	model.addAttribute("cri",cri);
     	
+    	HttpSession session = hsr.getSession(true);
+        String userid = (String)session.getAttribute("userid");
+       
+        model.addAttribute("userid",board.getuserid(userid));
+         
+        System.out.println("userid : "+userid);
+         
     	return "Notice/get";
     }
     

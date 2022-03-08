@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +95,10 @@
 <h1>목록페이지입니다.</h1>
 
 <div class="table_wrap" align=center>
-	<a href="/fit/enroll" class="top_btn">게시판 등록</a>
+		<c:if test="${userid.nickname!=null}">
+			<a href="/fit/enroll" class="top_btn">게시판 등록</a>
+		</c:if>	
+	
 	<table>
 		<thead>
 			<tr>
@@ -109,10 +112,8 @@
 		<c:forEach items="${list}" var="list">
             <tr>
                 <td><c:out value="${list.bno}"/></td>
-                <td>
-                    <a class="move" href='<c:out value="${list.bno}"/>'>
+                <td class="move" href='<c:out value="${list.bno}"/>'>
        					 <c:out value="${list.title}"/>
-   					</a>
                 </td>
                 <td><c:out value="${list.writer}"/></td>
                 <td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.regdate}"/></td>

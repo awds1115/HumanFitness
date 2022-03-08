@@ -62,10 +62,6 @@ textarea{
 		<input name="title" readonly="readonly" value='<c:out value="${pageInfo.title}"/>' >
 	</div>
 	<div class="input_wrap">
-		<label>게시판 내용</label>
-		<textarea rows="3" name="content" readonly="readonly"><c:out value="${pageInfo.content}"/></textarea>
-	</div>
-	<div class="input_wrap">
 		<label>게시판 작성자</label>
 		<input name="writer" readonly="readonly" value='<c:out value="${pageInfo.writer}"/>' >
 	</div>
@@ -76,10 +72,25 @@ textarea{
 	<div class="input_wrap">
 		<label>게시판 수정일</label>
 		<input name="updateDate" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.updateDate}"/>' >
-	</div>		
+	</div>
+	<div class="input_wrap">
+		<label>게시판 내용</label>
+		<textarea rows="3" name="content" readonly="readonly"><c:out value="${pageInfo.content}"/></textarea>
+	</div>
+	
+	
+	<div class="input_wrap">
+		<label>댓글</label>
+		<textarea rows="3" name="p_content"></textarea>
+		<a class="btn" id="p_insert_btn">댓글 작성</a> 
+	</div>
+	
 	<div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
-		<a class="btn" id="modify_btn">수정 하기</a>
+		<c:if test="${userid.nickname==pageInfo.writer}">
+			<a class="btn" id="modify_btn">수정 하기</a>
+			<a class="btn" id="delete_btn">삭제</a>
+		</c:if>	
 	</div>
 	<form id="infoForm" action="/fit/modify" method="get">
 		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
@@ -103,6 +114,12 @@ textarea{
 		form.attr("action", "/fit/modify");
 		form.submit();
 	});	
+	/* 삭제 버튼 */
+	$("#delete_btn").on("click", function(e){
+	    form.attr("action", "/fit/delete");
+	    form.attr("method", "post");
+	    form.submit();
+	});
 </script>	
 </body>
 </html>

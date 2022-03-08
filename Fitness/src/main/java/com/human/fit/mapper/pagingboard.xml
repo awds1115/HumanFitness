@@ -17,6 +17,9 @@
     select * from board where bno = #{bno}
     
 </select>
+<select id="getuserid" resultType="com.human.fit.membersA">
+  select userid, nickname from Members where userid=#{param1}
+</select>
 <!-- 수정부터 하기 -->
 <update id="modify">
 		update board set title = #{title}, content = #{content}, updatedate = now()
