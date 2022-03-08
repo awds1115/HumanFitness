@@ -62,39 +62,8 @@ input{
     }
 }
 
-.button_base {
-    margin: 0;
-    border: 0;
-    font-size: 18px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    margin-top: -25px;
-    margin-left: -100px;
-    width: 200px;
-    height: 50px;
-    text-align: center;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    cursor: default;
-}
 
-.button_base:hover {
-    cursor: pointer;
-}
 
-.b01 {
-    color: #000000;	
-    border: #000000 solid 1px;
-    padding: 10px;
-    background-color: #ffffff;
-}
-
-.b01:hover {
-    color: #ffffff;
-    background-color: #000000;
-}
 .m_container{
 	margin-top:200px;
 	text-align:center;
