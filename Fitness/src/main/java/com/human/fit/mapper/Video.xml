@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.human.fit.iVideo">
+<select id="getVideo" resultType="com.human.fit.Video">
+	select url from video where no=#{param1};
+</select>
+
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.human.fit.iRegeister">
+<select id="id_check" resultType="com.human.fit.Register">
+    select*from Members where userid =#{param1};
+</select>
+
+<select id="nickname_check" resultType="com.human.fit.Register">
+    select*from Members where nickname =#{param1};
+</select>
+
+<select id="question" resultType="com.human.fit.Register">
+	select q_code,q_type from question order by q_code;
+</select>
+
+<insert id="insertMember">
+	insert into Members (userid,password,nickname,human_id,age,name,type,gender,mobile,address,email,question,answer )
+	values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},#{param13});
+</insert>
+
+<insert id="insertbmi">
+	insert into mypage (userid)
+	values(#{param1});
+</insert>
+
+<select id="getMember" resultType="com.human.fit.Register">
+		select * from Members where userid=#{param1}
+</select>
+
+<select id="findId" resultType="com.human.fit.Register">
+	select userid from Members where email=#{param1};
+</select>
+ 
+<select id="getfindid" resultType="com.human.fit.Register">
+	select name,email from Members;
+</select>
+
+<select id="questlist" resultType="com.human.fit.Register">
+select q_code,q_type from question order by q_code;
+</select>
+
+<select id="findPassword" resultType="com.human.fit.Register">
+select mem.password
+from Members mem,question quest 
+where mem.question=quest.q_code and userid=#{param1};
+</select>
+
+<select id="getfindPassword" resultType="com.human.fit.Register">
+select mem.answer,mem.userid,quest.q_type,q_code,mem.question
+from Members mem,question quest
+where mem.question=quest.q_code;
+</select>
+</mapper>
