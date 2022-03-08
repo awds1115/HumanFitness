@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.human.fit.iAdmin">
+
+<select id="findMem" resultType="com.human.fit.membersA">
+	select a.name,a.nickname,a.userid,a.age,a.gender,a.mobile,a.email,b.mtype 
+	  from Members as a join membertype as b 
+	    on a.type = b.mtype_code
+	 where userid like CONCAT('%', #{param1}, '%');
+</select>
+
+<select id="members_admin" resultType="com.human.fit.membersA">
+	select a.name,a.nickname,a.userid,a.age,a.gender,a.mobile,a.email,b.mtype 
+	  from Members as a join membertype as b 
+	    on a.type = b.mtype_code
+</select>
+
+<select id="getMemInfo" resultType="com.human.fit.membersA">
+	select userid,password,nickname,age,name,gender,mobile,address,email
+	  from Members
+	 where userid=#{param1}
+</select>
+
+<update id="members_update">
+	update Members set type=#{param2} where userid=#{param1}
+</update>
+<delete id="members_delete">
+	delete from Members where userid=#{param1}
+</delete>
+
+<select id="getMtype" resultType="com.human.fit.membertype">
+	select * from membertype
+</select>
+
+<select id="getMship" resultType="com.human.fit.Mship">
+	select month,price from Mship where code=#{param1}
+</select>
+</mapper>
