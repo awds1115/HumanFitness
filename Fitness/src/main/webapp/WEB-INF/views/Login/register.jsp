@@ -6,121 +6,187 @@
 <meta charset="UTF-8">
 <title>회원 가입</title>
 </head>
+ <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css" />
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-table {
-   boder-collapse:collapse;
-   text-align:center;
-   width:400px;
-   background-color:honeydew;
+.m_container{
+	margin-top:150px;
+	text-align:center;
+/* 	width:50%; */
+	color:white;
 }
-td {
-   border:1px solid black;
-   width:120px;
+
+ul li {
+	list-style-type: none;
+	 width:10%;
+	 height:50px;
+	 text-align:center;
+	 display:inline-block;
+	 
 }
-body {
-   background-color:rgb(78, 117, 122);
-   text-align:center;
-   font-family:serif;
-   width:300px;
-    height:300px;
-    position:absolute;
-    left:50%;
-    top:50%;
-    margin-left:-190px;
-    margin-top:-140px;
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}
+
+input::placeholder {
+  font-size: 12px;
 }
 </style>
 <body>
-<form method="POST" action="/fit/register" id=frmsign>
-<table align=center valign=middle>
-    <tr>
-        <td align=right>아이디</td>
-        <td><input type=text id=userid name=userid size=20></td>
-        <td><input type=button value="중복확인"  onclick="doubleCheck()"></td>
-    </tr>
-    <tr>
-        <td align=right>비밀번호</td>
-        <td><input type=password id=password name=password size=20></td>
-    </tr>
-    <tr>
-        <td align=right>비밀번호 확인</td>
-        <td><input type=password id=passcode name=passcode size=20></td>
-    </tr>
+<div class="m_container" style="color:black;">
+<div>
+                <a href="home" style="font-size:40px; text-decoration:none">Human Fitness</a>
+</div><br><br>
+	 <h3 style="color:black;">회원가입</h3>
+	 <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <input type="hidden" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=number name=number>
+	</div>
+	 <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >아이디</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" style="width:44%;" aria-describedby="inputGroup-sizing-default"
+           id=userid name=userid>
+
+     <input type="button" class="form-control" aria-label="Sizing example input" id=check value=중복확인 aria-describedby="inputGroup-sizing-default" onclick="doubleCheck()">
+     </div>  
+         
+     <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >비밀번호</span>
+     <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=password name=password >
+	</div>
+	
+	 <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >비밀번호 확인</span>
+     <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=passcode name=passcode>
+	</div>
+	
+     <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >닉네임</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" style="width:44%;" aria-describedby="inputGroup-sizing-default"
+           id=passcode name=passcode>
+     <input type="button" class="form-control" aria-label="Sizing example input" onclick="nickCheck()" id=check value=중복확인 aria-describedby="inputGroup-sizing-default">
+	</div>
+	
+	 <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >주민번호</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=humanid name=id=humanid placeholder="-없이 입력하세요">-
+     <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=humanid2 name=id=humanid2 max=6>
+	 </div>
+	 
+	 <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >나이</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=age name=age>
+	</div>
+	
+	 <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >이름</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=name name=name>
+	</div>
+	
+	
+	 <div class="input-group mb-3" style="width:500px; margin:auto; ">
+	 <div class="btn-group" data-toggle="buttons">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >성별</span>
+	 
+			<label class="btn btn-info">
+				<input type="radio" name="gender" id="gender"  autocomplete="off" style="width:125px;">
+				<span class="glyphicon glyphicon-ok">남성</span>
+			</label>
+		
+			<label class="btn btn-danger">
+				<input type="radio" name="gender" id="gender" autocomplete="off" style=" width:125px;">
+				<span class="glyphicon glyphicon-ok">여성</span>
+			</label>
+			</div>
+	</div>
+	
+	 <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >전화번호</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=mobile name=mobile placeholder="-없이 입력하세요" >-
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=mobile1 name=mobile1>-
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=mobile2 name=mobile2>
+	</div>
+	
+	<div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >주소</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=postcode  placeholder="우편번호" >
+     
+     <input type="button" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=findPost  value="우편번호 찾기"><br>
+	</div>
+	<div class="input-group mb-3" style="width:500px; margin:auto;">
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=address name="address" placeholder="도로명주소" size="60">
+	</div>
+	
+	<div class="input-group mb-3" style="width:500px; margin:auto;">
+    <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >이메일</span>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=eamil name="eamil">
+	</div>
+	
+	<div class="input-group mb-3" style="width:500px; margin:auto;">
+    <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >비밀번호 힌트</span>
+     <select  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=question name=question style="width:74%;"></select>
+	</div>
+ 
+ 	<div class="input-group mb-3" style="width:500px; margin:auto;">
+    <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >답</span>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=answer name="answer">
+	</div>
+	
+		<div style="margin-bottom:15px;">
+               <button class="btn btn-secondary" id=frmsign name=frmsign 
+               	 style=" font-size:20px; width:300px;">가입완료</button>
+      		
+      	<ul style="padding-left: 0rem; margin-top:20px;">
+      		<li><a href="login" style="text-decoration:none">취소</a></li>
+      	</ul>
+    </div>
     
-    <tr>
-        <td align=right>닉네임</td>
-        <td><input type=text id=nickname name=nickname size=20></td>
-        <td><input type=button value="닉네임중복확인" onclick="nickCheck()"></td>
-    </tr>	
-    <tr>
-        <td align=right>주민번호</td> 
-        <td><input type=text id=human_id name=human_id size=14></td>
-    </tr>
-    <tr>
-        <td align=right>나이</td>
-        <td><input type=text id=age name=age size=3></td>
-    </tr>
-    <tr>
-        <td align=right>이름</td>
-        <td><input type=text id=name name=name size=20></td>
-    </tr>
-     <tr>
-        <td align=right></td>
-        <td><input type=hidden id=number name=number value="2" readonly size=20 ></td> 
-    </tr>
-    <tr>
-        <td align=right>성별</td>
-        <td><input type=radio name=gender value=남성>남성<br>
-            <input type=radio name=gender value=여성>여성</td>
-    </tr>
-    <tr>
-        <td align=right>전화번호</td>
-        <td><input type=text id=mobile name=mobile size=20></td>
-    </tr>
-    <tr>
-    <td>
-      <input type="text" id="postcode" placeholder="우편번호">
-	  <input type="button" id=findPost value="우편번호 찾기"><br>
-	  주소: <input type="text" id="address" name="address" placeholder="도로명주소" size="60" ><br>
-    </td>
-    </tr>
-    <tr>
-        <td align=right>이메일</td>
-        <td><input type=text id=email name=email size=20></td>
-    </tr>
-    <tr>
-        <td align=right>비밀번호 힌트</td>
-        <td><select id=question name=question>
-        </select><td>
-    </tr>
-    <tr>
-        <td align=right>답</td>
-        <td><input type=text id=answer name=answer size=20></td>
-    </tr>
-    <tr>
-        <td align = left>   
-        <input type=submit value='가입완료'>&nbsp;
-        <input type=reset value='비우기'>&nbsp;        
-        <input type=button value='취소' id='btnCancel' onclick="location.href='/fit/home'">
-      </td>
-    </tr>
-    </table>
-    </form>
+</div>
+<jsp:include page="../footer.jsp"/>
 </body>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script>
 let flag="";
+let flag2="";
 $(document)
 .ready(function(){
 	resi();
 })
-
-.on('submit','#frmsign',function(){ //submit이 공백이면 false 공백이없으면 true
+.on('click','#frmsign',function(){ //submit이 공백이면 false 공백이없으면 true
    if($('input[name=userid]').val()==''){
       alert('아이디를 적으세요');
     	 return false;
-   }if(flag!="true") {
+   }else if(flag!="true") {
 		alert('ID 중복검사를 진행해주세요.');
 		return false;
    }if($('input[name=password]').val()==''){
@@ -132,13 +198,13 @@ $(document)
   }if($('input[name=password]').val()!=$('input[name=passcode]').val()){
 		    alert('비밀번호와 비밀번호확인이 다릅니다.');
 		  return false;
-  }if(flag!="true") {
+  }if(flag2!="true") {
 		alert('닉네임 중복검사를 진행해주세요.');
 		return false;
   }if($('input[name=nickname]').val()==''){
     alert('별명을 적으세요');
     	 return false;
-   }if($('input[name=human_id]').val()==''){
+   }if($('input[name=human_id]').val()=='' && $('input[name=human_id2]').val()==''){
 	     alert('주민번호를 적으세요');
 	     return false;
   }if($('input[name=age]').val()==''){
@@ -150,7 +216,8 @@ $(document)
   }if($('input:radio[name=gender]').is(':checked')==false){
 		 alert('성별을 선택하세요');
 		 return false;
-   }if($('input[name=mobile]').val()==''){
+   }if($('input[name=mobile]').val()=='' && $('input[name=mobile2]').val()=='' &&
+	   $('input[name=mobile3]').val()==''){
 	    alert('전화번호를 적으세요');
    	 return false;
   }if($('input[name=address]').val()==''){
@@ -166,58 +233,39 @@ $(document)
      alert('답을 적으세요');
      return false;
 	}else {
-			$.post('/register',
+			$.post('register',
 				{
 					userid: $('#userid').val(),
 					password: $('#password').val(),
 					nickname: $('#nickname').val(),
-					human_id: $('#human_id').val(),
+					human_id: $('#human_id').val()+"-"+$('#human_id2').val(),
 					age: $('#age').val(),
 					name: $('#name').val(),
 					number: $('#number').val(),
-					gender:$('#gender').val(),
-					mobile: $('#mobile').val(),
+					gender:$('input[name="gender"]:checked').val(),
+					mobile: $('#mobile').val()+"-"+$('#mobile2').val()+"-"+$('#mobile3').val(),
 					address: $('#address').val(),
 					email: $('#email').val(),
 					question: $('#question').val(),
 					answer: $('#answer').val(),
 				},
 				function(txt) {
-
+					console.log(txt);
+						if(txt=="ok"){
+							alert("회원가입이 완료되었습니다.");
+							document.location="login";
+						} else {
+							alert("회원가입에 실패하였습니다.");
+							return false;
+						}
 				}, 'text');
 		}
+ return true;
 	})
 
 .on('click','#findPost',function(){
 	   execDaumPostcode();
 	})
-	
-.on("change", "#userid", function() {
-		$("#flag").val("0");
-		$("#flag").val("중복확인");
-	});
-
-//.on("change", "#nickname", function() {
-//	$("#flag1").val("0");
-//});
-
-function addClick() {
-
-	$("#userid").val("");
-	$("#name").val("");
-	$("#mobile").val("");
-
-	$("#userid").css({
-		"readonly": "false"
-	});
-}
-
-function emptyStr(str) {
-    if (typeof str == "undefined" || str == null || str == "")
-        return true;
-
-    return false;
-}
 
 function resi(){
 	$.ajax({
@@ -231,19 +279,16 @@ function resi(){
 			for(i=0; i<txt.length; i++){
 				let str='<option value='+txt[i]['q_code']+'>'+txt[i]['q_type']+'</option>';
 				$('#question').append(str);
-				console.log(txt[i]['q_code']+','+txt[i]['q_type']);
 			}
 		}
 	});
 }
 
 function doubleCheck() {
-	if (emptyStr($("#userid").val())) {
-		alert('ID를 작성하지 않았습니다.');
-
+	if($('#userid').val()==""){
+		alert('아이디를 작성하고 눌러주세요.');
 		return false;
-	}
-	else {
+	} else{
 		$.post('id_check', /*중복 */
 			{ userid: $('#userid').val() },
 			function(txt) {
@@ -255,17 +300,15 @@ function doubleCheck() {
 					flag="true";
 				}
 			}, 'text');
-	}
-
 	return true;
-};
+	}
+	};
 
 function nickCheck() {
-	if (emptyStr($("#nickname").val())) {
-		alert('닉네임를 작성하지 않았습니다.');
+	if($('#nickname').val()==""){
+		alert('닉네임을 작성하고 눌러주세요.');
 		return false;
-	}
-	else {
+	} else{
 		$.post('nickname_check',
 			{ nickname: $('#nickname').val() },
 			function(txt) {
@@ -274,11 +317,11 @@ function nickCheck() {
 					return false;
 				} else {
 					alert('사용 가능한 닉네임 입니다.');
-					flag="true";
+					flag2="true";
 				}
 			}, 'text');
-	}
 	return true;
+	}
 };
 
 
