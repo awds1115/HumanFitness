@@ -38,7 +38,7 @@ td,th{
 <!-- RUD,회원타입(직원,고객)업데이트,회원강퇴,회원조회,회원권환불 -->
 <!-- 보이는걸 엑셀식으로 이쁘게해주세요 -->
 <!-- 페이징, 회원권이랑 조인해서 조회 -->
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 <section class="page-section text-white" id="members">
 <h1 align=center>회원 명단</h1>
 	<div align=right>

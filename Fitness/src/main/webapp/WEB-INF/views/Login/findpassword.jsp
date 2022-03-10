@@ -6,67 +6,116 @@
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
 </head>
+<!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css" />
+
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <style>
-table {
-   boder-collapse:collapse;
-   text-align:center;
-   width:400px;
-   background-color:honeydew;
+.m_container{
+	margin-top:150px;
+	text-align:center;
+/* 	width:50%; */
+	color:white;
 }
-td {
-   border:1px solid black;
-   width:120px;
-}
-body {
-   background-color:rgb(78, 117, 122);
-   text-align:center;
-   font-family:serif;
-   width:300px;
-    height:300px;
-    position:absolute;
-    left:50%;
-    top:50%;
-    margin-left:-190px;
-    margin-top:-140px;
+
+ul li {
+	list-style-type: none;
+	 width:10%;
+	 height:50px;
+	 text-align:center;
+	 display:inline-block;
 }
 </style>
 <body>
-<table align=center valign=middle>
-    <tr>
-        <td align=right>아이디</td>
-        <td><input type=text id=userid name=userid size=20></td>
-    </tr>
-    <tr>
-        <td align=right>비밀번호 힌트</td>
-        <td><select id=question name=question></select></td>
-    </tr>
-    <tr>
-        <td align=right>답</td>
-        <td><input type=text id=answer name=answer size=20></td>
-    </tr>
-    <tr>
-        <td>   
-        <input type=button id=search value='찾기'>&nbsp;     
-        <input type=button value='취소' id='btnCancel' onclick="location.href='/fit/login'">
-      </td>
-    </tr>
-    </table>
-    <table>
-        <tr>
-        <td><input type=hidden id=password name=password size=20></td>
-    </tr>
-    </table>
+<div class="m_container" >
+<div>
+                <a href="home" style="font-size:40px; text-decoration:none">Human Fitness</a>
+</div><br><br>
+	 <h3 style="color:black;">비밀번호 찾기</h3>
+	 <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >아이디</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=userid name=userid>
+     </div>      
+     <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >질문</span>
+     <select  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=question name=question style="width:411px;"></select>
+	</div>
+		 <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >답변</span>
+     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=answer name=answer>
+     </div>   
+		<div style="margin-bottom:15px;">
+               <input type="button" class="btn btn-secondary" value="비밀번호 찾기" id=search name=search 
+               		style=" font-size:20px; width:300px;">
+      		
+      	<ul style="padding-left: 0rem; margin-top:20px;">
+      		<li><a href="login" style="text-decoration:none">로그인</a></li>
+      	</ul>
+      	</div>
+</div>
+
+	 <div id=dlgpw class="input-group mb-3" title="비밀번호 변경" style="width:500px; margin:auto; display:none;">
+     	<div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >비밀번호</span>
+     <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=password name=password>
+     </div>    
+     <div class="input-group mb-3" style="width:500px; margin:auto;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >비밀번호 확인</span>
+     <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=password2 name=password2>
+     </div>        
+     <div style="margin-bottom:15px;">
+               <input type="button" class="btn btn-secondary" value="비밀번호 변경" id=pwchange name=pwchange 
+               		style=" font-size:20px; width:300px; margin-left:35%;">
+	</div>
+		</div>
+<jsp:include page="../footer.jsp"/>
 </body>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
+<script src='https://code.jquery.com/ui/1.13.0/jquery-ui.js'></script>
 <script>
-let flag='fasle';
+let flag='false';
 $(document)
 .ready(function(){
 	resi();
+	
 })
-
-
-
+.on('click','#pwchange',function(){
+	if($('#password').val()==$('#password2').val()){
+	$.ajax({
+		url:'/fit/changepw',
+		data:{userid:$('#userid').val(),
+			  password:$('#password').val()},
+		method:'post',
+		dataType:'text',
+		success:function(txt){
+			console.log(txt);
+			if(txt=="ok"){
+			alert('비밀번호가 변경되었습니다.');
+				location.href='/fit/login';
+			}
+		}
+	})
+	}else{
+		alert('비밀번호가 다릅니다');
+		return false;
+	}
+})
 .on('click','#search',function() {
 	if ($('#email').val()=='') {
 		alert("이메일이 비었습니다.");
@@ -80,30 +129,24 @@ $(document)
 	         data:{}, //해당 파라미터에 안넣을거니까 아무런 데이터도 적지않는다(비교만 한다는뜻)
 	         dataType:'json',
 	         method:'post',
+	         beforeSend:function(){
+	        	flag='false'; 
+	         },
 	         success:function(txt){
+	        	 
 	        	for(i=0; i<txt.length; i++){
 				if($('#userid').val()==txt[i]['userid'] &&
-				   $("#question option:selected").val(txt[i]['question'])&&	
+				   $("#question option:selected").val()==txt[i]['question'] &&	
 				   $('#answer').val()==txt[i]['answer']){
-					 console.log($("select[name=question] option:selected").val());
 					flag='true';
 				}
 			}
 			console.log(flag)
 			if(flag=='true'){
-				$.ajax({
-					url:'/fit/findpassword',
-					data:{userid:$('#userid').val(),
-						question:$('#question').val(),
-						  answer:$('#answer').val()},
-					method:'post',
-					datatype:'json',
-					success:function(txt){
-						$('#password').val(txt[0]['password'])
-						alert($('#userid').val()+"님의 비밀번호는 "+$('#password').val()+"  입니다");
-						location.href='/fit/login'
-					}
-				})
+				$('#dlgpw').dialog({
+    		        width: 550,
+    		        resizable:false
+    		        })
 			} else{
 				alert('아이디,질문과 답변이 맞지 않습니다.');
 				return false;
@@ -117,18 +160,8 @@ $(document)
 
 
 
-    .on("change","#question",function(){
-//     	$("#question").val('');
-//     	$('#question option').each(function(){
-//             if($(this).text()==question){
-//                $(this).prop('selected','selected');
-//                return false;
-//     		}
-//     	});
-//     	return false;
-//     })
-    	$(this).find("option[value='" + $(this).val() + "']").text()
-        console.log($(this).find("option[value='" + $(this).val() + "']").text());
+.on("change","#question",function(){
+    $(this).find("option[value='" + $(this).val() + "']").text()
 });
 
 function resi(){
@@ -141,7 +174,6 @@ function resi(){
 			for(i=0; i<txt.length; i++){
 				let str='<option value='+txt[i]['q_code']+'>'+txt[i]['q_type']+'</option>';
 				$('#question').append(str);
-				console.log(txt[i]['q_code']+','+txt[i]['q_type']);
 			}
 		}
 	});
