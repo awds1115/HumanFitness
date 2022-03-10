@@ -95,27 +95,27 @@ input{
 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >아이디</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=id name=id value="${userid.userid }" readonly>
+           id=id name=id value="${view.userid }" readonly>
 </div>
 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >닉네임</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=nname name=nname value="${userid.nickname }" readonly>
+           id=nname name=nname value="${view.nickname }" readonly>
 </div>
 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >이메일</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=email name=email value="${userid.email }" readonly>
+           id=email name=email value="${view.email }" readonly>
 </div>
 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default"  >전화번호</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=phone name=phone value="${userid.mobile }" readonly>
+           id=phone name=phone value="${view.mobile }" readonly>
 </div>
 <div class="input-group mb-3" style="width:500px; margin:auto;" >
      <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;" >주소</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=address name=address value="${userid.address }" style="text-overflow: ellipsis;" readonly>
+           id=address name=address value="${view.address }" style="text-overflow: ellipsis;" readonly>
 </div>
 
 		<div style="margin-bottom:15px; ">
@@ -126,17 +126,17 @@ input{
 </div>
 	<div class=b_container>
 	
-<c:if test="${userid2.weight!=0 }">
+<c:if test="${view2.weight!=0 }">
 <div class="input-group mb-3" style="width:500px; margin:auto;" >
      <span class="input-group-text" id="inputGroup-sizing-default"style="width:97px;">몸무게(kg)</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=weight name=weight value="${userid2.weight }">
+           id=weight name=weight value="${view2.weight }">
 	 <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">키(cm)</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=height name=height value="${userid2.height }">           
+           id=height name=height value="${view2.height }">           
 </div>
 </c:if>
-<c:if test="${userid2.weight ==0 }">
+<c:if test="${view2.weight ==0 }">
 <div class="input-group mb-3" style="width:500px; margin:auto;" >
      <span class="input-group-text" id="inputGroup-sizing-default"style="width:97px;">몸무게(kg)</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"

@@ -170,7 +170,7 @@ public String logout(HttpServletRequest hsr) {
 	member.logoutMember(session.getAttribute("userid").toString());
 	session.invalidate();	
 	
-	return "home";
+	return "redirect:/home";
 }
 
 @RequestMapping("/ifind")
