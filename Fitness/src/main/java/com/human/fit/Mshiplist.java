@@ -1,7 +1,7 @@
 package com.human.fit;
 
 public class Mshiplist {
-	int no;
+	int no; 
 	String sports_name;
 	String month;
 	int price;

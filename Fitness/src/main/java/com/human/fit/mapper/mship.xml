@@ -4,7 +4,7 @@
 <mapper namespace="com.human.fit.iMship">
 <select id="myMship" resultType="com.human.fit.Mshiplist">
 	select a.no,b.sports_name,a.month,a.price from Mship a,Sports b where a.code=b.code;
-</select>
+</select> 
 <update id="Mshipupdate">
 	update Mship set price=#{param2}, month=#{param3}, M_code=#{param4} where no=#{param1};
 </update>

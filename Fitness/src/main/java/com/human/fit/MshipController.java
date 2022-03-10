@@ -18,7 +18,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class MshipController {
-
+ 
 	@Autowired
 	private SqlSession sqlSession;
 	
