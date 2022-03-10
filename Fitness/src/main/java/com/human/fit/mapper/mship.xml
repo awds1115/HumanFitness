@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.human.fit.iMship">
+<select id="myMship" resultType="com.human.fit.Mshiplist">
+	select a.no,b.sports_name,a.month,a.price from Mship a,Sports b where a.code=b.code;
+</select>
+<update id="Mshipupdate">
+	update Mship set price=#{param2}, month=#{param3}, M_code=#{param4} where no=#{param1};
+</update>
+
+<insert id="Mshipadd">
+	insert into Mship(code,month,price,M_code) values(#{param1},#{param2},#{param3},#{param4});
+</insert>
+
+<select id="getSports" resultType="com.human.fit.Sportlist">
+	select * from Sports;
+</select>
+<delete id="Mshipdelete">
+	delete from Mship where no=#{param1};
+</delete>
+<update id="Sportsupdate">
+	update Sports set sports_name=#{param2} where code=#{param1};
+</update>
+
+<insert id="Sportsadd">
+	insert into Sports(sports_name) values(#{param1});
+</insert>
+<delete id="Sportsdelete">
+	delete from Sports where code=#{param1};
+</delete>
+</mapper>

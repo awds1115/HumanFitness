@@ -16,7 +16,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css" />
-
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <!-- Bootstrap core CSS -->
     <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>마이페이지</title>
@@ -76,6 +76,16 @@ input{
 	margin-top:200px;
 	margin-left:100px;
 }
+	section {width:100%;height:60px;margin:0 auto;}
+
+	section > p {text-align:center;vertical-align:middle;position:relative;display:inline-block;float:left;font-weight:bold;color:#fff;font-size:13px;}
+	section > p strong {position:absolute;bottom:-20px;display:block;width:100%;text-align:center;color:#777;}
+	section > p em {vertical-align:middle;font-size:20px;}
+	section > p:nth-child(1) {height:30px;width:100px;background:#719bb6;}
+	section > p:nth-child(2) {height:30px;width:100px;background:#4d74cd;}
+	section > p:nth-child(3) {height:30px;width:100px;background:#6c6ec6;}
+	section > p:nth-child(4) {height:30px;width:100px;background:#ac6dc9;}
+	section > p:nth-child(5) {height:30px;width:100px;background:#ec4d5e;}
 </style> 
 <body class='bg-dark' class="page-section text-white">
 <jsp:include page="../header.jsp"/>
@@ -125,7 +135,6 @@ input{
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
            id=height name=height value="${userid2.height }">           
 </div>
-
 </c:if>
 <c:if test="${userid2.weight ==0 }">
 <div class="input-group mb-3" style="width:500px; margin:auto;" >
@@ -137,25 +146,66 @@ input{
            id=height name=height placeholder="입력란">           
 </div>
 </c:if>
-		<div class="input-group mb-3" style="width:500px; margin:auto; margin-top:20px; height:60px;" >
-     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">BMI</span>
-     <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=bmicheck name=bmicheck readonly>
-     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=bmicheck2 name=bmicheck2 readonly>           
+	<div class="input-group mb-3" style="width:500px; margin:auto; margin-top:20px; height:60px;" >
+     	<span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;">BMI</span>
+     	<input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+               id=bmicheck name=bmicheck readonly>
+     	<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+               id=bmicheck2 name=bmicheck2 readonly>           
 </div>
-		<div style="margin-bottom: 15px;" align=center>
+<section id="graph">
+	<p><em>저체중</em><strong>1~18.5</strong></p>
+	<p><em>정상</em><strong>18.6~23</strong></p>
+	<p><em>과체중</em><strong>24~25</strong></p>
+	<p><em>비만</em><strong>26~30</strong></p>
+	<p><em>고도비만</em><strong>31이상</strong></p>
+</section>
+	<div style="margin-bottom: 15px;" align=center>
 		<input type="button" class="btn btn-secondary" value="등록하기" id=bmi name=bmi ><br>
-		</div>
-	
 	</div>
-<!-- 프로필사진 다른거 다하고 시간이좀 남았을때 시도해보기,키-몸무게수정,입력된 몸무게에 대한 bmi지수 -->
-<!-- 회원탈퇴,회원정보수정(닉네임(중복확인),비밀번호,이메일,전화번호,주소) -->
-
+	
+	
+	<div id=pscheck title='비밀번호 확인' style="display:none;">
+	<div class="input-group mb-3" style="width:500px; margin:auto;" >
+     <span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;" >비밀번호</span>
+     <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+           id=passw name=passw " style="text-overflow: ellipsis;">
+	</div>
+	<div style="margin-bottom: 15px;" align=center>
+		<input type="button" class="btn btn-secondary" value="확인" id=next name=next ><br>
+	</div>
+</div>
+	
+	
+	
+	
+	
+</div>
 </body>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
+<script src='https://code.jquery.com/ui/1.13.0/jquery-ui.js'></script>
 <script>
 $(document)
+.ready(function(){
+// 	document.querySelector("#obesity_box > div.obesity_box_inner")
+})
+.on('click','#next',function(){
+	$.ajax({url:'/fit/pwCheck',
+		data:{id:$('#id').val()},
+		dataType:'json',
+		method:'GET',
+		success:function(data){
+			if($('#passw').val()==data[0]['pw']){
+				alert("확인되었습니다.");
+				document.location='/fit/M_update';
+				return true;
+			} else{
+				alert("비밀번호가 맞지 않습니다.");
+				return false;
+			}
+		}
+		})
+})
 .on('click','#bmi',function(){
 	$.ajax({url:'/fit/weight',
 		data:{id:$('#id').val(),weight:$('#weight').val(),height:$('#height').val()},
@@ -184,26 +234,15 @@ $(document)
 	})
 })
 .on('click','#m_update',function(){
-	passw=prompt("비밀번호를 입력하세요");
-	$.ajax({url:'/fit/pwCheck',
-		data:{id:$('#id').val()},
-		dataType:'json',
-		method:'GET',
-		success:function(data){
-			if(passw==data[0]['pw']){
-				alert("확인되었습니다.");
-				document.location='/fit/M_update';
-				return true;
-			} else{
-				alert("비밀번호가 맞지 않습니다.");
-				return false;
-			}
-		}
-		})
+	$('#pscheck').dialog({
+        width: 600
+        })
 })
 .on('click','#m_quit',function(){
 	document.location='/fit/delInfo';
 })
+
+
 </script>
 <script src="<c:url value='/resources/js/scripts.js' />"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
