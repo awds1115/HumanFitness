@@ -131,7 +131,7 @@ button{
 	<!-- 시작날짜, 끝나는날짜, 운동종류, 개월수, 가격, -->
 	<!-- select조회 -->
 	<!-- insert(userid,운동종류,개월수,시작날짜, 끝나는날짜) -->
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 <section class="page-section text-white" id="buyMship">
 	<table class=tbl1 align=center>
 	<thead><tr><th><h2><a href="/fit/sports1">YOGA</a></h2></th>
