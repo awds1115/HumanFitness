@@ -37,5 +37,6 @@ public class Mship {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
 	
 }
