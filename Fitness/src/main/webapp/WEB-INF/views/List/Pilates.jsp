@@ -23,6 +23,8 @@
 </head>
 
 <style>
+
+
 .depth3{
 	margin-top:200px;
 	
@@ -52,17 +54,104 @@
 .depth3 > ul > li.on > a{
 	color:#f7f7e4;
 	font-weight:600;
-	background:#64a19d
+	background:#A00000;
 	}
+	table.general td, table.general th {
+    border: 0;
+/*     border-top: solid 1px #c2c2c2; */
+    border-bottom: solid 1px #c2c2c2;
+    border-left: solid 1px #c2c2c2;
+    padding: 10px 0;
+    text-align: center;
+    line-height: 140%;
+    vertical-align: middle;
+    height: auto;
+    color: #252525;
+}
+table {
+    width: 70%;
+    border-collapse: collapse;
+    border: 0;
+    empty-cells: show;
+    border-spacing: 0;
+}
+table.general tbody th{
+	border-left:none;
+}
+table.general thead th{
+	border-left:none;
+}
+table.general {
+    border-collapse: collapse;
+    border-top: solid 2px #f7941d;
+}
+table.general li {
+    line-height: normal;
+    padding-bottom: 5px;
+    text-align: left;
+}
+.hmar{
+margin-left:15%;
+}
+
+.h_bul {
+    font-size: 1.25em;
+    background: url(https://www.cfmc.or.kr/_kor/designer/images/section/sub_bul_1.gif) 0 4px no-repeat;
+    padding: 0 0 10px 15px;
+    color: #f7941d;
+    font-size: 1.25em;
+    background-position: 0 5px;
+    padding: 0 0 10px 15px;
+    height: auto;
+    line-height: 100%;
+    margin-left:15%;
+}
+.c_blue2{
+    font-weight: 400;
+    -webkit-text-size-adjust: none;
+    font-size: 1em;
+    font-family: 'NanumGothic', sans-serif;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    line-height: 180%;
+    padding-bottom: 10px;
+    color: #2681d5;
+    margin-left:15%;
+    }
+    .grayBox{
+    margin-left:15%;
+    margin-right:15%;
+    
+    font-weight: 400;
+    color: #252525;
+    -webkit-text-size-adjust: none;
+    font-size: 1em;
+    font-family: 'NanumGothic', sans-serif;
+    
+    border: 0;
+    list-style: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    background: #f2f2f2;
+    padding: 25px 30px;
+    }
+.noBul{
+	list-style:none;
+}
 </style>
+
 <body>
 
-
+<section class="page-section bg-dark text-white">
 <jsp:include page="../header.jsp"/>
+</section>
 <div class="depth3">
 	<ul>
-		<li class="on"><a href="/fit/pt" >PT</a></li>
-		<li><a href="/fit/health">헬스</a></li>
+		<li><a href="/fit/health" >헬스</a></li>
+		<li><a href="/fit/pt" >PT</a></li>
+		<li class="on"><a href="/fit/pilates">필라테스</a></li>
 		<li><a href="/fit/yoga">요가</a></li>
 	</ul>
 	<br><br>
@@ -73,6 +162,86 @@
 			그 결과 전신 근육의 균형적인 발달과. 신체의 스트레칭 능력과 혈액순환의 향상을 가져오게 된다.</p>
 		</div>
 	</div>
+		<br><br><br><br><br>
+<h3 class="h_bul">운영시간</h3>
+	<table class="general" align=center>
+  <thead>
+    <tr><th class="first" scope="col">구분</th><th scope="col">화~금요일</th><th scope="col">토요일</th><th scope="col">일요일·공휴일</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">운영시간</th><td>09:00 ~ 20:00</td><td>09:00 ~ 19:00</td><td>09:00 ~ 19:00</td></tr>
+    <tr><th scope="row">휴일</th><td colspan="3">매주 월요일, 신정, 설날·추석연휴, 기타 공단이 지정한날(보수공사 등)</td></tr>
+  </tbody>
+</table><br><br>
+<h3 class="h_bul">이용요금</h3>
+<table class="general" align=center>
+  <thead><tr><th class="first" scope="col">구분</th><th scope="col">회원</th><th scope="col">비고</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">3개월</th><td>340,000원</td><td rowspan="3">회원권 구매(발권)날짜로부터 <br>만기일 해당 날짜까지<b></b></td></tr>
+    <tr><th scope="row">6개월</th><td>580,000원</td></tr>
+    <tr><th scope="row">12개월</th><td>790,000원</td></tr>
+  </tbody>
+</table><br><br>
+<h3 class="h_bul">감면기준</h3>
+<table class="general" align=center>
+
+  <tbody>
+    <tr>
+      <th class="center" scope="row">50%감면</th>
+      <td>
+        <ul class="list">
+          <li>장애인(단,1~3급은 보호자 1인 포함)</li>
+          <li>국가유공자</li>
+          <li>의사상자</li>
+          <li>만 65세 이상의 노인</li>
+          <li>만 18세 미만 자녀가 있는 세자녀 이상 가정</li>
+          <li>기초생활수급자</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="c_blue2">
+  <b>※ 감면대상자는 관련 증빙자료를 현장방문 하여 안내데스크에 제출바랍니다.</b>
+</p>
+<div class="grayBox">
+  <ul class="noBul" >
+    <li>1. 본 클래스는 필라테스회원 외 입장이 불가하며 기구사용도 불가합니다.</li>
+    <li>
+      2. 필라테스 수업이 시작하기 10분 전에는 입장 해주셔야 합니다.
+       수업 시작 이후, 늦게 오시는 분들은 수강이 불가합니다.
+    </li>
+    <li>3. 운동전에 충분한 준비 운동을 꼭 해야 합니다.</li>
+    <li>
+      4. 모든 필라테스 수업은 50분 동안 진행됩니다.
+    </li>
+    <li>
+      5. 수업 시 마스크 착용을 의무로 해야하며, 개인매트 및 개인 소도구를 이용합니다.
+    </li>
+    <li>
+      6. 시설유지와 안전사고 예방을 위하여
+      <b class="c_red_1">어린이(미취학 아동)</b> 출입을 금합니다.
+    </li>
+    <li>
+      7. <b class="c_red_1">음주, 흡연, 소란행위 등</b> 피해를 주는 행위를
+      회원은 클래스를 이용할 수 없으며, 발견 시 퇴장조치 합니다.
+    </li>
+    <li>
+      8. <b class="c_red_1">본인의 부주의</b>로 인한 사고는 휴먼 피트니스 에서 책임지지 않습니다.
+    </li>
+    <li>
+      9. <b class="c_red_1">귀중품</b>은 안내데스크에 보관해 주시고 보관하지
+      않은 귀중품에 대해서는 일체 책임지지 않습니다.
+    </li>
+    <li>
+      10. 클래스 내에서는 절대 <b class="c_red_1">금연, 음식물 반입</b>을
+      금합니다.
+    </li>
+    <li>11. 건강을 위하여 무리한 운동은 피해야 합니다.</li>
+    <li>12. 위 이용수칙을 지키지 않을시 퇴장조치 하겠습니다.</li>
+  </ul>
+</div>
 </body>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script>
