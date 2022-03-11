@@ -53,7 +53,7 @@
 .depth3 > ul > li.on > a{
 	color:#f7f7e4;
 	font-weight:600;
-	background:#64a19d
+	background:#A00000;
 	}
 	table.general td, table.general th {
     border: 0;
@@ -142,11 +142,13 @@ margin-left:15%;
 </style>
 <body>
 
-
+<section class="page-section bg-dark text-white">
 <jsp:include page="../header.jsp"/>
+</section>
 <div class="depth3">
 	<ul>
-		<li class="on"><a href="/fit/pt" >PT</a></li>
+		<li class="on"><a href="/fit/health" >헬스</a></li>
+		<li><a href="/fit/pt" >PT</a></li>
 		<li><a href="/fit/pilates">필라테스</a></li>
 		<li><a href="/fit/yoga">요가</a></li>
 	</ul>
@@ -227,7 +229,7 @@ margin-left:15%;
       회원은 헬스장을 이용할 수 없으며, 발견 시 퇴장조치 합니다.
     </li>
     <li>
-      8. <b class="c_red_1">본인의 부주의</b>로 인한 사고는 북부스포츠센터에서 책임지지 않습니다.
+      8. <b class="c_red_1">본인의 부주의</b>로 인한 사고는 휴먼 피트니스에서 책임지지 않습니다.
     </li>
     <li>
       9. <b class="c_red_1">귀중품</b>은 안내데스크에 보관해 주시고 보관하지
