@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         <p class="text-white-75 mb-5">"WHAT SEEMS IMPOSSIBLE TODAY WILL SOON<br> BECOME YOUR WARM-UP"</p>
-                        <a class="btn btn-primary btn-xl" href="#about">${userid},${type},${nickname}</a>
+                        <a class="btn btn-primary btn-xl" href="#about">Start</a>
                     </div>
                 </div>
             </div>
@@ -56,10 +56,9 @@
                         <h2 class="text-white mt-0">Human Fitness</h2>
                         <hr class="divider divider-light" />
                         <p class="text-white-75 mb-4">Human Fitness ! 당신의 피트니스. 당신의 건강한 목표를 응원합니다! 고객님들의 건강한 목표달성을 응원하기 위해 건강한 목표를 가진 젊은 사람들이 모여 만든 휴먼 피트니스입니다. 고객님 한분한분 가족같이 생각하며, 언제나 초심과 진정성을 가지고 내집과 같은 편안한 분위기 속에서 건강한 몸을 만드실 수 있는 공간을 제공 해드릴 것을 약속합니다. 어렵게 가진 목표, 어렵지 않게 해드리겠습니다.</p>
-                        <a class="btn btn-light btn-xl" href="##">뭘쓸까</a>
+                        <a class="btn btn-light btn-xl" href="#">뭐쓸까</a>
                     </div>
                 </div>
-<!--                 asd -->
             </div>
         </section>
        
@@ -101,8 +100,8 @@
         <!-- Call to action-->
         <section class="page-section bg-dark text-white">
             <div class="container px-4 px-lg-5 text-center">
-                <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
-                <a class="btn btn-light btn-xl" href="https://startbootstrap.com/theme/creative/">Download Now!</a>
+                <h2 class="mb-4">회원권 구매하러 가기</h2>
+                <a class="btn btn-light btn-xl" href="buyMship">회원권 구매</a>
             </div>
         </section>
         <!-- Contact-->

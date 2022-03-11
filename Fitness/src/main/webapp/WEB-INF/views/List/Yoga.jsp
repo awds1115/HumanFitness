@@ -23,7 +23,6 @@
 </head>
 
 <style>
-<style>
 
 .depth3{
 	margin-top:200px;
@@ -54,7 +53,7 @@
 .depth3 > ul > li.on > a{
 	color:#f7f7e4;
 	font-weight:600;
-	background:#64a19d
+	background:#A00000;
 	}
 	table.general td, table.general th {
     border: 0;
@@ -141,15 +140,17 @@ margin-left:15%;
 	list-style:none;
 }
 </style>
-<body>
+<body >
 
-
+<section class="page-section bg-dark text-white">
 <jsp:include page="../header.jsp"/>
-<div class="depth3" style="margin-top:200px;">
+</section>
+<div class="depth3">
 	<ul>
-		<li class="on"><a href="/fit/pt" >PT</a></li>
-		<li><a href="/fit/health">헬스</a></li>
+		<li><a href="/fit/health" >헬스</a></li>
+		<li><a href="/fit/pt" >PT</a></li>
 		<li><a href="/fit/pilates">필라테스</a></li>
+		<li class="on"><a href="/fit/yoga">요가</a></li>
 	</ul>
 	<br><br>
 		<div id=video align=center></div>
@@ -157,6 +158,14 @@ margin-left:15%;
 			<p class="text-black-50">요가는 명상과 호흡, 스트레칭 등을 결합하여 심신의 균형 있는 발달을 돕고 바른 자세와 골격 강화에 도움이 된다. 
 			<br>또한 이완과 명상을 통해 마음의 평화와 안정을 가져다주어 피로 및 스트레스 해소 효과도 있다.</p>
 		</div>
+            <div class="container px-4 px-lg-5 text-center">
+                <a class="btn btn-primary btn-xl" href="#about">회원권 구매</a>
+            </div>
+
+<!-- 		<div style="margin-bottom:15px; margin-left:50%;"> -->
+<!--                <input type="button" class="btn btn-secondary" value="수정하기" id=m_update name=m_update > -->
+               
+<!--       	</div> -->
 	</div>
 	<br><br><br><br><br>
 <h3 class="h_bul">운영시간</h3>
