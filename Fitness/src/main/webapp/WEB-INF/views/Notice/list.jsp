@@ -95,7 +95,7 @@
 <h1>목록페이지입니다.</h1>
 
 <div class="table_wrap" align=center>
-		<c:if test="${userid.nickname!=null}">
+		<c:if test="${nickname!='null'}">
 			<a href="/fit/enroll" class="top_btn">게시판 등록</a>
 		</c:if>	
 	
@@ -165,7 +165,6 @@
 
 <script>
 $(document).ready(function(){
-	
 	let result = '<c:out value="${result}"/>';
 	
 	checkAlert(result);

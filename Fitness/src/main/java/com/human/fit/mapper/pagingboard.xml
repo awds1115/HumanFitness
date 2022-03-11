@@ -80,5 +80,8 @@
         </if>    
     
     </select>    
- 
+<!--  모댓글 불러오기 -->
+<select id="getreply" resultType="com.human.fit.p_reply">
+	select * from p_reply where bno= #{param1} order by grp,grps
+</select>
 </mapper>

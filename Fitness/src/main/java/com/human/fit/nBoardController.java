@@ -1,5 +1,7 @@
 package com.human.fit;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -47,11 +49,13 @@ public class nBoardController {
         model.addAttribute("pageMaker", pageMake);
         
     	HttpSession session = hsr.getSession(true);
-        String userid = (String)session.getAttribute("userid");
-       
-        model.addAttribute("userid",board.getuserid(userid));
+//        String userid = (String)session.getAttribute("userid");
+//       
+//        model.addAttribute("member",board.getuserid(userid));
         
-        System.out.println("userid : "+userid);
+        session_call(hsr, model);
+        
+//        System.out.println("userid : "+nickname);
         
         return "Notice/list";
         
@@ -97,12 +101,15 @@ public class nBoardController {
     	
     	model.addAttribute("cri",cri);
     	
-    	HttpSession session = hsr.getSession(true);
-        String userid = (String)session.getAttribute("userid");
-       
-        model.addAttribute("userid",board.getuserid(userid));
-         
-        System.out.println("userid : "+userid);
+//    	HttpSession session = hsr.getSession(true);
+//        String userid = (String)session.getAttribute("userid");
+        
+        List<p_reply> p1 = board.getreply(bno);
+        model.addAttribute("p1",p1);
+        session_call(hsr, model);
+//        model.addAttribute("userid",board.getuserid(userid));
+//         
+//        System.out.println("userid : "+userid);
          
     	return "Notice/get";
     }
@@ -145,4 +152,33 @@ public class nBoardController {
         return "redirect:/list";
         
     }
+    
+    public void session_call(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(true);
+           int type1=0;
+           String userid="";
+           String nickname="";
+           
+           if(session.getAttribute("userid")==null) {
+              userid="null";
+           } else {
+              userid=(String) session.getAttribute("userid");
+           }
+           if(session.getAttribute("type")==null){
+              type1=0;
+           } else {
+              type1=(int) session.getAttribute("type");
+           }
+           if(session.getAttribute("nickname")==null) {
+              nickname="null";
+           } else {
+              nickname=(String) session.getAttribute("nickname");
+           }
+//           int type=Integer.parseInt(type1);
+           model.addAttribute("userid",userid);
+           model.addAttribute("type",type1);
+           model.addAttribute("nickname",nickname);
+           
+//           System.out.println("nickname : "+nickname);
+     }
 }
