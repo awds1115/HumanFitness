@@ -96,7 +96,8 @@ $(document)
 .on('click','#btnNext',function(){
 	if($('#dropoutAgree').is(":checked")){
 		$('#quitMember2').dialog({
-	        width: 550
+	        width: 550,
+	        modal:true
 	        })
 	} else{
 		alert("탈퇴 안내를 확인하고 동의해 주세요.");

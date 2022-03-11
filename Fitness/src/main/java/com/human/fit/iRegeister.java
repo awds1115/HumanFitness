@@ -23,11 +23,13 @@ public interface iRegeister {
 	ArrayList<Register> question(); //질의응답 dto
 	void insertbmi(String userid); //bmi dto
 	ArrayList<Register> id__check(String userid); //아이디 유효성
-	Register getMember(String userid); //이것도 유효성
+	ArrayList<Register> getMember(); //이것도 유효성
 	ArrayList<Register> questlist(); //비밀번호 찾기중 목록
 	ArrayList<Register> findId(String email); //아이디 찾기
 	ArrayList<Register> getfindid(); //이메일 과 실명 맞을때만 찾게 (대조)
 	ArrayList<Register> findPassword(String userid);
 	ArrayList<Register> getfindPassword();
+	Register logoutMember(String userid);
+	void changepw(String userid, String password);
 }
 

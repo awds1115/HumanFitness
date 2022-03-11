@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,10 +33,35 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-
+	public String home(HttpServletRequest request, Model model) {
+		session_call(request, model);
 		return "home";
 	}
 
-
+	public void session_call(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession(true);
+	      int type1=0;
+	      String userid="";
+	      String nickname="";
+	      
+	      if(session.getAttribute("userid")==null) {
+	         userid="null";
+	      } else {
+	         userid=(String) session.getAttribute("userid");
+	      }
+	      if(session.getAttribute("type")==null){
+	         type1=0;
+	      } else {
+	         type1=(int) session.getAttribute("type");
+	      }
+	      if(session.getAttribute("nickname")==null) {
+	    	  nickname="null";
+	      } else {
+	    	  nickname=(String) session.getAttribute("nickname");
+	      }
+//	      int type=Integer.parseInt(type1);
+	      model.addAttribute("userid",userid);
+	      model.addAttribute("type",type1);
+	      model.addAttribute("nickname",nickname);
+	}
 }

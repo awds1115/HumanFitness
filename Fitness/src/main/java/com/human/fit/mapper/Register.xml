@@ -24,9 +24,11 @@
 	insert into mypage (userid)
 	values(#{param1});
 </insert>
-
+<select id="logoutMember" resultType="com.human.fit.Register">
+		select * from Members where userid=#{param1};
+</select>
 <select id="getMember" resultType="com.human.fit.Register">
-		select * from Members where userid=#{param1}
+		select * from Members;
 </select>
 
 <select id="findId" resultType="com.human.fit.Register">
@@ -52,4 +54,7 @@ select mem.answer,mem.userid,quest.q_type,q_code,mem.question
 from Members mem,question quest
 where mem.question=quest.q_code;
 </select>
+<update id="changepw">
+update Members set password=#{param2} where userid = #{param1};
+</update>
 </mapper>

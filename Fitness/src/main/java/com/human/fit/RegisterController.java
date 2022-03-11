@@ -28,10 +28,12 @@ public class RegisterController {
 			return "Login/register";
 		}
 		
-
+		@ResponseBody
 		@RequestMapping
 		(value = "/register", method = RequestMethod.POST, produces = "apllication/json;charset=utf-8")
 		public String signup(HttpServletRequest hsr) { /* insert */	
+			String retval="";
+			try {
 			iRegeister Member = sqlSession.getMapper(iRegeister.class);
 			String userid = hsr.getParameter("userid");
 			String password = hsr.getParameter("password");
@@ -55,8 +57,11 @@ public class RegisterController {
 			iRegeister bmi = sqlSession.getMapper(iRegeister.class);
 			String user = hsr.getParameter("userid");
 			bmi.insertbmi(user);
-			return "Login/login";
-			
+			retval="ok";
+			}catch(Exception e) {
+				retval="fail";
+			}
+			return retval;
 		}
 		
 		@ResponseBody
@@ -84,9 +89,10 @@ public class RegisterController {
 
 		if (id != null) {
 			return "fail";
-		}
+		} else {
 
 		return "ok";
+		}
 	}
 
 
@@ -99,10 +105,11 @@ public String nickname_check(HttpServletRequest hsr) {
 
 	if (nickname != null) {
 		return "fail";
-	}
+	}else {
 
 	return "ok";
 	}
+}
 @RequestMapping("/login")
 public String login() {
 	return "/Login/login";
@@ -121,26 +128,38 @@ public String pw() {
 @ResponseBody
 @RequestMapping(value = "/login_check", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 public String login_check(HttpServletRequest hsr, Model model) {
-	HttpSession session = hsr.getSession(true);
 	iRegeister member = sqlSession.getMapper(iRegeister.class);
 
-	String userid = hsr.getParameter("userid");
-	String password = hsr.getParameter("password");
 
-	Register mem = member.getMember(userid);
-
-	if (mem.getPassword().equals(password)) {
-		
-		System.out.println(userid + mem.getPassword());
-		
-		session.setAttribute("userid", userid);
-		session.setAttribute("nickname", mem.getNickname());
-		session.setAttribute("number", mem.getType());
-		member.getMember(userid);
-	} else {
-		return "fail";
+	ArrayList<Register> MCheck = member.getMember();
+	System.out.println(MCheck.size());
+	JSONArray ja = new JSONArray(); 
+	for (int i = 0; i < MCheck.size(); i++) { 
+		JSONObject jo = new JSONObject(); 
+		jo.put("userid", MCheck.get(i).getUserid());
+		jo.put("passcode", MCheck.get(i).getPassword());
+		ja.add(jo);
 	}
-	return "ok";
+	return ja.toString();
+}
+@ResponseBody
+@RequestMapping(value="/loginUpdate",method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
+public String loginUpdate(HttpServletRequest hsr, Model model) {
+	String retval="";
+	try {
+	iRegeister member = sqlSession.getMapper(iRegeister.class);
+	String userid=hsr.getParameter("userid");
+	Register update=member.logoutMember(userid);
+	
+	HttpSession session = hsr.getSession(true);
+	session.setAttribute("userid", userid);
+	session.setAttribute("nickname", update.getNickname());
+	session.setAttribute("type", update.getType());
+	retval="ok";
+	} catch(Exception e) {
+	retval="fail";
+	}
+	return retval;
 }
 
 @RequestMapping(value = "/logout ", method = RequestMethod.GET)
@@ -148,10 +167,10 @@ public String logout(HttpServletRequest hsr) {
 	HttpSession session = hsr.getSession();
 	iRegeister member = sqlSession.getMapper(iRegeister.class);
 	
-	member.getMember(session.getAttribute("userid").toString());
+	member.logoutMember(session.getAttribute("userid").toString());
 	session.invalidate();	
 	
-	return "home";
+	return "redirect:/home";
 }
 
 @RequestMapping("/ifind")
@@ -225,7 +244,7 @@ public String findpassword() {
 	for (int i = 0; i < TypeList.size(); i++) { // ArrayList -> JSON
 		JSONObject jo = new JSONObject(); // JSONObject 선언,임포트 "
 		jo.put("userid", TypeList.get(i).getUserid());
-		jo.put("question", TypeList.get(i).getQ_type());
+		jo.put("question", TypeList.get(i).getQ_code());
 		jo.put("answer", TypeList.get(i).getAnswer());
 		jo.put("q_code",TypeList.get(i).getQuestion());
 		ja.add(jo);
@@ -253,5 +272,20 @@ public String getRoomList1(Model m) {
 	}
 	return ja.toString();
 }	
-
+@ResponseBody
+@RequestMapping(value="/changepw",method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
+public String changepw(HttpServletRequest hsr, Model model) {
+	String retval="";
+	try {
+	iRegeister member = sqlSession.getMapper(iRegeister.class);
+	String userid=hsr.getParameter("userid");
+	String password=hsr.getParameter("password");
+	member.changepw(userid,password);
+	
+	retval="ok";
+	} catch(Exception e) {
+	retval="fail";
+	}
+	return retval;
+}
 }

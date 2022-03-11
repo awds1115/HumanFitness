@@ -100,28 +100,28 @@
 				style="width: 113px;">아이디</span> <input type="text"
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id=id name=id
-				value="${userid.userid }" readonly>
+				value="${view.userid }" readonly>
 		</div>
 		<div class="input-group mb-3" style="width: 500px; margin: auto;">
 			<span class="input-group-text" id="inputGroup-sizing-default"
 				style="width: 113px;">비밀번호</span> <input type="password"
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id=pw name=pw
-				value="${userid.password }">
+				value="${view.password }">
 		</div>
 		<div class="input-group mb-3" style="width: 500px; margin: auto;">
 			<span class="input-group-text" id="inputGroup-sizing-default"
 				style="width: 113px;">비밀번호확인</span> <input type="password"
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id=pw2 name=pw2
-				value="${userid.password }">
+				value="${view.password }">
 		</div>
 		<div class="input-group mb-3" style="width: 500px; margin: auto;">
 			<span class="input-group-text" id="inputGroup-sizing-default"
 				style="width: 113px;">닉네임</span> <input type="text"
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id=nname name=nname
-				value="${userid.nickname }"> <input type=button id=change
+				value="${view.nickname }"> <input type=button id=change
 				name=change value="닉네임변경">
 		</div>
 		<div class="input-group mb-3" style="width: 500px; margin: auto;">
@@ -129,21 +129,21 @@
 				style="width: 113px;">이메일</span> <input type="text"
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id=email name=email
-				value="${userid.email }">
+				value="${view.email }">
 		</div>
 		<div class="input-group mb-3" style="width: 500px; margin: auto;">
 			<span class="input-group-text" id="inputGroup-sizing-default" style="width: 113px;">전화번호</span>
 			<input type="text" class="form-control"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id=phone name=phone
-				value="${userid.mobile }">
+				value="${view.mobile }">
 		</div>
 		<div class="input-group mb-3" style="width: 500px; margin: auto;">
 			<span class="input-group-text" id="inputGroup-sizing-default"
 				style="width: 113px;">주소</span> <input type="text"
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" style="text-overflow: ellipsis;" id=road name=road
-				value="${userid.address }">
+				value="${view.address }">
 				<input type="button" id=findPost value="주소 찾기">
 		</div>
 		<div style="margin-bottom: 15px;" align=center>
@@ -163,7 +163,7 @@
 				style="width: 113px;">닉네임</span> <input type="text"
 				class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id=nname2 name=nname2
-				value="${userid.nickname }"> <input type=button class="btn btn-secondary" id=dubcheck
+				value="${view.nickname }"> <input type=button class="btn btn-secondary" id=dubcheck
 				name=dubcheck value="중복확인">
 		</div>
 			<div style="margin-bottom: 15px; margin-right: 30px;" align=right>

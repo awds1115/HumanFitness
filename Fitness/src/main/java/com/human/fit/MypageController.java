@@ -57,41 +57,26 @@ public class MypageController {
 	}
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage(Model model, HttpServletRequest request) {
-//		HttpSession session = request.getSession(true);
-//		String type1="";
-//		String userid="";
-//		String nickname="";
-//		
-//		if(session.getAttribute("userid")==null) {
-//			userid="null";
-//		} else {
-//			userid=(String) session.getAttribute("userid");
-//		}
-//		if(session.getAttribute("type")==null){
-//			type1="2";
-//		} else {
-//			type1=(String) session.getAttribute("type");
-//		}
-//		int type=Integer.parseInt(type1);
-//		model.addAttribute("type",type);
-//		model.addAttribute("userid",userid);
-		String userid="ora_user";
-	    
+		session_call(request, model);
+		HttpSession session = request.getSession(true);
+		String userid=(String) session.getAttribute("userid");
 		iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 
 	    Mypage view2=mpy.getWeight(userid);
-		model.addAttribute("userid",view);
-		model.addAttribute("userid2",view2);
+		model.addAttribute("view",view);
+		model.addAttribute("view2",view2);
 		return "Member/Mypage";
 	}
 	@RequestMapping(value="/M_update",method=RequestMethod.GET)
 	public String M_update(HttpServletRequest request, Model model) {
-		
-		String userid="ora_user";
+		HttpSession session = request.getSession(true);
+		session_call(request, model);
+		String userid=(String) session.getAttribute("userid");
+		System.out.println("["+userid+"]");
 		
 	    iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 
-		model.addAttribute("userid",view);
+		model.addAttribute("view",view);
 		return "Member/M_update";
 	}
 	@RequestMapping(value="/Mupdate",method=RequestMethod.GET)
@@ -179,5 +164,31 @@ public class MypageController {
 	       }
 	    return ja.toString(); 
 	}
+	public void session_call(HttpServletRequest request, Model model) {
+	      HttpSession session = request.getSession(true);
+	         int type1=0;
+	         String userid="";
+	         String nickname="";
+	         
+	         if(session.getAttribute("userid")==null) {
+	            userid="null";
+	         } else {
+	            userid=(String) session.getAttribute("userid");
+	         }
+	         if(session.getAttribute("type")==null){
+	            type1=0;
+	         } else {
+	            type1=(int) session.getAttribute("type");
+	         }
+	         if(session.getAttribute("nickname")==null) {
+	            nickname="null";
+	         } else {
+	            nickname=(String) session.getAttribute("nickname");
+	         }
+//	         int type=Integer.parseInt(type1);
+	         model.addAttribute("userid",userid);
+	         model.addAttribute("type",type1);
+	         model.addAttribute("nickname",nickname);
+	   }
 
 }
