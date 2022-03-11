@@ -14,17 +14,14 @@
 <body>
         <!-- Contact-->
 <footer class="bg-light py-5">
-		<div class="row gx-4 gx-lg-5 justify-content-center">
-			<div class="col-lg-4 text-center mb-5 mb-lg-0">
-				<i class="bi-phone fs-2 mb-3 text-muted"></i>
-				<div>+82 (041) 123-4567</div>
-				<br>
-			</div>
 			<div class="container px-4 px-lg-5">
-				<div class="small text-center text-muted">Copyright &copy;
-					2021 - Company Name</div>
+			<div class="small text-center text-muted" style="font-size:13px;">(주)휴먼교육센터<br>
+				천안점: 충청남도 천안시 동남구 대흥로 215  ㅣ  수원점: 경기도 수원시 팔달구 중부대로 100 3층  ㅣ  서울점: 서울특별시 영등포구 영중로8길 6 6층<br>
+				 천안점: 010-561-1122   ㅣ  수원점: 031-239-5855   ㅣ  서울점: 02-3667-3688 
+				</div><br>
+				<div class="small text-center text-muted" style="font-size:12px;">Copyright &copy;
+					2021 - HumanFitness</div>
 			</div>
-		</div>
 	</footer>
 </body>
 </html>
