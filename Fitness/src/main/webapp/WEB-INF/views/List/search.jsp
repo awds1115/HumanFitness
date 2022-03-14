@@ -1,7 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+<style>
+  table {
+    padding: 10px;
+    text-align:center;
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #444444;
+  }
+  .pageInfo{
+      list-style : none;
+      display: inline-block;
+    margin: 50px 0 0 100px;      
+  }
+  .pageInfo li{
+      float: left;
+    font-size: 20px;
+    margin-left: 18px;
+    padding: 7px;
+    font-weight: 500;
+  }
+ a:link {color:black; text-decoration: none;}
+ a:visited {color:black; text-decoration: none;}
+ a:hover {color:black; text-decoration: underline;}
+</style>
 <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -30,7 +58,34 @@
 </head>
  <body id="page-top">
 <!--         Navigation -->
-        <jsp:include page="../header.jsp"/>
+<%--         <jsp:include page="../header.jsp"/> --%>
+ <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="dropdown-item" href="#page-top">Human Fitness</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                        <li class="dropdown-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="dropdown-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="dropdown-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                        <li class="dropdown-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="dropdown text-end">
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                  </a>
+                  <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  </ul>
+                </div>
+            </div>
+        </nav>
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container px-4 px-lg-5">
@@ -38,30 +93,57 @@
                     <div class="col-lg-8 col-xl-6 text-center">
                         <h2 class="mt-0">영양 정보가 궁금하시다면?</h2>
                         <hr class="divider" />
-                        <p class="text-muted mb-5">아래 검색창에서 해당 음식에 관한 영양 정보를 찾아보세요!</p>
+                        <p class="text-muted mb-5">아래 검색창에서 해당 식품에 관한 영양 정보를 찾아보세요!</p>
                     </div>
                 </div>
                 <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
                     <div class="col-lg-6">
                    
                             <div class="form-floating mb-3" align=center>
-                                <input type=text id=value1 name=value1 placeholder="찾을 음식을 입력하세요.">
+                                <input type=text id=value1 name=value1 placeholder="찾을 식품을 입력하세요.">
                                 <input type=button id=btnSearch name=btnSearch value="찾기" >
                             </div>
                             <div class="d-grid" style="table-layout:fixed;">
-                            <button type=button class="btn btn-primary btn-xl disabled">영양 정보</button>
-                                <table id=tblSearch style="margin-left: auto; margin-right: auto;" style="text-align: center;">
-								</table>
+                            <button type=button class="btn btn-primary btn-xl disabled">해당 식품 영양 정보</button>
                             </div>
                     </div>
                 </div>
-               
             </div>
+                            <table id=tblSearch>
+							</table>
+		<div class="pageInfo_wrap" >
+        	<div class="pageInfo_area">
+ 				<ul id="pageInfo" class="pageInfo">
+ 					<!-- 이전페이지 버튼 -->
+                	<c:if test="${SearchpageMaker.prev}">
+                    	<li class="pageInfo_btn previous"><a href="${SearchpageMaker.startPage-1}">Previous</a></li>
+                	</c:if>
+ 				
+ 					<!-- 각 번호 페이지 버튼 -->
+                	<c:forEach var="num" begin="${SearchpageMaker.startPage}" end="${SearchpageMaker.endPage}">
+                    	<li class="pageInfo_btn"><a href="${num}">${num}</a></li>
+                	</c:forEach>
+                	
+                	<!-- 다음페이지 버튼 -->
+               		<c:if test="${SearchpageMaker.next}">
+                    	<li class="pageInfo_btn next"><a href="${SearchpageMaker.endPage + 1 }">Next</a></li>
+                	</c:if> 
+ 				</ul>
+        	</div>
+    	</div>
+    	
+    	<form id="moveForm" method="get">
+    		<input type="hidden" id=value1 name=value1>
+    		<input type="hidden" name="pageNum" value="${SearchpageMaker.sp.pageNum}">
+    		<input type="hidden" name="amount" value="${SearchpageMaker.sp.amount}">
+    	</form>
         </section>
+        
         <!-- Footer-->
-        <footer class="bg-light py-5">
-            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2022 - Human Fitness</div></div>
-        </footer>
+        <jsp:include page="../footer.jsp"/>
+<!--         <footer class="bg-light py-5"> -->
+<!--             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2022 - Human Fitness</div></div> -->
+<!--         </footer> -->
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- SimpleLightbox plugin JS-->
@@ -73,7 +155,6 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
 <!-- <div class="searchbox"> -->
 <!--       <div class="header"> -->
 <!--         <h1>Search</h1> -->
@@ -94,9 +175,45 @@ $(document)
 
 $("#value1").keyup(function(e){
 	if(e.keyCode == 13){
-		search(); 
+		search();
 	}
 })
+
+
+let moveForm = $("#moveForm");
+
+$(".move").on("click", function(e){
+    e.preventDefault();
+    
+    moveForm.append("<input type='hidden' name='num' value='"+ $(this).attr("href")+ "'>");
+    moveForm.attr("action", "/fit/search");
+    moveForm.submit();
+});
+
+$(".pageInfo a").on("click", function(e){
+    e.preventDefault();
+    moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+    moveForm.attr("action", "/fit/searchlist");
+    moveForm.submit();
+    
+});
+
+
+$(".search_area button").on("click", function(e){
+    e.preventDefault();
+    
+    let type = $(".search_area select").val();
+    let value = $(".search_area input[name='value1']").val();
+    
+    if(!value){
+        alert("키워드를 입력하세요.");
+        return false;
+    }        
+    
+    moveForm.find("input[name='value1']").val(value);
+    moveForm.find("input[name='pageNum']").val(1);
+    moveForm.submit();
+});
 
 function search(){
 	$.ajax({
@@ -120,23 +237,10 @@ function search(){
 				+'</td><td>'+txt[i]['transfat']+'</td>';
 				$('#tblSearch').append(str);
 	    	}
-    	} 
+    	}
 	})
-}
+};
 
-// function filter(){
-
-//   var value, i;
-
-//   value = document.getElementById("value").value.toUpperCase();
-
-//   for(i=0;i<item.length;i++){
-//     if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
-//       item[i].style.display = "flex";
-//     }else{
-//       item[i].style.display = "none";
-//     }
-//   }
-// }
 </script>
+</body>
 </html>

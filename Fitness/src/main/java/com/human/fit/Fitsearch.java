@@ -119,6 +119,13 @@ public class Fitsearch {
 		this.transfat = transfat;
 	}
 	
-	
-	
+	@Override
+	public String toString() {
+		return "Fitsearch [num=" + num + ", name=" + name + ", kcal=" + kcal
+				+ ", carbohydrate=" + carbohydrate
+				+ ", protein=" + protein + ", fat=" + fat + ", sugars=" + sugars
+				+ ", na=" + na + ", cholesterol=" + cholesterol
+				+ ", saturated_fatty_acids=" + saturated_fatty_acids
+				+ ", transfat=" + transfat + "]";
+	}
 }
