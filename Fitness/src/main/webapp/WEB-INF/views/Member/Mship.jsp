@@ -40,7 +40,7 @@
 				<div class="input-group mb-3" style="width:300px; margin:auto; margin-top:200px;float:left; margin-left:25%;">
 				<input type=button id=showdlg value='운동종류변경' style="margin-left:58%;" class="btn btn-secondary">
 				     <select  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-        			   id=selsports style="width:300px;" size=15></select>
+        			   id=selsports style="width:300px;overflow-y:auto;" size=15></select>
    				</div>
 				<div class=Mship_home>
 				<div class="input-group mb-3" style="width: 160px; margin: auto; margin-right:100%;">
