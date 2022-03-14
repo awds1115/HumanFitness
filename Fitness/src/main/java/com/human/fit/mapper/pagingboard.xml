@@ -9,7 +9,7 @@
 
 <!-- 게시판 목록 -->
 <select id="getBList" resultType="com.human.fit.BoardVO">
-	select * from board
+	select * from board;
 </select>
 
 <select id="getPage" resultType="com.human.fit.BoardVO">

@@ -55,17 +55,51 @@ public class MypageController {
 	       }
 	       return retval;
 	}
+	@ResponseBody
+	@RequestMapping(value="/ticketed",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+	public String ticketed(Model model, HttpServletRequest request) {
+		String retval="";
+	       try {
+	    	   String userid=request.getParameter("id");
+	    	   String sports=request.getParameter("sports");
+	    	   iMypage member=sqlSession.getMapper(iMypage.class);
+	    	   member.ticketed(userid,sports);
+	    	   retval="ok";
+	          
+	       } catch(Exception e) {
+	    	   retval="fail";
+	       }
+	       return retval;
+	}
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage(Model model, HttpServletRequest request) {
 		session_call(request, model);
 		HttpSession session = request.getSession(true);
 		String userid=(String) session.getAttribute("userid");
-		iMypage mpy=sqlSession.getMapper(iMypage.class); 
+		iMypage mpy=sqlSession.getMapper(iMypage.class);
 	    Mypage view=mpy.getView(userid); 
 	    Mypage view2=mpy.getWeight(userid);
 		model.addAttribute("view",view);
 		model.addAttribute("view2",view2);
 		return "Member/Mypage";
+	}
+	@ResponseBody
+	@RequestMapping(value="/ticketing",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+	public String ticketing(HttpServletRequest request, Model model) {
+		String id=request.getParameter("id");
+		iMypage mpy=sqlSession.getMapper(iMypage.class); 
+	       ArrayList<ticket> ticket=mpy.getticket(id);
+	       System.out.println(ticket.size());
+	       JSONArray ja= new JSONArray();
+	       for(int i=0; i<ticket.size(); i++) { 
+	          JSONObject jo=new JSONObject();
+	          jo.put("name",ticket.get(i).getSports_name());
+	          jo.put("start",ticket.get(i).getStart_dt());
+	          jo.put("end",ticket.get(i).getEnd_dt());
+	          
+	          ja.add(jo);
+	       }
+	    return ja.toString(); 
 	}
 	@RequestMapping(value="/M_update",method=RequestMethod.GET)
 	public String M_update(HttpServletRequest request, Model model) {

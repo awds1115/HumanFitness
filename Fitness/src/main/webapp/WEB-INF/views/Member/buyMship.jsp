@@ -146,10 +146,10 @@ a {
 	
 	
 	<table class=tbl1 align=center>
-	<thead><tr><th><h2><a href="/fit/List/Yoga">YOGA</a></h2></th>
-		<th><h2><a href="/fit/List/PT">PT</a></h2></th>
-		<th><h2><a href="/fit/List/Health">HEALTH</a></h2></th>
-		<th><h2><a href="/fit/List/Pilates">PILATES</a></h2></th></tr></thead>
+	<thead><tr><th><h2><a href="/fit/yoga">YOGA</a></h2></th>
+		<th><h2><a href="/fit/pt">PT</a></h2></th>
+		<th><h2><a href="/fit/health">HEALTH</a></h2></th>
+		<th><h2><a href="/fit/pilates">PILATES</a></h2></th></tr></thead>
 	<tbody><tr><td align=center>
 			<input type="hidden" id=yogacode name=yogacode value="1">
 			<input type="hidden" id=nameyoga name=nameyoga value="yoga">

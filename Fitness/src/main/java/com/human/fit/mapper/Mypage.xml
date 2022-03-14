@@ -28,4 +28,10 @@
 <select id="getWeight" resultType="com.human.fit.Mypage">
 	select userid,weight,height from mypage where userid=#{param1};	
 </select>
+<select id="getticket" resultType="com.human.fit.ticket">
+	select * from ticket where userid=#{param1};
+</select>
+<delete id="ticketed">
+	delete from ticket where userid=#{param1} and sports_name=#{param2};
+</delete>
 </mapper>

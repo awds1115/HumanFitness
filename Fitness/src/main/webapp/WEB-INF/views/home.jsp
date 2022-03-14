@@ -56,7 +56,7 @@
                         <h2 class="text-white mt-0">Human Fitness</h2>
                         <hr class="divider divider-light" />
                         <p class="text-white-75 mb-4">Human Fitness ! 당신의 피트니스. 당신의 건강한 목표를 응원합니다! 고객님들의 건강한 목표달성을 응원하기 위해 건강한 목표를 가진 젊은 사람들이 모여 만든 휴먼 피트니스입니다. 고객님 한분한분 가족같이 생각하며, 언제나 초심과 진정성을 가지고 내집과 같은 편안한 분위기 속에서 건강한 몸을 만드실 수 있는 공간을 제공 해드릴 것을 약속합니다. 어렵게 가진 목표, 어렵지 않게 해드리겠습니다.</p>
-                        <a class="btn btn-light btn-xl" href="#">뭐쓸까</a>
+                        <a class="btn btn-light btn-xl" href="map">지점찾기</a>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
             <div class="container-fluid p-0">
                 <div class="row g-0">
                     <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="https://www.bodychannel.co.kr/dist/img/main/slide_bg_4.jpg" title="Health">
+                        <a class="portfolio-box" href="health" title="health">
                             <img class="img-fluid2" src="https://www.bodychannel.co.kr/dist/img/main/slide_bg_4.jpg" alt="..." />
                             <div class="portfolio-box-caption">
                                 <div class="project-category text-white-50">HumanFitness</div>
@@ -77,7 +77,7 @@
                     </div>
                     
                     <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="http://crossbak.cafe24.com/wp-content/uploads/2020/08/180702_slider_bg_6.jpg" title="Yoga">
+                        <a class="portfolio-box" href="yoga" title="Yoga">
                             <img class="img-fluid3" src="http://crossbak.cafe24.com/wp-content/uploads/2020/08/180702_slider_bg_6.jpg" alt="..."/>
                             <div class="portfolio-box-caption">
                                 <div class="project-category text-white-50">HumanFitness</div>
@@ -85,8 +85,9 @@
                             </div>
                         </a>
                     </div>
+                    
                     <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="http://www.pilatesfit.co.kr/css/images/branch_img/pc002.jpg" title="Pilates">
+                        <a class="portfolio-box" href="pilates" title="Pilates">
                             <img class="img-fluid" src="http://www.pilatesfit.co.kr/css/images/branch_img/pc002.jpg" alt="..." />
                             <div class="portfolio-box-caption">
                                 <div class="project-category text-white-50">HumanFitness</div>
@@ -97,13 +98,11 @@
                 </div>
             </div>
         </div>
-        <!-- Call to action-->
-        <section class="page-section bg-dark text-white">
+        <br><br>
             <div class="container px-4 px-lg-5 text-center">
-                <h2 class="mb-4">회원권 구매하러 가기</h2>
-                <a class="btn btn-light btn-xl" href="buyMship">회원권 구매</a>
+                <a class="btn btn-primary btn-xl" href="buyMship">회원권 구매</a>
             </div>
-        </section>
+
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container px-4 px-lg-5">

@@ -48,6 +48,7 @@
 	text-align:center;box-sizing:border-box;
 	color:#484848;padding:0 20px;
 	font-size:14px;
+	text-decoration:none;
 	}
 .depth3 > ul > li.on{box-shadow:none;}
 .depth3 > ul > li.on > a{
@@ -121,6 +122,7 @@ margin-left:15%;
     margin-left:15%;
     }
     .grayBox{
+    margin-bottom:5%;
     margin-left:15%;
     margin-right:15%;
     
@@ -247,6 +249,7 @@ margin-left:15%;
     <li>12. 위 이용수칙을 지키지 않을시 퇴장조치 하겠습니다.</li>
   </ul>
 </div>
+<jsp:include page="../footer.jsp"/>
 </body>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script>
@@ -267,7 +270,11 @@ $(document)
 })
 
 </script>
-<script src="<c:url value='/resources/js/scripts.js' />"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+                <script src="<c:url value='/resources/js/scripts.js' />"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

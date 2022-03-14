@@ -19,4 +19,10 @@ public interface iMypage {
 	void bmicheck(String userid, int weight, int height);
 
 	Mypage getWeight(String userid);
+
+	ArrayList<ticket> getticket(String id);
+
+	void ticketed(String userid, String sports);
+
+	
 }

@@ -209,7 +209,6 @@ public class AdminController {
 				
 				if(param.equals("userid")) {
 					admin.members_delete(value);
-					
 				} else if(param.equals("check")) {
 					String[] userid=value.split(",");
 					
@@ -218,6 +217,7 @@ public class AdminController {
 						for(int i=0;i<userid.length;i++) {
 							System.out.println("["+userid[i]+"]");
 							admin.members_delete(userid[i]);
+							
 						}
 						str="ok";
 					} catch(Exception e) {
