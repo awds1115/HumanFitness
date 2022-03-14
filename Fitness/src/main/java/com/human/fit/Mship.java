@@ -5,19 +5,15 @@ public class Mship {
 	String sports_name;
 	String month;
 	int price;
+	int M_code;
 	public Mship() {
 	}
-	public Mship(int code, String sports_name, String month, int price) {
-		this.code = code;
+	public Mship(int code, String sports_name, String month, int price, int m_code) {
 		this.sports_name = sports_name;
 		this.month = month;
 		this.price = price;
-	}
-	public int getCode() {
-		return code;
-	}
-	public void setCode(int code) {
 		this.code = code;
+		M_code = m_code;
 	}
 	public String getSports_name() {
 		return sports_name;
@@ -37,6 +33,17 @@ public class Mship {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
+	public int getM_code() {
+		return M_code;
+	}
+	public void setM_code(int m_code) {
+		M_code = m_code;
+	}
 	
 }

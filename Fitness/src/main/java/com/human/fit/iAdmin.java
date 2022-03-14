@@ -12,4 +12,6 @@ public interface iAdmin {
 	ArrayList<membertype> getMtype();
 	
 	ArrayList<Mship> getMship(int code);
+	
+	void payment(String userid,String sports_name,String start_dt,String end_dt);
 }

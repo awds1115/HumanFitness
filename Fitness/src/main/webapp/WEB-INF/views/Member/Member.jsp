@@ -7,23 +7,26 @@
 <meta charset="UTF-8">
 <title>회원관리</title>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-        <!-- Favicon-->
-	<link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
-		<!-- Bootstrap Icons-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Google fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-        <!-- SimpleLightbox plugin CSS-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css" />
+       <!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
+	<!-- Bootstrap Icons-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+       <!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+       <!-- SimpleLightbox plugin CSS-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+       <!-- Core theme CSS (includes Bootstrap)-->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css" />
 
-    <!-- Bootstrap core CSS -->
-    <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Bootstrap core CSS -->
+   <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
-tr {
+.tbl{
+	width:90%;
+}
+#memAtbl tr {
 	border: 1px solid white;
     border-collapse: collapse;
 	background-color: rgb(3, 3, 3);
@@ -33,6 +36,43 @@ td,th{
 	/* vertical-align:middle; */
 	padding: 15px;
 }
+.search{
+	margin-right:45px;
+}
+/* .depth3{
+	margin-top:200px;
+	} */
+.depth3 > ul{
+	font-size:0;
+	text-align:center;
+
+	}
+.depth3 > ul > li{
+	display:inline-block;
+	vertical-align:top;
+	min-width:180px;
+	box-sizing:border-box;
+	box-shadow: 1px 1px 0 0 #e5e5e5 inset, -1px -1px 0 0 #e5e5e5 inset;
+	}
+.depth3 > ul > li > a{
+	display:block;
+	height:46px;
+	line-height:46px;
+	text-align:center;
+	box-sizing:border-box;
+	color:#cccccc;
+	padding:0 20px;
+	font-size:14px;
+	}
+.depth3 > ul > li.on > a{
+	color:#f7f7e4;
+	font-weight:500;
+	background:#A00000;
+	}
+a {
+/*   color: rgb(233, 22, 36); */
+  text-decoration: none;
+}
 </style>
 <body class="bg-dark">
 <!-- RUD,회원타입(직원,고객)업데이트,회원강퇴,회원조회,회원권환불 -->
@@ -40,27 +80,33 @@ td,th{
 <!-- 페이징, 회원권이랑 조인해서 조회 -->
 <jsp:include page="../header.jsp"/>
 <section class="page-section text-white" id="members">
-<h1 align=center>회원 명단</h1>
-	<div align=right>
+<h1 align=center class="text-white font-weight-bold">관리자페이지</h1><br>
+<div class="depth3">
+	<ul>
+		<li class="on"><a href="/fit/viewmember" >회원관리</a></li>
+		<li><a href="/fit/mship" >운동종류 관리</a></li>
+	</ul>
+</div>
+<table class=tbl align=center>
+<tr><td align=right>
+	<div align=right class=search>
 		<input type="text" name="findMem" id="findMem"/>
 		<button id="btnSearch" class="submit submit_button">회원검색</button>
-	</div><br>
-<div align=center>
-	<table id=memAtbl class="mb-4">
+	</div>
+</td></tr>
+<tr><td align=center>
+	<table id=memAtbl class="mb-4" align=center>
 		<!-- name,nickname,userid,age,gender,mobile,email,type -->
 		<thead>
 		<tr><th>\</th><th>이름</th><th>닉네임</th><th>아이디</th><th>나이</th><th>성별</th>
 			<th>전화번호</th><th>이메일</th><th>고객/직원</th><th>/</th></tr>
 		</thead>
 		<tbody></tbody>
-	</table><br>
-	<div class="booking-list_btn" >
+	</table>
 		<input type=button id=btnDelete value="선택삭제">&nbsp;&nbsp;
 		<input type=button id=btnSlctview value="선택조회">
-	
-	</div>
-</div>
-
+</td></tr>
+</table>
 </section>
 
    <div class="bg-dark text-white" id=dlgMemupdate style='display:none;' title='회원관리'>
@@ -78,6 +124,8 @@ td,th{
 			<tr><td><select id=mtype name=mtype size=1 style="width: 200px; height: 30px;"></select></td></tr>
 		</table><br>
    </div>
+   
+<jsp:include page="../footer.jsp"/>
    
 </body>
 <script src="<c:url value='/resources/js/scripts.js' />"></script>

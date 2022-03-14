@@ -3,11 +3,23 @@
 
 <mapper namespace="com.human.fit.iAdmin">
 
+<!-- 게시물 총 갯수 -->
+<select id="count" resultType="int">
+ 	select count(*) from Members
+</select>
+
 <select id="findMem" resultType="com.human.fit.membersA">
 	select a.name,a.nickname,a.userid,a.age,a.gender,a.mobile,a.email,b.mtype 
 	  from Members as a join membertype as b 
 	    on a.type = b.mtype_code
-	 where userid like CONCAT('%', #{param1}, '%');
+	 where name like CONCAT('%', #{param1}, '%')
+	    or nickname like CONCAT('%', #{param1}, '%')
+	    or userid like CONCAT('%', #{param1}, '%')
+	    or age like CONCAT('%', #{param1}, '%')
+	    or gender like CONCAT('%', #{param1}, '%')
+	    or mobile like CONCAT('%', #{param1}, '%')
+	    or email like CONCAT('%', #{param1}, '%')
+	    or mtype like CONCAT('%', #{param1}, '%')
 </select>
 
 <select id="members_admin" resultType="com.human.fit.membersA">
@@ -34,6 +46,10 @@
 </select>
 
 <select id="getMship" resultType="com.human.fit.Mship">
-	select month,price from Mship where code=#{param1}
+	select code,month,price,M_code from Mship where code=#{param1}
 </select>
+
+<insert id="payment">
+	insert into ticket values(#{param1},#{param2},#{param3},#{param4})
+</insert>
 </mapper>
