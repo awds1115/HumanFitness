@@ -49,21 +49,20 @@ textarea{
 	padding-left : 80px;
 	margin-top : 50px;
 }
+.rp_child{
+
+}
 </style>
 </head>
 <body>
 <h1>조회 페이지</h1>
-	<div class="input_wrap">
-		<label>게시판 번호</label>
-		<input name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
-	</div>
+<!-- 	<div class="input_wrap"> -->
+<!-- 		<label>게시판 번호</label> -->
+		
+<!-- 	</div> -->
 	<div class="input_wrap">
 		<label>게시판 제목</label>
 		<input name="title" readonly="readonly" value='<c:out value="${pageInfo.title}"/>' >
-	</div>
-	<div class="input_wrap">
-		<label>게시판 내용</label>
-		<textarea rows="3" name="content" readonly="readonly"><c:out value="${pageInfo.content}"/></textarea>
 	</div>
 	<div class="input_wrap">
 		<label>게시판 작성자</label>
@@ -76,11 +75,102 @@ textarea{
 	<div class="input_wrap">
 		<label>게시판 수정일</label>
 		<input name="updateDate" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.updateDate}"/>' >
-	</div>		
-	<div class="btn_wrap">
-		<a class="btn" id="list_btn">목록 페이지</a> 
-		<a class="btn" id="modify_btn">수정 하기</a>
 	</div>
+	<div class="input_wrap">
+		<label>게시판 내용</label>
+		<textarea rows="3" name="content" readonly="readonly" style="resize:none;"><c:out value="${pageInfo.content}"/></textarea>
+	</div>
+	<br><br>
+	
+	<div>
+	댓글<hr>
+	<table>
+		<tr>
+			<td>
+				<c:forEach items="${p1}" var="list">
+		            <c:if test="${list.grpl==0 }">
+				    	<table id="${list.grp }" class="rp_parent">
+				            <tr>
+				                <td>${list.writer}</td>
+				                <td>${list.wdate}</td>
+				            </tr>
+				            <tr>
+			            		<c:if test="${nickname=='null' }">
+			            			<td colspan=2>${list.content}</td>
+			            		</c:if>
+			            		<c:if test="${nickname!='null' }">
+			            			<c:if test="${list.writer!=userid }">
+				            			<td>${list.content}</td>
+				            			<td>
+				            				<input type=button id="" name="" value="답글달기">
+				            			</td>
+				            		</c:if>
+				            		<c:if test="${list.writer==userid }">
+				            			<td>${list.content}</td>
+				            			<td>
+				            				<input type=button id="" name="" value="답글달기">
+				            				<input type=button id="" name="" value="댓글수정"> 
+				            				<input type=button id="" name="" value="댓글삭제">
+				            			</td>
+				            		</c:if>
+			            		</c:if>
+			            	</tr>
+		            	</table>	
+	            	</c:if>
+	            	<c:if test="${list.grpl!=0 }">
+						<table class="rp_child">
+		            		<tr>
+				                <td>${list.writer}</td>
+				                <td>${list.wdate}</td>
+				            </tr>
+				            <tr>
+			            		<c:if test="${nickname=='null' }">
+			            			<td colspan=2>${list.content}</td>
+			            		</c:if>
+			            		<c:if test="${nickname!='null' }">
+			            			<c:if test="${list.writer!=userid }">
+				            			<td>${list.content}</td>
+				            			<td>
+				            				<input type=button id="" name="" value="답글달기">
+				            			</td>
+				            		</c:if>
+				            		<c:if test="${list.writer==userid }">
+				            			<td>${list.content}</td>
+				            			<td>
+				            				<input type=button id="" name="" value="답글달기">
+				            				<input type=button id="" name="" value="댓글수정"> 
+				            				<input type=button id="" name="" value="댓글삭제">
+				            			</td>
+				            		</c:if>
+			            		</c:if>
+			            	</tr>
+			            </table>	
+	            	</c:if>
+	        	</c:forEach>
+	        </td>
+		</tr>
+	</table>
+	</div>
+	
+	<br><br>
+	<form id="replyForm" action="/fit/reply" method="post">
+		<div class="input_wrap">
+		<input type="hidden" name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
+		<label>댓글</label>
+		<textarea rows="3" name="p_content" style="resize:none;"></textarea>
+		<a class="btn" id="p_insert_btn" >댓글 작성</a> 
+	</div>
+		<div class="btn_wrap">
+		<a class="btn" id="list_btn">목록 페이지</a> 
+		<c:if test="${nickname==pageInfo.writer}">
+			<a class="btn" id="modify_btn">수정 하기</a>
+			<a class="btn" id="delete_btn">삭제</a>
+		</c:if>	
+	</div>
+	</form>
+
+	
+
 	<form id="infoForm" action="/fit/modify" method="get">
 		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
 		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
@@ -90,7 +180,7 @@ textarea{
 	</form>
 <script>
 	let form = $("#infoForm");
-	
+	let form_r = $("replyForm");
 
 	
 	$("#list_btn").on("click", function(e){
@@ -103,6 +193,19 @@ textarea{
 		form.attr("action", "/fit/modify");
 		form.submit();
 	});	
+	/* 삭제 버튼 */
+	$("#delete_btn").on("click", function(e){
+	    form.attr("action", "/fit/delete");
+	    form.attr("method", "post");
+	    form.submit();
+	});
+	/* 댓글 작성 */
+	$("#p_insert_btn").on("click", function(e){
+	    form_r.attr("action", "/fit/reply");
+	    form_r.attr("method", "post");
+	    form_r.submit();
+	});
+	
 </script>	
 </body>
 </html>

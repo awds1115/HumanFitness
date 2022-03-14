@@ -21,4 +21,9 @@ public interface Iboard {
     public int delete(int bno);
     /* 게시판 총 갯수 */
     public int getTotal(Criteria cri);
+    
+    public membersA getuserid(String userid);
+    
+    //댓글 불러오기
+    public List<p_reply> getreply(int bno);
 }

@@ -17,6 +17,9 @@
     select * from board where bno = #{bno}
     
 </select>
+<select id="getuserid" resultType="com.human.fit.membersA">
+  select userid, nickname from Members where userid=#{param1}
+</select>
 <!-- 수정부터 하기 -->
 <update id="modify">
 		update board set title = #{title}, content = #{content}, updatedate = now()
@@ -77,5 +80,13 @@
         </if>    
     
     </select>    
- 
+<!--  댓글 불러오기 -->
+<select id="getreply" resultType="com.human.fit.p_reply">
+	select * from p_reply where bno= #{param1} order by grp,grps
+</select>
+<!-- 모댓글 추가 -->
+<insert id="replyAdd">
+	insert into p_reply values (0,#{bno},1,0,0,#{nickname},"모댓글",now());
+<!-- 	1 스키마 outo로 바꾸기 -->
+</insert>
 </mapper>

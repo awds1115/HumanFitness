@@ -19,8 +19,7 @@
         <textarea rows="3" name="content"></textarea>
     </div>
     <div class="input_wrap">
-        <label>글쓴이</label>
-        <input type=text name="writer">
+        <input type=hidden name="writer" value="${userid.nickname}">
     </div>
     <button class="btn">등록</button>
 </form>
