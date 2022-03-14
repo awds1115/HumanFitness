@@ -80,8 +80,13 @@
         </if>    
     
     </select>    
-<!--  모댓글 불러오기 -->
+<!--  댓글 불러오기 -->
 <select id="getreply" resultType="com.human.fit.p_reply">
 	select * from p_reply where bno= #{param1} order by grp,grps
 </select>
+<!-- 모댓글 추가 -->
+<insert id="replyAdd">
+	insert into p_reply values (0,#{bno},1,0,0,#{nickname},"모댓글",now());
+<!-- 	1 스키마 outo로 바꾸기 -->
+</insert>
 </mapper>

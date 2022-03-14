@@ -56,10 +56,10 @@ textarea{
 </head>
 <body>
 <h1>조회 페이지</h1>
-	<div class="input_wrap">
-		<label>게시판 번호</label>
-		<input name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
-	</div>
+<!-- 	<div class="input_wrap"> -->
+<!-- 		<label>게시판 번호</label> -->
+		
+<!-- 	</div> -->
 	<div class="input_wrap">
 		<label>게시판 제목</label>
 		<input name="title" readonly="readonly" value='<c:out value="${pageInfo.title}"/>' >
@@ -153,19 +153,24 @@ textarea{
 	</div>
 	
 	<br><br>
-	<div class="input_wrap">
+	<form id="replyForm" action="/fit/reply" method="post">
+		<div class="input_wrap">
+		<input type="hidden" name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
 		<label>댓글</label>
 		<textarea rows="3" name="p_content" style="resize:none;"></textarea>
 		<a class="btn" id="p_insert_btn" >댓글 작성</a> 
 	</div>
-	
-	<div class="btn_wrap">
+		<div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
 		<c:if test="${nickname==pageInfo.writer}">
 			<a class="btn" id="modify_btn">수정 하기</a>
 			<a class="btn" id="delete_btn">삭제</a>
 		</c:if>	
 	</div>
+	</form>
+
+	
+
 	<form id="infoForm" action="/fit/modify" method="get">
 		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
 		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
@@ -175,7 +180,7 @@ textarea{
 	</form>
 <script>
 	let form = $("#infoForm");
-	
+	let form_r = $("replyForm");
 
 	
 	$("#list_btn").on("click", function(e){
@@ -193,6 +198,12 @@ textarea{
 	    form.attr("action", "/fit/delete");
 	    form.attr("method", "post");
 	    form.submit();
+	});
+	/* 댓글 작성 */
+	$("#p_insert_btn").on("click", function(e){
+	    form_r.attr("action", "/fit/reply");
+	    form_r.attr("method", "post");
+	    form_r.submit();
 	});
 	
 </script>	
