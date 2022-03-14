@@ -5,13 +5,13 @@ import java.util.Enumeration;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.sf.json.JSONArray;
@@ -236,7 +236,8 @@ public class AdminController {
 		return "/Member/ex";
 	}
 	@RequestMapping("/buyMship")
-	public String Mship() {
+	public String Mship(HttpServletRequest hsr, Model model) {
+		session_call(hsr, model);
 		return "/Member/buyMship";
 	}
 	@ResponseBody
@@ -251,10 +252,52 @@ public class AdminController {
         JSONArray ja= new JSONArray();
          for(int i=0; i<MshipList.size(); i++) { 
             JSONObject jo=new JSONObject();
+            jo.put("code",MshipList.get(i).getCode());
             jo.put("month",MshipList.get(i).getMonth());
             jo.put("price",MshipList.get(i).getPrice());
+            jo.put("M_code",MshipList.get(i).getM_code());
             ja.add(jo);
          }
          return ja.toString(); 
     }
+	
+	@RequestMapping(value="/payment", produces="application/json;charset=utf-8")
+	public String Payment(HttpServletRequest hsr, Model model) {
+		HttpSession session = hsr.getSession(true);
+		iAdmin admin = sqlSession.getMapper(iAdmin.class);
+		
+		String userid=(String) session.getAttribute("userid");
+		String sports_name=hsr.getParameter("sports_name");
+		String start_dt=hsr.getParameter("start_dt");
+		String end_dt=hsr.getParameter("end_dt");
+	    admin.payment(userid,sports_name,start_dt,end_dt);
+		
+		return "redirect:/buyMship";
+	}
+	public void session_call(HttpServletRequest request, Model model) {
+	    HttpSession session = request.getSession(true);
+	       int type1=0;
+	       String userid="";
+	       String nickname="";
+	       
+	       if(session.getAttribute("userid")==null) {
+	          userid="null";
+	       } else {
+	          userid=(String) session.getAttribute("userid");
+	       }
+	       if(session.getAttribute("type")==null){
+	          type1=0;
+	       } else {
+	          type1=(int) session.getAttribute("type");
+	       }
+	       if(session.getAttribute("nickname")==null) {
+	          nickname="null";
+	       } else {
+	          nickname=(String) session.getAttribute("nickname");
+	       }
+//	       int type=Integer.parseInt(type1);
+	       model.addAttribute("userid",userid);
+	       model.addAttribute("type",type1);
+	       model.addAttribute("nickname",nickname);
+	 }
 }
