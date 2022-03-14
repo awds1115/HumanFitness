@@ -3,6 +3,7 @@ package com.human.fit;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,12 @@ public class MshipController {
          return "Member/Mship"; 
     }
 	@RequestMapping(value="/map", produces="application/json;charset=utf-8")
-    public String Map(HttpServletRequest hsr) {
-	       
+    public String Map(HttpServletRequest request,Model model) {
+		HttpSession session=request.getSession();
+		session_call(request, model);
+		String userid=(String) session.getAttribute("userid");
+		model.addAttribute("userid",userid);
+		
          return "map"; 
     }
 	@ResponseBody
@@ -110,4 +115,30 @@ public class MshipController {
 		mship.Sportsdelete(code);
 		return "Member/Mship";
 	}
+	public void session_call(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(true);
+           int type1=0;
+           String userid="";
+           String nickname="";
+           
+           if(session.getAttribute("userid")==null) {
+              userid="null";
+           } else {
+              userid=(String) session.getAttribute("userid");
+           }
+           if(session.getAttribute("type")==null){
+              type1=0;
+           } else {
+              type1=(int) session.getAttribute("type");
+           }
+           if(session.getAttribute("nickname")==null) {
+              nickname="null";
+           } else {
+              nickname=(String) session.getAttribute("nickname");
+           }
+//           int type=Integer.parseInt(type1);
+           model.addAttribute("userid",userid);
+           model.addAttribute("type",type1);
+           model.addAttribute("nickname",nickname);
+     }
 }
