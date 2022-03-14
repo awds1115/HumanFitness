@@ -18,7 +18,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class MshipController {
-
+ 
 	@Autowired
 	private SqlSession sqlSession;
 	
@@ -26,6 +26,11 @@ public class MshipController {
     public String MtypeList(HttpServletRequest hsr) {
 	       
          return "Member/Mship"; 
+    }
+	@RequestMapping(value="/map", produces="application/json;charset=utf-8")
+    public String Map(HttpServletRequest hsr) {
+	       
+         return "map"; 
     }
 	@ResponseBody
 	@RequestMapping(value="/sportslist",method=RequestMethod.GET,produces="application/json;charset=utf-8")

@@ -1,5 +1,5 @@
 package com.human.fit;
-
+ 
 public class Sportlist {
 	private int code;
 	private String sports_name;
