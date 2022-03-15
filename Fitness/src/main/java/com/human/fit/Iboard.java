@@ -26,4 +26,16 @@ public interface Iboard {
     
     //댓글 불러오기
     public List<p_reply> getreply(int bno);
+    //bno 불러오기
+    public List<p_reply> getbno();
+    //댓글 추가하기
+//    public void reply(int bno,String nickname,String p_content);
+//    public void insertA(int bno,String nickname,String p_content);
+//    public void insertB(int bno,String nickname,String p_content);
+    public int getGrp(int bno);
+    public int getMaxNo(int bno);
+    public void insertReply(int bno,int grp,String nickname,String p_content);
+    public void deleteReply(int no);
+    public void updateReply(int no,String p_content);
+    public void reply_insert2(int bno,int grp,String nickname, String p_content);
 }

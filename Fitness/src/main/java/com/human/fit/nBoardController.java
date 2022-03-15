@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -150,6 +151,92 @@ public class nBoardController {
         rttr.addFlashAttribute("result", "delete success");
         
         return "redirect:/list";
+        
+    }
+    
+//    댓글작성
+    @ResponseBody
+    @RequestMapping(value="/reply",method=RequestMethod.POST)
+    public String replyinsert(HttpServletRequest hsr,RedirectAttributes rttr) {
+        System.out.println("왔니");
+        int bno = Integer.parseInt(hsr.getParameter("bno"));
+        String nickname = hsr.getParameter("nickname");
+        String p_content = hsr.getParameter("p_content");
+        
+        System.out.println(bno);
+        System.out.println(nickname);
+        System.out.println(p_content);
+        Iboard board1=sqlSession.getMapper(Iboard.class);
+        
+        int n = board1.getGrp(bno);
+        int grp = n+1;
+        System.out.println(grp);
+        String retval="";
+        try {
+        	board1.insertReply(bno,grp,nickname,p_content);
+            retval=  Integer.toString(grp)+"," +board1.getMaxNo(bno);
+        } catch(Exception e) {
+        	e.printStackTrace();
+        	retval="fail";
+        }
+        return retval;
+       
+        
+        
+    }
+    //댓글 삭제
+    @ResponseBody
+    @RequestMapping(value="/replyDelete",method=RequestMethod.POST)
+    public String replydelete(HttpServletRequest hsr,RedirectAttributes rttr) {
+        int no = Integer.parseInt(hsr.getParameter("no"));
+        
+        System.out.println(no);
+        Iboard board1=sqlSession.getMapper(Iboard.class);
+        
+
+        board1.deleteReply(no);
+
+        return "ok";
+       
+        
+        
+    }
+    //댓글 업데이트
+    @ResponseBody
+    @RequestMapping(value="/replyUpdate",method=RequestMethod.POST)
+    public String replyUpdate(HttpServletRequest hsr,RedirectAttributes rttr) {
+        int no = Integer.parseInt(hsr.getParameter("no"));
+        String p_content = hsr.getParameter("p_content");
+        
+        System.out.println(no);
+        Iboard board1=sqlSession.getMapper(Iboard.class);
+        
+
+        board1.updateReply(no,p_content);
+
+        return "ok";
+       
+        
+        
+    }
+    //대댓글 작성
+    @ResponseBody
+    @RequestMapping(value="/replyUpdate",method=RequestMethod.POST)
+    public String reply_insert2(HttpServletRequest hsr,RedirectAttributes rttr) {
+        int bno = Integer.parseInt(hsr.getParameter("bno"));
+        int grp = Integer.parseInt(hsr.getParameter("grp"));
+        String nickname = hsr.getParameter("nickname");
+        String p_content = hsr.getParameter("p_content");
+        
+     
+        Iboard board1=sqlSession.getMapper(Iboard.class);
+        
+
+        board1.reply_insert2(bno,grp,nickname,p_content);
+
+        return "ok";
+       
+        
         
     }
     

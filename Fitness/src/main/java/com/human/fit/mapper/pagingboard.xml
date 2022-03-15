@@ -84,9 +84,48 @@
 <select id="getreply" resultType="com.human.fit.p_reply">
 	select * from p_reply where bno= #{param1} order by grp,grps
 </select>
+
 <!-- 모댓글 추가 -->
-<insert id="replyAdd">
-	insert into p_reply values (0,#{bno},1,0,0,#{nickname},"모댓글",now());
-<!-- 	1 스키마 outo로 바꾸기 -->
+<!-- <insert id="reply"> -->
+<!--     <selectKey resultType="int" keyProperty="grp" order="AFTER"> -->
+<!--         SELECT ifnull(MAX(grp)+1,1) FROM p_reply where bno=#{param1} -->
+<!--     </selectKey>     -->
+<!--     INSERT INTO p_reply -->
+<!--     VALUES(0,#{param1},#{grp},0,0,#{param2},#{param3},now()) -->
+<!-- </insert>   -->
+
+
+<!-- <select id="getbno" resultType="com.human.fit.p_reply"> -->
+<!-- 	select distinct bno from p_reply; -->
+<!-- </select> -->
+
+<!-- <insert id="insertA"> -->
+<!-- 	insert into p_reply values (0,#{param1},1,0,0,#{param2},#{param3},now()); -->
+<!-- </insert> -->
+
+<!-- <insert id="insertB"> -->
+<!-- 	insert into p_reply values  -->
+<!-- 	(0,#{param1},(select max(grp)+1 from (select grp from p_reply)r),0,0,{param2},#{param3},now()); -->
+<!-- </insert> -->
+<select id="getGrp" resultType="int">
+	select ifnull (max(grp),0)
+		from p_reply where bno=#{bno}
+</select>
+<select id="getMaxNo" resultType="int">
+	select max(no) from p_reply where bno=#{bno}
+</select>
+<insert id="insertReply">
+	insert into p_reply (bno,grp,grps,grpl,writer,content,wdate) values (#{param1},#{param2},0,0,#{param3},#{param4},now());
+</insert>
+<delete id="deleteReply">
+	delete from p_reply where no = #{no};
+</delete>
+<update id="updateReply">
+	update p_reply set content = #{param2} , wdate = now()
+        where no = #{param1}
+</update>
+<insert id="reply_insert2">
+<!-- 컨트롤에서 +1 되도록 변수설정후 전해줄것 -->
+	insert into p_reply (bno,grp,grps,grpl,writer,content,wdate) values (2045,1,1+1,1,'가나다라마바','자식댓글',now());
 </insert>
 </mapper>

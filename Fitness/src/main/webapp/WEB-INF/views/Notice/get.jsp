@@ -27,7 +27,7 @@ input{
 }
 textarea{
 	width: 800px;
-    height: 200px;
+    height: 100px;
     font-size: 15px;
     padding: 10px;
 }
@@ -82,35 +82,35 @@ textarea{
 	</div>
 	<br><br>
 	
-	<div>
+	<div id=dvReply>
 	댓글<hr>
 	<table>
 		<tr>
 			<td>
 				<c:forEach items="${p1}" var="list">
 		            <c:if test="${list.grpl==0 }">
-				    	<table id="${list.grp }" class="rp_parent">
+				    	<table id="table${list.grp}" name="${list.no}" class="rp_parent">
 				            <tr>
 				                <td>${list.writer}</td>
 				                <td>${list.wdate}</td>
 				            </tr>
 				            <tr>
 			            		<c:if test="${nickname=='null' }">
-			            			<td colspan=2>${list.content}</td>
+			            			<td colspan=2 id="${list.no}">${list.content}</td>
 			            		</c:if>
 			            		<c:if test="${nickname!='null' }">
-			            			<c:if test="${list.writer!=userid }">
-				            			<td>${list.content}</td>
-				            			<td>
-				            				<input type=button id="" name="" value="답글달기">
+			            			<c:if test="${list.writer!=nickname }">
+				            			<td id="no${list.no}">${list.content}</td>
+				            			<td id="btn${list.no}">
+				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button>
 				            			</td>
 				            		</c:if>
-				            		<c:if test="${list.writer==userid }">
-				            			<td>${list.content}</td>
-				            			<td>
-				            				<input type=button id="" name="" value="답글달기">
-				            				<input type=button id="" name="" value="댓글수정"> 
-				            				<input type=button id="" name="" value="댓글삭제">
+				            		<c:if test="${list.writer==nickname }">
+				            			<td id="no${list.no}">${list.content}</td>
+				            			<td id="btn${list.no}">
+				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button>
+				            				<button id="${list.no}" onClick="reply_update(this.id)">댓글수정</button>
+				            				<button id="${list.no}" onClick="reply_delete(this.id)">댓글삭제</button>
 				            			</td>
 				            		</c:if>
 			            		</c:if>
@@ -128,18 +128,18 @@ textarea{
 			            			<td colspan=2>${list.content}</td>
 			            		</c:if>
 			            		<c:if test="${nickname!='null' }">
-			            			<c:if test="${list.writer!=userid }">
-				            			<td>${list.content}</td>
-				            			<td>
-				            				<input type=button id="" name="" value="답글달기">
+			            			<c:if test="${list.writer!=nickname }">
+				            			<td id="no${list.no}">${list.content}</td>
+				            			<td id="btn${list.no}">
+				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button>
 				            			</td>
 				            		</c:if>
-				            		<c:if test="${list.writer==userid }">
-				            			<td>${list.content}</td>
-				            			<td>
-				            				<input type=button id="" name="" value="답글달기">
-				            				<input type=button id="" name="" value="댓글수정"> 
-				            				<input type=button id="" name="" value="댓글삭제">
+				            		<c:if test="${list.writer==nickname }">
+				            			<td id="no${list.no}">${list.content}</td>
+				            			<td id="btn${list.no}">
+				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button>
+				            				<button id="${list.no}" onClick="reply_update(this.id)">댓글수정</button>
+				            				<button id="${list.no}" onClick="reply_delete(this.id)">댓글삭제</button>
 				            			</td>
 				            		</c:if>
 			            		</c:if>
@@ -153,21 +153,22 @@ textarea{
 	</div>
 	
 	<br><br>
-	<form id="replyForm" action="/fit/reply" method="post">
+<!-- 	<form id="replyForm" action="/fit/reply" method="post"> -->
 		<div class="input_wrap">
-		<input type="hidden" name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
+		<input type="hidden" id="bno" name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
+		<input type="hidden" id="nickname" name="nickname" readonly="readonly" value='<c:out value="${nickname}"/>' >
 		<label>댓글</label>
-		<textarea rows="3" name="p_content" style="resize:none;"></textarea>
+		<textarea rows="3" id="p_content" name="p_content" style="resize:none;"></textarea>
 		<a class="btn" id="p_insert_btn" >댓글 작성</a> 
 	</div>
-		<div class="btn_wrap">
+	<div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
 		<c:if test="${nickname==pageInfo.writer}">
 			<a class="btn" id="modify_btn">수정 하기</a>
 			<a class="btn" id="delete_btn">삭제</a>
 		</c:if>	
 	</div>
-	</form>
+<!-- 	</form> -->
 
 	
 
@@ -179,8 +180,9 @@ textarea{
     	<input type="hidden" name="type" value="${cri.type }">
 	</form>
 <script>
+
 	let form = $("#infoForm");
-	let form_r = $("replyForm");
+	let form_r = $("#replyForm");
 
 	
 	$("#list_btn").on("click", function(e){
@@ -201,11 +203,155 @@ textarea{
 	});
 	/* 댓글 작성 */
 	$("#p_insert_btn").on("click", function(e){
-	    form_r.attr("action", "/fit/reply");
-	    form_r.attr("method", "post");
-	    form_r.submit();
+// 		console.log("안되니");
+// 	    form_r.attr("action", "/fit/reply");
+// 	    form_r.attr("method", "post");
+// 	    form_r.submit();
+		$.post('/fit/reply',{bno:$('#bno').val(), 
+							nickname:$('#nickname').val(), 
+							p_content:$("#p_content").val()},function(txt){
+				now=new Date();
+				let yyyy = now.getFullYear();
+				let MM = now.getMonth();
+				let dd = now.getDate();
+				let hh = now.getHours();
+				let mm = now.getMinutes();
+				let ss = now.getSeconds();
+				if(txt=="fail"){
+					alert('댓글작성 실패');
+				} else {
+// 					let maxno = txt.split(",");
+// 					str='<table id="'+maxno[0]+'" name="'+maxno[1]+'" class="rp_parent">'+
+// 		            '<tr><td>'+$('#nickname').val()+'</td>'+
+//                 	'<td>'+yyyy+'-'+MM+'-'+dd+' '+hh+':'+mm+':'+ss+'</td></tr><tr><td id=no"'+maxno[1]+'">'+$('#p_content').val()+
+//                 	'</td><td id=btn"'+maxno[1]+'">'+
+//                 	'<button id="'+maxno[1]+'" onClick="reply_insert1('+maxno[1]+')">답글달기</button>'+
+//          			'<button id="'+maxno[1]+'" onClick="reply_update('+maxno[1]+')">댓글수정</button>'+ 
+//             		'<button id="'+maxno[1]+'" onClick="reply_delete('+maxno[1]+')">댓글삭제</button>'+
+//             		'</td></tr></table>';
+//             	$('#dvReply').append(str);
+//             	$('#p_content').val('');
+
+					location.reload();
+				}
+			},'text');
+		
 	});
+	/* 댓글 삭제 */
+	function reply_delete(id){
+		console.log(id)
+		alert("댓글을 삭제하시겠습니까?")
+		$.post('/fit/replyDelete',{no:id},function(txt){
+			$("table[name="+id+"]").remove();
+			},'text');
+		return false;
+	}
+	/* 댓글 수정 창 띄우기*/
+	function reply_update(id){
+		R_reply='<td id=no'+id+'>';
+		R_reply+='<textarea rows="1" cols="5" id="p_content2" name="p_content2" style="resize:none;">'+$("#no"+id).text();
+		R_reply+='</textarea></td>';
+		R_btn='<td id=btn'+id+'>';
+		R_btn+='<button id="'+id+'" onClick="reply_update2('+id+')">완료</button>';
+		R_btn+='<button id="'+id+'" onClick="reply_return('+id+')">취소</button></td>';
+		$("#no"+id).html(R_reply);
+		$("#btn"+id).html(R_btn);
+		return false;
+	}
+	/* 댓글 업데이트 */
+	function reply_update2(id){
+			$.post('/fit/replyUpdate',{no:id,p_content:$("#p_content2").val()},function(txt){
+				location.reload();
+				},'text');
+		}
+	/* 댓글 수정 취소 */
+	function reply_return(id){
+		R_reply='<td id=no'+id+'>'+$("#no"+id).text()+'</td>';
+		
+		R_btn='<td id=btn'+id+'>';
+		R_btn+='<button id="'+id+'" onClick="reply_insert1(this.id)">답글달기</button>';
+		R_btn+='<button id="'+id+'" onClick="reply_update(this.id)">댓글수정</button>';
+		R_btn+='<button id="'+id+'" onClick="reply_delete(this.id)">댓글삭제</button></td>';
+		$("#no"+id).replaceWith(R_reply);
+		$("#btn"+id).replaceWith(R_btn);
+	}
+	/* 대댓글 창 띄우기 */
 	
+	function reply_insert1(id){
+		R_reply='<table name=reply2><tr><td id='+id+'>';
+		R_reply+='<textarea rows="1" cols="5" id="p_content2" name="p_content2" style="resize:none;"></textarea></td></tr>';
+		R_reply+='<tr><td id=btn'+id+'>';
+		R_reply+='<button id="'+id+'" onClick="reply_insert2('+id+')">완료</button>';
+		R_reply+='<button id="'+id+'" onClick="reply_return2('+id+')">취소</button></td></tr></table>';
+		$("#table"+id).append(R_reply);
+		return false;
+	}
+	/* 대댓글 취소 */
+	function reply_return2(id){
+		$("table[name=reply2]").remove();
+	}
+	/* 대댓글 작성 */
+	function reply_insert2(id){
+		$.post('/fit/reply',{
+			bno:$('#bno').val(), 
+			grp:id,
+			nickname:$('#nickname').val(), 
+			p_content:$("#p_content2").val()},function(txt){
+// 				now=new Date();
+// 				let yyyy = now.getFullYear();
+// 				let MM = now.getMonth();
+// 				let dd = now.getDate();
+// 				let hh = now.getHours();
+// 				let mm = now.getMinutes();
+// 				let ss = now.getSeconds();
+// 				if(txt=="fail"){
+// 					alert('댓글작성 실패');
+// 				} else {
+// 			let maxno = txt.split(",");
+// 			str='<table id="'+maxno[0]+'" name="'+maxno[1]+'" class="rp_parent">'+
+// 	    '<tr><td>'+$('#nickname').val()+'</td>'+
+// 		'<td>'+yyyy+'-'+MM+'-'+dd+' '+hh+':'+mm+':'+ss+'</td></tr><tr><td id=no"'+maxno[1]+'">'+$('#p_content').val()+
+// 		'</td><td id=btn"'+maxno[1]+'">'+
+// 		'<button id="'+maxno[1]+'" onClick="reply_insert1('+maxno[1]+')">답글달기</button>'+
+// 			'<button id="'+maxno[1]+'" onClick="reply_update('+maxno[1]+')">댓글수정</button>'+ 
+// 			'<button id="'+maxno[1]+'" onClick="reply_delete('+maxno[1]+')">댓글삭제</button>'+
+// 			'</td></tr></table>';
+// 		$('#dvReply').append(str);
+// 		$('#p_content').val('');
+
+// 		}
+	},'text');
+
+}
+	
+	
+	
+	
+// 	$("#p_update_btn").on("click", function(e){
+// 		$.post('/fit/reply',{bno:$('#bno').val(),
+// 							p_content:$("#p_content").val()},function(txt){
+// 				now=new Date();
+// 				let yyyy = now.getFullYear();
+// 				let MM = now.getMonth();
+// 				let dd = now.getDate();
+// 				let hh = now.getHours();
+// 				let mm = now.getMinutes();
+// 				let ss = now.getSeconds();
+// 				if(txt=="fail"){
+// 					alert('댓글작성 실패');
+// 				} else {
+// 					str='<table id='+txt+' class="rp_parent">'+
+// 		            '<tr><td>'+$('#nickname').val()+'</td>'+
+//                 	'<td>'+yyyy+'-'+MM+'-'+dd+' '+hh+':'+mm+':'+ss+'</td></tr><tr><td>'+$('#p_content').val()+
+//                 	'</td><td><input type=button id="" name="" value="답글달기">'+
+//          			'<input type=button id="p_update_btn" name="p_update_btn" value="댓글수정">'+ 
+//             		'<input type=button id="" name="" value="댓글삭제">'+
+//             		'</td></tr></table>';
+//             	$('#dvReply').append(str);
+//             	$('#p_content').val('');
+// 				}
+// 			},'text');
+// 	});
 </script>	
 </body>
 </html>
