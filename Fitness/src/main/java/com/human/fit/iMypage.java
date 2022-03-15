@@ -24,5 +24,9 @@ public interface iMypage {
 
 	void ticketed(String userid, String sports);
 
+	void newcontact(String name, String email, String mobile, String message);
+
+	ArrayList<contact> getcontact();
+
 	
 }

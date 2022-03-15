@@ -28,14 +28,61 @@ public class MypageController {
 	
 	private ServletRequest session;
 	
-	@RequestMapping(value="delInfo")
+//	@ResponseBody
+//	@RequestMapping(value="/mailview",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+//	public String mailview(HttpServletRequest request, Model model) {
+//		iMypage mpy=sqlSession.getMapper(iMypage.class); 
+			
+//	       ArrayList<contact> contact=mpy.getmailview("no");
+//	       JSONArray ja= new JSONArray();
+//	       for(int i=0; i<contact.size(); i++) { 
+//	          JSONObject jo=new JSONObject();
+//	          jo.put("no",contact.get(i).getNo());
+//	          jo.put("name",contact.get(i).getName());
+//	          jo.put("email",contact.get(i).getEmail());
+//	          jo.put("mobile",contact.get(i).getMobile());
+//	          jo.put("message",contact.get(i).getMessage());
+//	          ja.add(jo);
+//	       }
+//	    return ja.toString(); 
+//	}
+	@ResponseBody
+	@RequestMapping(value="/contacting",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+	public String contacting(HttpServletRequest request, Model model) {
+		iMypage mpy=sqlSession.getMapper(iMypage.class); 
+	       ArrayList<contact> contact=mpy.getcontact();
+	       System.out.println("["+contact.size()+"]");
+	       JSONArray ja= new JSONArray();
+	       for(int i=0; i<contact.size(); i++) { 
+	          JSONObject jo=new JSONObject();
+	          jo.put("no",contact.get(i).getNo());
+	          jo.put("name",contact.get(i).getName());
+	          jo.put("email",contact.get(i).getEmail());
+	          jo.put("mobile",contact.get(i).getMobile());
+	          jo.put("message",contact.get(i).getMessage());
+	          ja.add(jo);
+	       }
+	    return ja.toString(); 
+	}
+	
+	
+	
+	@RequestMapping(value="/delInfo")
 	public String delInfo(Model model,HttpServletRequest request){
-		String userid="ora_user";
+		session_call(request, model);
+		HttpSession session = request.getSession(true);
+		String userid=(String) session.getAttribute("userid");
 	    
 		iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 
-		model.addAttribute("userid",view);
+		model.addAttribute("view",view);
 		return "Member/delinfo";
+	}
+	@RequestMapping(value="/M_contact")
+	public String M_contact(Model model, HttpServletRequest request) {
+		session_call(request, model);
+		
+		return "Member/M_contact";
 	}
 	@ResponseBody
 	@RequestMapping(value="/weight",method=RequestMethod.GET,produces="application/json;charset=utf-8")

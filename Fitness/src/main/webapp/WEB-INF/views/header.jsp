@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <style>
+#dropdownUser1{color:rgba(255,255,255,0.7);}
+.navbar-shrink #dropdownUser1{color:#212529;}
 </style>
 <body>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
@@ -31,7 +33,7 @@
                   
 				<div class="dropdown text-end">
 				<c:if test="${type==1 }">
-                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgba(255, 255, 255, 0.7);">
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">&nbsp;${userid}
                   </a>
                  
@@ -64,5 +66,5 @@
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<!--         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
 </html>

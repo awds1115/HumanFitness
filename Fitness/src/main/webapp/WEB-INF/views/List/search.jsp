@@ -58,9 +58,8 @@
 </head>
 
  <body id="page-top">
-<section class="page-section bg-dark text-white">
 <jsp:include page="../header.jsp"/>
-</section>
+
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container px-4 px-lg-5">
