@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <style>
+#dropdownUser1{color:rgba(255,255,255,0.7);}
+.navbar-shrink #dropdownUser1{color:#212529;}
 </style>
 <body>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
@@ -17,7 +19,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <li class="nav-item"><a class="nav-link" href="buyMship">회원권결제</a></li>
-                        <li class="nav-item"><a class="nav-link" href="list">공지사항</a></li>
+                        <li class="nav-item"><a class="nav-link" href="notice">공지사항</a></li>
                         <li class="nav-item"><a class="nav-link" href="community">커뮤니티</a></li>
                         <li class="nav-item"><a class="nav-link" href="map">오시는길</a></li>
         		  <c:if test="${type==0 }">
@@ -31,8 +33,8 @@
                   
 				<div class="dropdown text-end">
 				<c:if test="${type==1 }">
-                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgba(255, 255, 255, 0.7);">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">&nbsp;${userid}
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    ${userid}
                   </a>
                  
                   <ul class="dropdown-menu text-small " aria-labelledby="dropdownUser1">
@@ -44,7 +46,7 @@
        			<c:if test="${type==2 }">
        			 
        			<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">&nbsp;${userid}
+                   ${userid}
                   </a>
                   <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                     <li><a class="dropdown-item" href="mypage">마이페이지</a></li>
@@ -59,10 +61,15 @@
 
         </nav>
 </body>
-        <script src="<c:url value='/resources/js/scripts.js' />"></script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+                <script src="<c:url value='/resources/js/scripts.js' />"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<!--         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
 </html>

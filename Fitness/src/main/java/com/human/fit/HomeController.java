@@ -37,6 +37,16 @@ public class HomeController {
 		session_call(request, model);
 		return "home";
 	}
+	@RequestMapping(value="/contact", method = RequestMethod.GET)
+	public String contact(HttpServletRequest hsr, Model model) {
+		String name=hsr.getParameter("name");
+		String email=hsr.getParameter("email");
+		String mobile=hsr.getParameter("phone");
+		String message=hsr.getParameter("message");
+		iMypage mpy=sqlSession.getMapper(iMypage.class); 
+		mpy.newcontact(name,email,mobile,message);
+		return "redirect:/home";
+	}
 
 	public void session_call(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(true);

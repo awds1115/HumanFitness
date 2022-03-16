@@ -1,6 +1,7 @@
 package com.human.fit;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Locale;
 
 import javax.servlet.ServletRequest;
@@ -28,14 +29,181 @@ public class MypageController {
 	
 	private ServletRequest session;
 	
-	@RequestMapping(value="delInfo")
+	 	@ResponseBody 
+	    @RequestMapping(value="/pagecheck", method=RequestMethod.GET,produces="application/json;charset=UTF-8")
+	    public String pagecheck(HttpServletRequest hsr) {
+	      iMypage mpy=sqlSession.getMapper(iMypage.class);
+	      int lines=10;
+	       int pageno=Integer.parseInt(hsr.getParameter("pageno"));
+	       String find=hsr.getParameter("find"); 
+	       int start=lines*pageno+1;
+	       JSONArray good=new JSONArray();
+	       if(find.equals("")) { 
+	    	   ArrayList<contact> pageList = mpy.contactList(start);
+	    	   for(int i=0; i<pageList.size(); i++) {
+	    		   JSONObject jo=new JSONObject();
+	    		   jo.put("no",pageList.get(i).getNo());
+	    		   good.add(jo);
+	    	   }
+	       } else {
+	    	   ArrayList<contact> pageList = mpy.findpagingcheck(start,find);
+	    	   for(int i=0; i<pageList.size(); i++) {
+	    		   JSONObject jo=new JSONObject();
+	    		   jo.put("no",pageList.get(i).getNo());
+	    		   good.add(jo);
+	       } 
+	    }
+	       return good.toString();
+	 	}
+	@ResponseBody
+    @RequestMapping(value="/paging" ,method=RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public String getLines(HttpServletRequest hsr, Model model) {
+		
+		iMypage mpy=sqlSession.getMapper(iMypage.class);
+       int lines=10;
+       int pageno=Integer.parseInt(hsr.getParameter("pageno"));
+       String find=hsr.getParameter("find"); 
+       int start=lines*pageno+1;
+       JSONArray ja = new JSONArray();
+     if(find.equals("")) { 
+       ArrayList<contact> pageList = mpy.contactList(start);
+       for(int i=0; i<pageList.size(); i++) { //ArrayList -> JSON 으로 바꾸는 작업 해야함
+           JSONObject jo = new JSONObject();
+           
+           jo.put("no",pageList.get(i).getNo());
+           jo.put("name",pageList.get(i).getName());
+           jo.put("email",pageList.get(i).getEmail());
+           jo.put("mobile",pageList.get(i).getMobile());
+           jo.put("message",pageList.get(i).getMessage());
+           jo.put("send_dt",pageList.get(i).getSend_dt());
+           ja.add(jo);
+        }
+     } else {
+    	 ArrayList<contact> pageList = mpy.findpaging(start,find);
+    	 for(int i=0; i<pageList.size(); i++) { //ArrayList -> JSON 으로 바꾸는 작업 해야함
+             JSONObject jo = new JSONObject();
+             
+             jo.put("no",pageList.get(i).getNo());
+             jo.put("name",pageList.get(i).getName());
+             jo.put("email",pageList.get(i).getEmail());
+             jo.put("mobile",pageList.get(i).getMobile());
+             jo.put("message",pageList.get(i).getMessage());
+             jo.put("send_dt",pageList.get(i).getSend_dt());
+             ja.add(jo);
+          }
+     }
+     System.out.println(ja);
+      return ja.toString(); 
+    }
+	
+	@ResponseBody
+	@RequestMapping(value="/findmail",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+	public String findmail(HttpServletRequest request, Model model) {
+		iMypage mpy=sqlSession.getMapper(iMypage.class);
+			String find=request.getParameter("find");
+	       ArrayList<contact> contact=mpy.findmail(find);
+	       System.out.println("["+contact.size()+"]");
+	       JSONArray ja= new JSONArray();
+	       for(int i=0; i<contact.size(); i++) { 
+	          JSONObject jo=new JSONObject();
+	          jo.put("no",contact.get(i).getNo());
+	          jo.put("name",contact.get(i).getName());
+	          jo.put("email",contact.get(i).getEmail());
+	          jo.put("mobile",contact.get(i).getMobile());
+	          jo.put("message",contact.get(i).getMessage());
+	          jo.put("send_dt",contact.get(i).getSend_dt());
+	          ja.add(jo);
+	       }
+	    return ja.toString(); 
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/muldel", produces="application/text;charset=UTF-8")
+	public String muldel(HttpServletRequest hsr) {
+		iMypage mpy = sqlSession.getMapper(iMypage.class);
+			String[] no=hsr.getParameter("check").split(",");
+			String str="";
+			try {
+				for(int i=0;i<no.length;i++) {
+					mpy.mail_del(no[i]);
+				}
+				str="ok";
+			} catch(Exception e) {
+				str="fail";
+			}
+		return str;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/maildel",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+	public String maildel(Model model, HttpServletRequest request) {
+		String retval="";
+	       try {
+	    	   int no=Integer.parseInt(request.getParameter("no"));
+	    	   iMypage mpy=sqlSession.getMapper(iMypage.class);
+	    	   mpy.maildel(no);
+	    	   
+	    	   retval="ok";
+	          
+	       } catch(Exception e) {
+	    	   retval="fail";
+	       }
+	       return retval;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/mailview",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+	public String mailview(HttpServletRequest request, Model model) {
+		iMypage mpy=sqlSession.getMapper(iMypage.class); 
+			int no=Integer.parseInt(request.getParameter("no"));
+	       ArrayList<contact> contact=mpy.getmailview(no);
+	       JSONArray ja= new JSONArray();
+	       for(int i=0; i<contact.size(); i++) { 
+	          JSONObject jo=new JSONObject();
+	          jo.put("name",contact.get(i).getName());
+	          jo.put("email",contact.get(i).getEmail());
+	          jo.put("mobile",contact.get(i).getMobile());
+	          jo.put("message",contact.get(i).getMessage());
+	          ja.add(jo);
+	       }
+	    return ja.toString(); 
+	}
+	@ResponseBody
+	@RequestMapping(value="/contacting",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+	public String contacting(HttpServletRequest request, Model model) {
+		iMypage mpy=sqlSession.getMapper(iMypage.class); 
+	       ArrayList<contact> contact=mpy.getcontact();
+//	       System.out.println("["+contact.size()+"]");
+	       JSONArray ja= new JSONArray();
+	       for(int i=0; i<contact.size(); i++) { 
+	          JSONObject jo=new JSONObject();
+	          jo.put("no",contact.get(i).getNo());
+	          jo.put("name",contact.get(i).getName());
+	          jo.put("email",contact.get(i).getEmail());
+	          jo.put("mobile",contact.get(i).getMobile());
+	          jo.put("message",contact.get(i).getMessage());
+	          jo.put("send_dt",contact.get(i).getSend_dt());
+	          ja.add(jo);
+	       }
+	    return ja.toString(); 
+	}
+	
+	@RequestMapping(value="/delInfo")
 	public String delInfo(Model model,HttpServletRequest request){
-		String userid="ora_user";
+		session_call(request, model);
+		HttpSession session = request.getSession(true);
+		String userid=(String) session.getAttribute("userid");
 	    
 		iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 
-		model.addAttribute("userid",view);
+		model.addAttribute("view",view);
 		return "Member/delinfo";
+	}
+	@RequestMapping(value="/M_contact")
+	public String M_contact(Model model, HttpServletRequest request) {
+		session_call(request, model);
+		
+		return "Member/M_contact";
 	}
 	@ResponseBody
 	@RequestMapping(value="/weight",method=RequestMethod.GET,produces="application/json;charset=utf-8")

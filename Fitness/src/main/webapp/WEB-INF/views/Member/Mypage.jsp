@@ -222,28 +222,22 @@ table.general li {
 <script>
 $(document)
 .ready(function(){
-	$.ajax({url:'/fit/ticketing',
-			data:{id:$('#id').val()},
-			dataType:'json',
-			method:'GET',
-			success:function(data){
-				for(i=0;i<data.length;i++){
-					sports_name=data[i]['name'].split("  ");
-					let str="<tr><td><input type=radio id='ticketed' name='ticketed' value="+sports_name[0]+">"+sports_name[0]+"</td><td>"+sports_name[1]+"</td><td>"
-							+data[i]['start']+"</td><td>"+data[i]['end']+"</td></tr>"
-					$('#ticket').append(str);
-				}
-			}
-	})
+	 loadticket();
 })
 .on('click','#ref',function(){
 	$("input[name='ticketed']:checked").each(function(){
+		
 		$.ajax({url:'/fit/ticketed',
 				data:{id:$('#id').val(), sports:$(this).val()},
 				dataType:'text',
 				method:'GET',
 				success:function(txt){
-					console.log(txt);
+					if(txt=="ok"){
+						alert("환불이 완료되었습니다.");
+						 loadticket()
+					} else{
+						alert("환불이 불가능 합니다.");
+					}
 				}
 		})
 	})
@@ -312,7 +306,24 @@ $(document)
 	document.location='/fit/delInfo';
 })
 
-
+function loadticket(){
+	$.ajax({url:'/fit/ticketing',
+		data:{id:$('#id').val()},
+		dataType:'json',
+		method:'GET',
+		beforeSend:function(){
+			$('#ticket').empty();
+		},
+		success:function(data){
+			for(i=0;i<data.length;i++){
+				sports_name=data[i]['name'].split("  ");
+				let str="<tr><td><input type=radio id='ticketed' name='ticketed' value='"+data[i]['name']+"'>"+sports_name[0]+"</td><td>"+sports_name[1]+"</td><td>"
+						+data[i]['start']+"</td><td>"+data[i]['end']+"</td></tr>"
+				$('#ticket').append(str);
+			}
+		}
+})
+}
 </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- SimpleLightbox plugin JS-->
