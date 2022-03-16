@@ -191,7 +191,6 @@ public class MypageController {
 	@RequestMapping(value="/delInfo")
 	public String delInfo(Model model,HttpServletRequest request){
 		session_call(request, model);
-		HttpSession session = request.getSession(true);
 		String userid=(String) session.getAttribute("userid");
 	    
 		iMypage mpy=sqlSession.getMapper(iMypage.class); 
