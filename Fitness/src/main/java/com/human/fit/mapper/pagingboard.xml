@@ -29,8 +29,6 @@
         delete from board where bno = #{bno}
 </delete>
 
-
-
 <!-- 검색 조건문 -->
     <sql id="criteria">
         <trim prefix="where (" suffix=")" prefixOverrides="OR">
@@ -53,8 +51,6 @@
     
     </sql>
  
- 
- 
     <!-- 게시물 목록(페이징) -->
     <select id="getListPaging" resultType="com.human.fit.BoardVO">
     
@@ -69,7 +65,6 @@
     
     </select>
  
- 
     <!-- 게시물 총 개숫 -->
     <select id="getTotal" resultType="int">
     
@@ -80,6 +75,7 @@
         </if>    
     
     </select>    
+    
 <!--  댓글 불러오기 -->
 <select id="getreply" resultType="com.human.fit.p_reply">
 	select * from p_reply where bno= #{param1} order by grp,grps

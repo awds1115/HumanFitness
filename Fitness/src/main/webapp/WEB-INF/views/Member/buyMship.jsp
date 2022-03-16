@@ -3,7 +3,7 @@
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <meta charset="UTF-8">
 <title>회원권 결제</title>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -23,65 +23,6 @@
 </head>
 
 <style>
-    --color_0: 255,255,255;
-    --color_1: 0,0,0;
-    --color_2: 255,255,255;
-    --color_3: 237,28,36;
-    --color_4: 0,136,203;
-    --color_5: 255,203,5;
-    --color_6: 114,114,114;
-    --color_7: 176,176,176;
-    --color_8: 255,255,255;
-    --color_9: 114,114,114;
-    --color_10: 176,176,176;
-    --color_11: 3,3,3;
-    --color_12: 68,68,68;
-    --color_13: 102,102,102;
-    --color_14: 153,153,153;
-    --color_15: 255,255,255;
-    --color_16: 79,18,22;
-    --color_17: 147,54,62;
-    --color_18: 233,22,36;
-    --color_19: 242,149,155;
-    --color_20: 249,185,189;
-    --color_21: 38,21,67;
-    --color_22: 58,29,107;
-    --color_23: 76,42,133;
-    --color_24: 141,111,194;
-    --color_25: 200,186,225;
-    --color_26: 11,71,45;
-    --color_27: 21,143,90;
-    --color_28: 32,214,135;
-    --color_29: 131,228,186;
-    --color_30: 173,241,212;
-    --color_31: 45,50,47;
-    --color_32: 89,99,94;
-    --color_33: 134,149,141;
-    --color_34: 178,198,188;
-    --color_35: 223,248,235;
-    --font_0: normal normal normal 100px/1.4em lulo-clean-w01-one-bold,lulo-clean-w05-one-bold,sans-serif;
-    --font_1: normal normal normal 14px/1.4em spinnaker,sans-serif;
-    --font_2: normal normal normal 38px/1.4em lulo-clean-w01-one-bold,lulo-clean-w05-one-bold,sans-serif;
-    --font_3: normal normal normal 36px/1.4em raleway,sans-serif;
-    --font_4: normal normal normal 30px/1.4em raleway,sans-serif;
-    --font_5: normal normal normal 28px/1.4em raleway,sans-serif;
-    --font_6: normal normal normal 26px/1.4em lulo-clean-w01-one-bold,lulo-clean-w05-one-bold,sans-serif;
-    --font_7: normal normal bold 18px/1.4em raleway,sans-serif;
-    --font_8: normal normal normal 14px/1.4em raleway,sans-serif;
-    --font_9: normal normal normal 13px/1.4em raleway,sans-serif;
-    --font_10: normal normal normal 12px/1.4em spinnaker,sans-serif;
-    --wix-ads-height: 0px;
-    --wix-ads-top-height: 0px;
-    --site-width: 980px;
-    --above-all-z-index: 100000;
-    --portals-z-index: 100001;
-    --minViewportSize: 320;
-    --maxViewportSize: 1920;
-    --pinned-layers-in-page: 0;
-    --pinned-layer-in-container: 51;
-    --above-all-in-container: 49;
-    --transition-duration: 600ms;
-
 .s1B41v {
 /* //best value */
 	color: rgb(3, 3, 3);
@@ -90,7 +31,7 @@
 	border-color: rgba(255,255,255,0)
 }
 
-.tbl1,.tblt {
+.tbl1 {
 	/* border: 1px solid white; */
     border-collapse: collapse;
 	text-align: center;
@@ -99,11 +40,19 @@
 	height:250px;
 	padding: 15px;
 }
-.tbl2{
+.tblt{
     border-collapse: collapse;
 	text-align: center;
 	vertical-align:middle;
 	width:80%;
+	height:350px;
+	padding: 15px;
+}
+.tbl2{
+    border-collapse: collapse;
+	text-align: center;
+	vertical-align:middle;
+	width:90%;
 	height:90%;
 	padding: 15px;
 }
@@ -112,7 +61,12 @@
 	vertical-align:middle;
 	padding: 10px;
 }
-.price tr,.tbl2 tr {
+.price tr {
+	border: 1px solid white;
+    border-collapse: collapse;
+	background-color: rgb(3, 3, 3);
+}
+.tbl2 tr {
 	border: 1px solid white;
     border-collapse: collapse;
 	background-color: rgb(3, 3, 3);
@@ -133,7 +87,21 @@ a {
   color: rgb(233, 22, 36);
   text-decoration: none;
 }
-
+.total {
+	border: 1px solid white;
+	background-color:white;
+	width: 99%;
+	height: 95%;
+}
+.total td {
+	text-align: center;
+	vertical-align:middle;
+	border: 1px solid white;
+	width: 100px;
+}
+.totaltd {
+	background-color:white;
+}
 </style>
 <body class="bg-dark">
 	<!-- 회원권구매,회원권조회 -->
@@ -144,12 +112,11 @@ a {
 <section class="page-section text-white" id="buyMship">
 <br><h1 align=center class="text-white font-weight-bold">Booking service</h1><br><br>
 	
-	
 	<table class=tbl1 align=center>
-	<thead><tr><th><h2><a href="/fit/List/Yoga">YOGA</a></h2></th>
-		<th><h2><a href="/fit/List/PT">PT</a></h2></th>
-		<th><h2><a href="/fit/List/Health">HEALTH</a></h2></th>
-		<th><h2><a href="/fit/List/Pilates">PILATES</a></h2></th></tr></thead>
+	<thead><tr><th><h2><a href="/fit/yoga">YOGA</a></h2></th>
+		<th><h2><a href="/fit/pt">PT</a></h2></th>
+		<th><h2><a href="/fit/health">HEALTH</a></h2></th>
+		<th><h2><a href="/fit/pilates">PILATES</a></h2></th></tr></thead>
 	<tbody><tr><td align=center>
 			<input type="hidden" id=yogacode name=yogacode value="1">
 			<input type="hidden" id=nameyoga name=nameyoga value="yoga">
@@ -182,15 +149,23 @@ a {
 <tr><td>
 	<table class=tbl2 align=center>
 		<tr>
-			<c:if test="${userid == 'null'}"><td colspan=3>로그인 후 사용해 주세요</td></c:if>
-			<c:if test="${userid != 'null'}"><td colspan=3>${userid}님 안녕하세요</td></c:if>
+			<c:if test="${userid == 'null'}"><td>로그인 후 사용해 주세요</td></c:if>
+			<c:if test="${userid != 'null'}"><td>${userid}님 안녕하세요</td></c:if>
 		</tr>
-		<tr><td colspan=3>운동복 (월 5000 ₩)&nbsp;&nbsp;&nbsp;&nbsp;<input type=checkbox id=sportswear name=sportswear value='5000'>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;락커 (월 5000 ₩)&nbsp;&nbsp;&nbsp;&nbsp;<input type=checkbox id=locker name=locker value='5000'></td></tr>
-		<tr><td><span id=months></span></td><td><span id=price></span></td><td><span id=total></span></td></tr>
-		<tr><td colspan=3><input type=text id=date>&nbsp;&nbsp;-&nbsp;&nbsp;
-				<input type=text id=end_date></td></tr>
-		<tr><td colspan=3><input type=button id='btnPay' name='btnPay' value='결제하기'></td></tr>
+		<tr><td>
+			운동복 (월 5000 ₩)&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type=checkbox id=sportswear name=sportswear value='5000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			락커 (월 5000 ₩)&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type=checkbox id=locker name=locker value='5000'></td></tr>
+		<tr><td align=center class='totaltd'>
+			<table class='total'><tbody>
+				<tr><td>종목</td><td>결제내역</td><td>총 결제요금</td></tr>
+				<tr><td><span id=months></span></td><td><span id=price></span></td><td><span id=total></span></td></tr>
+			</tbody></table>
+		</td></tr>
+		
+		<tr><td><input type=text id=date>&nbsp;&nbsp;-&nbsp;&nbsp;<input type=text id=end_date></td></tr>
+		<tr><td><input type=button id='btnPay' name='btnPay' value='결제하기'></td></tr>
 	</table>
 </td></tr>
 </table>
@@ -222,12 +197,16 @@ $(document)
 
 })
 
+
+
 //결제하기
 .on('click','#btnPay',function(){
 	let id='${userid}';
-	console.log(id);
 	if(id==''){
 		alert('로그인 후 이용 바랍니다.');
+		return false;
+	} else if ($('#total').html()==''){
+		alert('운동종류와 기간을 선택해주세요.');
 		return false;
 	} else {
 		$.ajax({
@@ -242,7 +221,7 @@ $(document)
 		   },
 		   success:function(data){
 		      alert("예약이 완료되었습니다.");
-		       document.location='/fit/home';
+		      document.location='/fit/home';
 		   }
 		});
 	}
@@ -303,68 +282,71 @@ $(document)
 function ClickTables(sports){
 	$(document).on('click','#'+sports+'tbl > tbody > tr',function(){
 		$(this).find("input[type=radio]").prop("checked", true);
+		
 		var mcode = $('input[name=mcode]:checked').val();
 		var sportsName = $('#name'+sports).val();
 		let flag = false;
+		
 		$('#sportswear,#locker').prop("checked",flag);
 		
-			let arLine = [];
-			for(i = 1; i < $('td',this).length + 1; i++){
-		        arLine.push($('td:nth-child('+ i +')', this).text());
-		     }
-			console.log(arLine);
-			CountDate();
-			$('#months').html(sportsName.toUpperCase()+'  '+arLine[1]);
-			let arline2=arLine[2].split(' ');
-			let swPrice,lckPrice=0;
-			let total=parseInt(arline2[0]);
-			
-			$('#sportswear,#locker').change(function(){
-					
-				if ($('#sportswear').is(":checked") && $('#locker').is(":checked")){
-					console.log('locker and sportsw checked');
-					lckPrice= parseInt(mcode)*parseInt($('#locker').val());
-					swPrice= parseInt(mcode)*parseInt($('#sportswear').val());
-					console.log(lckPrice);
-					console.log(swPrice);
+		let arLine = [];
+		for(i = 1; i < $('td',this).length + 1; i++){
+	        arLine.push($('td:nth-child('+ i +')', this).text());
+	     }
+		console.log(arLine);
+		
+		CountDate();
+		$('#months').html(sportsName.toUpperCase()+'  '+arLine[1]);
+		let arline2=arLine[2].split(' ');
+		let swPrice,lckPrice=0;
+		let total=parseInt(arline2[0]);
+		
+		$('#sportswear,#locker').change(function(){
+				
+			if ($('#sportswear').is(":checked") && $('#locker').is(":checked")){
+				console.log('locker and sportsw checked');
+				lckPrice= parseInt(mcode)*parseInt($('#locker').val());
+				swPrice= parseInt(mcode)*parseInt($('#sportswear').val());
+				console.log(lckPrice);
+				console.log(swPrice);
 
-					$('#price').html(arline2[0]+' + '+swPrice+' (운동복) '+' + '+lckPrice+' (라커) '+arline2[1]);
-					total=parseInt(arline2[0])+swPrice+lckPrice;
-					$('#total').html(total+' ₩');
+				$('#price').html(arline2[0]+' + '+swPrice+' (운동복) '+' + '+lckPrice+' (라커) '+arline2[1]);
+				total=parseInt(arline2[0])+swPrice+lckPrice;
+				$('#total').html(total+' ₩');
+				
+			} else if($('#locker').is(":checked")){
+				console.log('locker checked');
+				lckPrice= parseInt(mcode)*parseInt($('#locker').val());
+				console.log(lckPrice);
 					
-				} else if($('#locker').is(":checked")){
-					console.log('locker checked');
-					lckPrice= parseInt(mcode)*parseInt($('#locker').val());
-					console.log(lckPrice);
-						
-					$('#price').html(arline2[0]+' + '+lckPrice+' (라커) '+arline2[1]);
-					total=parseInt(arline2[0])+lckPrice;
-					$('#total').html(total+' ₩');
+				$('#price').html(arline2[0]+' + '+lckPrice+' (라커) '+arline2[1]);
+				total=parseInt(arline2[0])+lckPrice;
+				$('#total').html(total+' ₩');
+				
+			} else if($('#sportswear').is(":checked")){
+				console.log('sports checked');
+				swPrice= parseInt(mcode)*parseInt($('#sportswear').val());
+				console.log(swPrice);
 					
-				} else if($('#sportswear').is(":checked")){
-					console.log('sports checked');
-					swPrice= parseInt(mcode)*parseInt($('#sportswear').val());
-					console.log(swPrice);
-						
-					$('#price').html(arline2[0]+' + '+swPrice+' (운동복) '+arline2[1]);
-					total=parseInt(arline2[0])+swPrice;
-					$('#total').html(total+' ₩');
-					
-				} else {
-					console.log('sports !checked');
-					swPrice=0;
-					lckPrice=0;
-					total=parseInt(arline2[0]);
-					$('#price').html(arline2[0]+' '+arline2[1]);
-					$('#total').html(total+' ₩');
-				}
-				return flag;
-			})
-
-			$('#price').html(arline2[0]+' '+arline2[1]);
-			$('#total').html(total+' ₩');
+				$('#price').html(arline2[0]+' + '+swPrice+' (운동복) '+arline2[1]);
+				total=parseInt(arline2[0])+swPrice;
+				$('#total').html(total+' ₩');
+				
+			} else {
+				console.log('sports !checked');
+				swPrice=0;
+				lckPrice=0;
+				total=parseInt(arline2[0]);
+				$('#price').html(arline2[0]+' '+arline2[1]);
+				$('#total').html(total+' ₩');
+			}
+			return flag;
 		})
-	}
+
+		$('#price').html(arline2[0]+' '+arline2[1]);
+		$('#total').html(total+' ₩');
+	})
+}
 
 function CountDate(){
 		var mcode = $('input[name=mcode]:checked').val();

@@ -7,7 +7,7 @@ public class Mship {
 	int price;
 	int M_code;
 	public Mship() {
-	}
+	} 
 	public Mship(int code, String sports_name, String month, int price, int m_code) {
 		this.sports_name = sports_name;
 		this.month = month;

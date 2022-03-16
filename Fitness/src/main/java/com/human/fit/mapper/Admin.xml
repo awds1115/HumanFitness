@@ -2,12 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.human.fit.iAdmin">
-
-<!-- 게시물 총 갯수 -->
-<select id="count" resultType="int">
- 	select count(*) from Members
-</select>
-
+ 
 <select id="findMem" resultType="com.human.fit.membersA">
 	select a.name,a.nickname,a.userid,a.age,a.gender,a.mobile,a.email,b.mtype 
 	  from Members as a join membertype as b 
@@ -26,7 +21,15 @@
 	select a.name,a.nickname,a.userid,a.age,a.gender,a.mobile,a.email,b.mtype 
 	  from Members as a join membertype as b 
 	    on a.type = b.mtype_code
+	 limit 1,10
 </select>
+<select id="paging" resultType="com.human.fit.membersA">
+	select a.name,a.nickname,a.userid,a.age,a.gender,a.mobile,a.email,b.mtype 
+	  from Members as a join membertype as b 
+	    on a.type = b.mtype_code
+	 limit #{param1},10;
+</select>
+
 
 <select id="getMemInfo" resultType="com.human.fit.membersA">
 	select userid,password,nickname,age,name,gender,mobile,address,email
@@ -37,6 +40,9 @@
 <update id="members_update">
 	update Members set type=#{param2} where userid=#{param1}
 </update>
+<delete id="delete_mypage">
+	delete from mypage where userid=#{param1}
+</delete>
 <delete id="members_delete">
 	delete from Members where userid=#{param1}
 </delete>

@@ -25,13 +25,13 @@ public class MypageController {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
 	private ServletRequest session;
 	
 	@RequestMapping(value="delInfo")
 	public String delInfo(Model model,HttpServletRequest request){
-		String userid="ora_user";
-	    
+		session_call(request, model);
+		String userid=request.getParameter("userid");
+		
 		iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 
 		model.addAttribute("userid",view);

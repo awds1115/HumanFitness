@@ -119,5 +119,11 @@ public class membersA {
 		this.answer = answer;
 	}
 	
+	@Override
+	public String toString() {
+		return "membersA [name=" + name + ", nickname=" + nickname + ", userid=" 
+				+ userid + ", age=" + age + ", gender=" + gender + ", mobile=" 
+				+ mobile + ", email=" + email + ", type=" + type + "]";
+	}
 	
 }

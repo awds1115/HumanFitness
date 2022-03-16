@@ -87,12 +87,9 @@ public class Criteria {
 
 	@Override
 	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", keyword=" + keyword + ", skip=" + skip
-				+ ", type=" + type + ", typeArr=" + Arrays.toString(typeArr) + "]";
+		return "Criteria [pageNum=" + pageNum + ", amount=" + amount 
+				+ ", keyword=" + keyword + ", skip=" + skip + ", type=" + type 
+				+ ", typeArr=" + Arrays.toString(typeArr) + "]";
 	}
 
-
-
-
-    
 }
