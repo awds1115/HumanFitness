@@ -68,7 +68,7 @@
                 <div class="row g-0">
                     <div class="col-lg-4 col-sm-6">
                         <a class="portfolio-box" href="health" title="health">
-                            <img class="img-fluid2" src="https://www.bodychannel.co.kr/dist/img/main/slide_bg_4.jpg" alt="..." />
+                            <img class="img-fluid2" src="resources/assets/img/goodhealth.jpg" alt="..." />
                             <div class="portfolio-box-caption">
                                 <div class="project-category text-white-50">HumanFitness</div>
                                 <div class="project-name">Health</div>
@@ -78,7 +78,7 @@
                     
                     <div class="col-lg-4 col-sm-6">
                         <a class="portfolio-box" href="yoga" title="Yoga">
-                            <img class="img-fluid3" src="http://crossbak.cafe24.com/wp-content/uploads/2020/08/180702_slider_bg_6.jpg" alt="..."/>
+                            <img class="img-fluid3" src="resources/assets/img/goodyoga.jpg" alt="..."/>
                             <div class="portfolio-box-caption">
                                 <div class="project-category text-white-50">HumanFitness</div>
                                 <div class="project-name">Yoga</div>
@@ -88,7 +88,7 @@
                     
                     <div class="col-lg-4 col-sm-6">
                         <a class="portfolio-box" href="pilates" title="Pilates">
-                            <img class="img-fluid" src="http://www.pilatesfit.co.kr/css/images/branch_img/pc002.jpg" alt="..." />
+                            <img class="img-fluid" src="resources/assets/img/goodpilates.jpg" alt="..." />
                             <div class="portfolio-box-caption">
                                 <div class="project-category text-white-50">HumanFitness</div>
                                 <div class="project-name">Pilates</div>

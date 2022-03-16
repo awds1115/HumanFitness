@@ -6,14 +6,16 @@ public class contact {
 		private String email;
 		private String mobile;
 		private String message;
+		private String send_dt;
 		public contact() {
 		}
-		public contact(int no, String name, String email, String mobile, String message) {
+		public contact(int no, String name, String email, String mobile, String message, String send_dt) {
 			this.no = no;
 			this.name = name;
 			this.email = email;
 			this.mobile = mobile;
 			this.message = message;
+			this.send_dt = send_dt;
 		}
 		public int getNo() {
 			return no;
@@ -44,6 +46,12 @@ public class contact {
 		}
 		public void setMessage(String message) {
 			this.message = message;
+		}
+		public String getSend_dt() {
+			return send_dt;
+		}
+		public void setSend_dt(String send_dt) {
+			this.send_dt = send_dt;
 		}
 		
 }

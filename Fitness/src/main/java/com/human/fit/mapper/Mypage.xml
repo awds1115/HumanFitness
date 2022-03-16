@@ -35,9 +35,37 @@
 	delete from ticket where userid=#{param1} and sports_name=#{param2};
 </delete>
 <insert id="newcontact">
-	insert into contact(name,email,mobile,message) values(#{param1},#{param2},#{param3},#{param4});
+	insert into contact(name,email,mobile,message,send_dt) values(#{param1},#{param2},#{param3},#{param4},date_format(now(),'%Y-%m-%d'));
 </insert>
 <select id="getcontact" resultType="com.human.fit.contact">
-	select * from contact;
+	select * from contact limit 1,10;
+</select>
+<select id="contactList" resultType="com.human.fit.contact">
+	select * from contact limit #{param1},10;
+</select>
+<select id="getmailview" resultType="com.human.fit.contact">
+	select name,email,mobile,message from contact where no=#{param1};
+</select>
+<delete id="maildel">
+	delete from contact where no=#{param1};
+</delete>
+<delete id="mail_del">
+	delete from contact where no=#{param1};
+</delete>
+<select id="findmail" resultType="com.human.fit.contact">
+	select * from contact where name like concat('%',#{param1},'%') limit 1,10;
+							
+</select>
+<select id="findpaging" resultType="com.human.fit.contact">
+	select * from contact where name like concat('%',#{param2},'%') 
+							or email like concat('%',#{param2},'%') 
+							or mobile like concat('%',#{param2},'%') 
+							or message like concat('%',#{param2},'%') limit #{param1},10;					
+</select>
+<select id="findpagingcheck" resultType="com.human.fit.contact">
+	select * from contact where name like concat('%',#{param2},'%') 
+							or email like concat('%',#{param2},'%') 
+							or mobile like concat('%',#{param2},'%') 
+							or message like concat('%',#{param2},'%') limit #{param1},10;
 </select>
 </mapper>

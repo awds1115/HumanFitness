@@ -28,5 +28,20 @@ public interface iMypage {
 
 	ArrayList<contact> getcontact();
 
+	ArrayList<contact> getmailview(int no);
+
+	void maildel(int no);
+
+	void mail_del(String string);
+
+	ArrayList<contact> findmail(String find);
+
+	ArrayList<contact> contactList(int start);
+
+	ArrayList<contact> findpaging(int start, String find);
+
+	ArrayList<contact> findpagingcheck(int start, String find);
+
+
 	
 }
