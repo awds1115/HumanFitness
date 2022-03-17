@@ -35,10 +35,11 @@ public class AdminController {
     public String FidnMember(HttpServletRequest hsr) {
        iAdmin admin = sqlSession.getMapper(iAdmin.class);
        String keyword = hsr.getParameter("keyword");
+       JSONArray ja= new JSONArray();
         ArrayList<membersA> Flist=admin.findMem(keyword);
         System.out.println("Flist:"+Flist);
         
-        JSONArray ja= new JSONArray();
+       
          for(int i=0; i<Flist.size(); i++) { 
             JSONObject jo=new JSONObject();
             jo.put("name",Flist.get(i).getName());
@@ -58,18 +59,26 @@ public class AdminController {
     @RequestMapping(value="/pagecheck2", produces="application/json;charset=UTF-8")
     public String pagecheck2(HttpServletRequest hsr) {
 	       iAdmin admin = sqlSession.getMapper(iAdmin.class);
-	      int lines=10;
+	       int lines=10;
 	       int pageno=Integer.parseInt(hsr.getParameter("pageno"));
+	       String searchMem=hsr.getParameter("searchmem");
 	       int start=lines*pageno+1;
-	       int end=lines*(pageno+1);
-	       ArrayList<membersA> pageList = admin.paging(start);
-	       System.out.println(pageList.size());
-	      JSONArray ja=new JSONArray();
+	       JSONArray ja=new JSONArray();
+	       if(searchMem.equals("")) {
+	    	   ArrayList<membersA> pageList = admin.paging(start);
+	 	      	for(int i=0; i<pageList.size(); i++) {
+	 	         JSONObject jo=new JSONObject();
+	 	         jo.put("userid",pageList.get(i).getUserid());
+	 	         ja.add(jo);
+	 	      	} 
+	       }else {
+	       ArrayList<membersA> pageList = admin.findMempaging(searchMem,start);
 	      for(int i=0; i<pageList.size(); i++) {
 	         JSONObject jo=new JSONObject();
 	         jo.put("userid",pageList.get(i).getUserid());
 	         ja.add(jo);
 	      }
+	       }
 	      return ja.toString();
     }
 	
@@ -79,28 +88,39 @@ public class AdminController {
 	       iAdmin admin = sqlSession.getMapper(iAdmin.class);
        int lines=10;
        int pageno=Integer.parseInt(hsr.getParameter("pageno"));
-//       System.out.println(pageno);
+       String searchMem=hsr.getParameter("searchmem");
+       
        int start=lines*pageno+1;
-       int end=lines*(pageno+1);
-//       System.out.println(start);
-//       System.out.println(end);
-       ArrayList<membersA> pageList = admin.paging(start);
-//       System.out.println("["+pageList.size()+"]");
-      
        JSONArray ja = new JSONArray();
-      for(int i=0; i<pageList.size(); i++) { 
-          JSONObject jo=new JSONObject();
-          jo.put("name",pageList.get(i).getName());
-          jo.put("nickname",pageList.get(i).getNickname());
-          jo.put("userid",pageList.get(i).getUserid());
-          jo.put("age",pageList.get(i).getAge());
-          jo.put("gender",pageList.get(i).getGender());
-          jo.put("mobile",pageList.get(i).getMobile());
-          jo.put("email",pageList.get(i).getEmail());
-          jo.put("mtype",pageList.get(i).getMtype());
-          ja.add(jo);
-   }
-//      System.out.println(ja.toString());
+       if(searchMem.equals("")) {
+    	   ArrayList<membersA> pageList = admin.paging(start);
+          	for(int i=0; i<pageList.size(); i++) { 
+             JSONObject jo=new JSONObject();
+             jo.put("name",pageList.get(i).getName());
+             jo.put("nickname",pageList.get(i).getNickname());
+             jo.put("userid",pageList.get(i).getUserid());
+             jo.put("age",pageList.get(i).getAge());
+             jo.put("gender",pageList.get(i).getGender());
+             jo.put("mobile",pageList.get(i).getMobile());
+             jo.put("email",pageList.get(i).getEmail());
+             jo.put("mtype",pageList.get(i).getMtype());
+             ja.add(jo);
+          	} 
+       } else {
+    	   ArrayList<membersA> pageList = admin.findMempaging(searchMem,start);
+          	for(int i=0; i<pageList.size(); i++) { 
+             JSONObject jo=new JSONObject();
+             jo.put("name",pageList.get(i).getName());
+             jo.put("nickname",pageList.get(i).getNickname());
+             jo.put("userid",pageList.get(i).getUserid());
+             jo.put("age",pageList.get(i).getAge());
+             jo.put("gender",pageList.get(i).getGender());
+             jo.put("mobile",pageList.get(i).getMobile());
+             jo.put("email",pageList.get(i).getEmail());
+             jo.put("mtype",pageList.get(i).getMtype());
+             ja.add(jo);
+          	}
+       } 
       return ja.toString(); 
     }
 	

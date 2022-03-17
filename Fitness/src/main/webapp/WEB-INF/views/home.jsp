@@ -2,9 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-<!--     dd -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -143,16 +142,14 @@
                             </div>
                         </form>
                     </div>
+                    <input type=hidden id=userid2 name=userid2 value=${userid }>
                 </div>
              
             </div>
         </section>
-        <!-- Footer-->
+
         <jsp:include page="footer.jsp"/>
-<!--         <footer class="bg-light py-5"> -->
-<!--             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2021 - Company Name</div></div> -->
-<!--         </footer> -->
-        <!-- Bootstrap core JS-->
+ <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- SimpleLightbox plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
@@ -174,6 +171,18 @@ $(document)
 	} else {
 		alert("상담문의가 성공적으로 전송 되었습니다.");
 		return true;
+	}
+})
+.on('click','#buy',function(){
+	if($('#userid2').val()=="null"){
+		if(confirm("로그인이 필요한 서비스 입니다.\n로그인을 하시겠습니까?")){
+			document.location="login";
+		} else{
+			return false;
+		}
+
+	} else{
+		document.location="buyMship";
 	}
 })
 </script>

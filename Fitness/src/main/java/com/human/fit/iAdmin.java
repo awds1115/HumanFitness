@@ -17,4 +17,6 @@ public interface iAdmin {
 	ArrayList<Mship> getMship(int code);
 	
 	void payment(String userid,String sports_name,String start_dt,String end_dt);
+
+	ArrayList<membersA> findMempaging(String searchMem, int start);
 }

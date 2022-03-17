@@ -14,9 +14,21 @@
 	    or gender like CONCAT('%', #{param1}, '%')
 	    or mobile like CONCAT('%', #{param1}, '%')
 	    or email like CONCAT('%', #{param1}, '%')
-	    or mtype like CONCAT('%', #{param1}, '%')
+	    or mtype like CONCAT('%', #{param1}, '%') limit 1,10
 </select>
-
+<select id="findMempaging" resultType="com.human.fit.membersA">
+	select a.name,a.nickname,a.userid,a.age,a.gender,a.mobile,a.email,b.mtype 
+	  from Members as a join membertype as b 
+	    on a.type = b.mtype_code
+	 where name like CONCAT('%', #{param1}, '%')
+	    or nickname like CONCAT('%', #{param1}, '%')
+	    or userid like CONCAT('%', #{param1}, '%')
+	    or age like CONCAT('%', #{param1}, '%')
+	    or gender like CONCAT('%', #{param1}, '%')
+	    or mobile like CONCAT('%', #{param1}, '%')
+	    or email like CONCAT('%', #{param1}, '%')
+	    or mtype like CONCAT('%', #{param1}, '%') limit #{param2},10					
+</select>
 <select id="members_admin" resultType="com.human.fit.membersA">
 	select a.name,a.nickname,a.userid,a.age,a.gender,a.mobile,a.email,b.mtype 
 	  from Members as a join membertype as b 

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
        <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
-	<!-- Bootstrap Icons-->
+   <!-- Bootstrap Icons-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
        <!-- Google fonts-->
 <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
@@ -47,14 +47,14 @@ section.notice {
 }
 #board-search .search-window .search-wrap {
   position: relative;
-/* 	padding-right: 124px; */
-	display: block;
-	margin: 20px 0 20px 0;
-	float:right;
+/*    padding-right: 124px; */
+   display: block;
+   margin: 20px 0 20px 0;
+   float:right;
 }
 #board-search .search-window .search-wrapper {
-	overflow:hidden;
-	padding:0 1.3rem;
+   overflow:hidden;
+   padding:0 1.3rem;
 }
 #board-search .search-window .search-wrap input {
   height: 40px;
@@ -209,118 +209,60 @@ section.notice {
   width: 1px;
   height: 1px;
 }
-.bno_width{
-    width: 10%;
- }
- .writer_width{
-    width: 20%;
- }
- .regdate_width{
-    width: 15%;
- }
- .updatedate_width{
-    width: 15%;
- }
-
-.top_btn{
-	font-size: 20px;
-  padding: 6px 12px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  font-weight: 600;
-}
-.pageInfo_wrap .pageInfo_area {
-  padding: 15px 0;
-  background-color: #f9f7f9;
-  width: 1078px;
-}
-  .pageInfo{
-    list-style : none;
-    display: inline-block;
-	margin: 20px 0 20px 0;
-}
-.pageInfo li{
-    float: left;
-  font-size: 20px;
-/*   margin-left: 18px; */
-  padding: 7px;
-  font-weight: 500;
-}
 
 ///////////////////////////////////
-/* .tbl{
-	width:90%;
-}
-#memAtbl tr, #dlgMemtbl tr {
-	border: 1px solid white;
-    border-collapse: collapse;
-	background-color: rgb(3, 3, 3);
-}
-td,th{
-	text-align: center;
-	/* vertical-align:middle;
-	padding: 15px;
-} */
+
 #search{
-	margin-left:45px;
+   margin-left:45px;
 }
 
 .depth3 > ul{
-	font-size:0;
-	text-align:center;
-
-	}
+   font-size:0;
+   text-align:center;
+   padding-left:0;
+   }
 .depth3 > ul > li{
-	display:inline-block;
-	vertical-align:top;
-	min-width:180px;
-	box-sizing:border-box;
-	border:1px solid #999;
-	border-left:0;
+   display:inline-block;
+   vertical-align:top;
+   min-width:180px;
+   box-sizing:border-box;
+   border:1px solid #999;
+   border-left:0;
 }
 .depth3 > ul > li.on{
-	border:1px solid #A00000;
+   border:1px solid #A00000;
 }
 .depth3 > ul > li > a{
-	display:block;
-	height:46px;
-	line-height:46px;
-	text-align:center;
-	box-sizing:border-box;
-	color:#555;
-	padding:0 20px;
-	font-size:14px;
-	}
+   display:block;
+   height:46px;
+   line-height:46px;
+   text-align:center;
+   box-sizing:border-box;
+   color:#555;
+   padding:0 20px;
+   font-size:14px;
+   }
 .depth3 > ul > li.on > a{
-	color:#f7f7e4;
-	font-weight:500;
-	background:#A00000;
-	}
+   color:#f7f7e4;
+   font-weight:500;
+   background:#A00000;
+   }
 a {
   text-decoration: none;
 }
 #btnDelete,#btnSlctview {
-	border-radius: 5px;
-	text-align:center;
-	vertical-align:middle;
-	border:1px solid #999;
-	border-radius:0;
+   border-radius: 5px;
+   text-align:center;
+   vertical-align:middle;
+   border:1px solid #999;
+   border-radius:0;
 }
 #back,#next {
-	vertical-align: middle;
-	text-align: center;
-	align: center;
-	padding:3px 10px;
+   vertical-align: middle;
+   text-align: center;
+   align: center;
+   padding:3px 10px;
 }
-/* .divbtn{
-	margin: 0 5%;
-} */
-/* #btnType{
-	border-radius: 5px;
-	text-align:center;
-	align:center;
-	vertical-align:middle;
-} */
 </style>
 <body>
 <!-- RUD,회원타입(직원,고객)업데이트,회원강퇴,회원조회,회원권환불 -->
@@ -333,28 +275,29 @@ a {
 <section class="page-section" id="members">
   <div class="page-title">
       <div class="container" align=center>
-		<h2>관리자페이지</h2><br><br>
-	  </div>
-	<div class="depth3">
-		<ul>
-			<li class="on"><a href="/fit/viewmember" >회원관리</a></li>
-			<li><a href="/fit/mship" >운동종류 관리</a></li>
-		</ul>
-	</div>
+      <h2>관리자페이지</h2><br><br>
+     </div>
+   <div class="depth3">
+      <ul>
+         <li class="on"><a href="/fit/viewmember" >회원관리</a></li>
+         <li><a href="/fit/mship" >운동종류 관리</a></li>
+         <li><a href="/fit/M_contact" >상담문의 관리</a></li>
+      </ul>
+   </div>
   </div>
 <div id="board-search">
     <div class="container">
         <div class="search-window">
-			<div class="search-wrapper">
-				<div style="width: 350px; float:left;" class="search-wrap">
-					<button class="btn" id=btnDelete>선택삭제</button>
-					<button class="btn" id=btnSlctview>선택조회</button>
-				</div>
-				<div id='search' class="search-wrap">
-					<input type="search" name="findMem" id="findMem"/>
-					<button id="btnSearch" class="btn btn-dark">회원검색</button>
-				</div>
-			</div>	
+         <div class="search-wrapper">
+            <div style="width: 350px; float:left;" class="search-wrap">
+               <button class="btn" id=btnDelete>선택삭제</button>
+               <button class="btn" id=btnSlctview>선택조회</button>
+            </div>
+            <div id='search' class="search-wrap">
+               <input type="search" name="findMem" id="findMem"/>
+               <button id="btnSearch" class="btn btn-dark">회원검색</button>
+            </div>
+         </div>   
             </div>
         </div>
     </div>
@@ -363,50 +306,50 @@ a {
 <div id="board-list">
     <div class="container">
 
-	<table id=memAtbl class="board-table" align=center>
-		<!-- name,nickname,userid,age,gender,mobile,email,type -->
-		<thead>
-		<tr><th>\</th><th>이름</th><th>닉네임</th><th>아이디</th><th>나이</th><th>성별</th>
-			<th>전화번호</th><th>이메일</th><th>고객/직원</th><th>/</th></tr>
-		</thead>
-		<tbody></tbody>
-	</table>
-	
+   <table id=memAtbl class="board-table" align=center>
+      <!-- name,nickname,userid,age,gender,mobile,email,type -->
+      <thead>
+      <tr><th>\</th><th>이름</th><th>닉네임</th><th>아이디</th><th>나이</th><th>성별</th>
+         <th>전화번호</th><th>이메일</th><th>고객/직원</th><th>/</th></tr>
+      </thead>
+      <tbody></tbody>
+   </table>
+   
     </div>
     <div id="board-search">
     <div class="container">
         <div class="search-window">
-		<button id='back' class="btn btn-light">
-			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
-			  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12z"/>
-			</svg>
-		</button>&nbsp;&nbsp;&nbsp;&nbsp;
-		<button id='next' class="btn btn-light">
-			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
-			  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4v8z"/>
-			</svg>
-		</button>
-		</div>
-		</div>
-		</div>
+      <button id='back' class="btn btn-light">
+         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+           <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12z"/>
+         </svg>
+      </button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button id='next' class="btn btn-light">
+         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
+           <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4v8z"/>
+         </svg>
+      </button>
+      </div>
+      </div>
+   </div>
 </div>
 
 </section>
 
    <div class="bg-dark text-white" id=dlgMemupdate style='display:none;' title='회원관리'>
-		<br><h1 align=center>회원 정보</h1><br>
-		<input type="hidden" id=_userid name=_userid>
-	      <table id=dlgMemtbl class="board-table" align=center>
-			<thead>
-				<tr><th>아이디</th><th>이름</th><th>닉네임</th><th>나이</th><th>성별</th>
-					<th>전화번호</th><th>이메일</th><th>주소</th></tr>
-			</thead>
-			<!-- userid,password,nickname,age,name,gender,mobile,address,email,mtype -->
-			<tbody></tbody>
-		</table><br>
-		<table id=updatetbl align=center>
-			<tr><td><select id=mtype name=mtype size=1 style="width: 200px; height: 30px;"></select></td></tr>
-		</table><br>
+      <br><h1 align=center>회원 정보</h1><br>
+      <input type="hidden" id=_userid name=_userid>
+         <table id=dlgMemtbl class="board-table" align=center>
+         <thead>
+            <tr><th>아이디</th><th>이름</th><th>닉네임</th><th>나이</th><th>성별</th>
+               <th>전화번호</th><th>이메일</th><th>주소</th></tr>
+         </thead>
+         <!-- userid,password,nickname,age,name,gender,mobile,address,email,mtype -->
+         <tbody></tbody>
+      </table><br>
+      <table id=updatetbl align=center>
+         <tr><td><select id=mtype name=mtype size=1 style="width: 200px; height: 30px;"></select></td></tr>
+      </table><br>
    </div>
    
 <jsp:include page="../footer.jsp"/>
@@ -437,7 +380,7 @@ $(document)
 .on('click','#next',function(){
 	pageno=pageno+1;
 		$.ajax({url:'/fit/pagecheck2',
-			data:{pageno:pageno},
+			data:{pageno:pageno,searchmem:$('#findMem').val()},
             datatype:'json',
             method:'get',
             success:function(txt){
@@ -447,7 +390,7 @@ $(document)
 					return false;
 				}
 			$.ajax({url:'/fit/paging2',
-				data:{pageno:pageno},
+				data:{pageno:pageno,searchmem:$('#findMem').val()},
 				dataType:'JSON',
 				method:'GET',
 				success:function(txt){
@@ -464,8 +407,8 @@ $(document)
   		 			}
 				}
 			  })
-			} // pagecheck
-      }) // pagecheckc
+			} 
+      })
 })
 .on('click','#back',function(){
    pageno=pageno-1;
@@ -474,14 +417,14 @@ $(document)
        pageno=0;
        return false;
    }
-   $.ajax({url:'/fit/pagecheck',
-      data:{pageno:pageno},
-      datatype:'json',
+   $.ajax({url:'/fit/pagecheck2',
+      data:{pageno:pageno,searchmem:$('#findMem').val()},
+      dataType:'json',
       method:'get',
       success:function(txt){
     	  console.log(txt);
-		   $.ajax({url:'/fit/paging',
-		      data:{pageno:pageno},
+		   $.ajax({url:'/fit/paging2',
+		      data:{pageno:pageno,searchmem:$('#findMem').val()},
 		      dataType:'JSON',
 		      method:'GET',
 				success:function(txt){
@@ -498,8 +441,8 @@ $(document)
 			 		}
 				}
 		   })
-      } // pagecheck
-   })  // pagecheck
+      }
+   }) 
 })
 
 //검색기능
