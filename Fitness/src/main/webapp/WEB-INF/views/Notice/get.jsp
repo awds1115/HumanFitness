@@ -50,7 +50,7 @@ textarea{
 	margin-top : 50px;
 }
 .rp_child{
-
+	padding-left: 20px;
 }
 </style>
 </head>
@@ -106,19 +106,29 @@ textarea{
 				            			</td>
 				            		</c:if>
 				            		<c:if test="${list.writer==nickname }">
-				            			<td id="no${list.no}">${list.content}</td>
-				            			<td id="btn${list.no}">
-				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button>
-				            				<button id="${list.no}" onClick="reply_update(this.id)">댓글수정</button>
-				            				<button id="${list.no}" onClick="reply_delete(this.id)">댓글삭제</button>
-				            			</td>
+				            			<c:if test="${list.content=='삭제된 댓글입니다.' }">
+					            			<td id="no${list.no}">${list.content}</td>
+					            			<td id="btn${list.no}">
+	<%-- 				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button> --%>
+<%-- 					            				<button id="${list.no}" onClick="reply_update(this.id)">댓글수정</button> --%>
+<%-- 					            				<button id="${list.no}" onClick="reply_delete(this.id)">댓글삭제</button> --%>
+					            			</td>
+				            			</c:if>
+				            				<c:if test="${list.content!='삭제된 댓글입니다.' }">
+					            			<td id="no${list.no}">${list.content}</td>
+					            			<td id="btn${list.no}">
+					            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button>
+					            				<button id="${list.no}" onClick="reply_update(this.id)">댓글수정</button>
+					            				<button id="${list.no}" onClick="reply_delete(this.id)">댓글삭제</button>
+					            			</td>
+				            			</c:if>
 				            		</c:if>
 			            		</c:if>
 			            	</tr>
 		            	</table>	
 	            	</c:if>
 	            	<c:if test="${list.grpl!=0 }">
-						<table class="rp_child">
+						<table id="table${list.grp}" name="${list.no}" class="rp_child">
 		            		<tr>
 				                <td>${list.writer}</td>
 				                <td>${list.wdate}</td>
@@ -131,16 +141,26 @@ textarea{
 			            			<c:if test="${list.writer!=nickname }">
 				            			<td id="no${list.no}">${list.content}</td>
 				            			<td id="btn${list.no}">
-				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button>
+<%-- 				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button> --%>
 				            			</td>
 				            		</c:if>
 				            		<c:if test="${list.writer==nickname }">
-				            			<td id="no${list.no}">${list.content}</td>
-				            			<td id="btn${list.no}">
-				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button>
-				            				<button id="${list.no}" onClick="reply_update(this.id)">댓글수정</button>
-				            				<button id="${list.no}" onClick="reply_delete(this.id)">댓글삭제</button>
-				            			</td>
+				            			<c:if test="${list.content=='삭제된 댓글입니다.' }">
+					            			<td id="no${list.no}">${list.content}</td>
+					            			<td id="btn${list.no}">
+	<%-- 				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button> --%>
+<%-- 					            				<button id="${list.no}" onClick="reply_update(this.id)">댓글수정</button> --%>
+<%-- 					            				<button id="${list.no}" onClick="reply_delete(this.id)">댓글삭제</button> --%>
+					            			</td>
+				            			</c:if>
+				            				<c:if test="${list.content!='삭제된 댓글입니다.' }">
+					            			<td id="no${list.no}">${list.content}</td>
+					            			<td id="btn${list.no}">
+	<%-- 				            				<button id="${list.grp}" onClick="reply_insert1(this.id)">답글달기</button> --%>
+					            				<button id="${list.no}" onClick="reply_update(this.id)">댓글수정</button>
+					            				<button id="${list.no}" onClick="reply_delete(this.id)">댓글삭제</button>
+					            			</td>
+				            			</c:if>
 				            		</c:if>
 			            		</c:if>
 			            	</tr>
@@ -210,13 +230,13 @@ textarea{
 		$.post('/fit/reply',{bno:$('#bno').val(), 
 							nickname:$('#nickname').val(), 
 							p_content:$("#p_content").val()},function(txt){
-				now=new Date();
-				let yyyy = now.getFullYear();
-				let MM = now.getMonth();
-				let dd = now.getDate();
-				let hh = now.getHours();
-				let mm = now.getMinutes();
-				let ss = now.getSeconds();
+// 				now=new Date();
+// 				let yyyy = now.getFullYear();
+// 				let MM = now.getMonth();
+// 				let dd = now.getDate();
+// 				let hh = now.getHours();
+// 				let mm = now.getMinutes();
+// 				let ss = now.getSeconds();
 				if(txt=="fail"){
 					alert('댓글작성 실패');
 				} else {
@@ -237,23 +257,36 @@ textarea{
 			},'text');
 		
 	});
-	/* 댓글 삭제 */
+	/* 모댓글 삭제 */
 	function reply_delete(id){
-		console.log(id)
 		alert("댓글을 삭제하시겠습니까?")
 		$.post('/fit/replyDelete',{no:id},function(txt){
-			$("table[name="+id+"]").remove();
+			location.reload();
+			
 			},'text');
 		return false;
 	}
+// 	/* 자식댓글 삭제 */
+// 	function reply_delete2(id){
+// 		console.log(id)
+// 		console.log($("#no"+id).html());
+// 		alert("댓글을 삭제하시겠습니까?")
+// 		$.post('/fit/replyDelete',{no:id},function(txt){
+// 			$("table[name="+id+"]").remove();
+// 			},'text');
+// 		return false;
+// 	}
 	/* 댓글 수정 창 띄우기*/
 	function reply_update(id){
+		console.log("updateid : "+id);
 		R_reply='<td id=no'+id+'>';
 		R_reply+='<textarea rows="1" cols="5" id="p_content2" name="p_content2" style="resize:none;">'+$("#no"+id).text();
 		R_reply+='</textarea></td>';
 		R_btn='<td id=btn'+id+'>';
 		R_btn+='<button id="'+id+'" onClick="reply_update2('+id+')">완료</button>';
 		R_btn+='<button id="'+id+'" onClick="reply_return('+id+')">취소</button></td>';
+		console.log($("#no"+id).text());
+		console.log(R_reply+"<br>"+R_btn);
 		$("#no"+id).html(R_reply);
 		$("#btn"+id).html(R_btn);
 		return false;
@@ -292,7 +325,7 @@ textarea{
 	}
 	/* 대댓글 작성 */
 	function reply_insert2(id){
-		$.post('/fit/reply',{
+		$.post('/fit/reply2',{
 			bno:$('#bno').val(), 
 			grp:id,
 			nickname:$('#nickname').val(), 
@@ -318,8 +351,9 @@ textarea{
 // 			'</td></tr></table>';
 // 		$('#dvReply').append(str);
 // 		$('#p_content').val('');
-
+			
 // 		}
+				location.reload();
 	},'text');
 
 }

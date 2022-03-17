@@ -26,16 +26,13 @@ public class nBoardController {
     @Autowired
 	private SqlSession sqlSession;
     
-//    @RequestMapping("/list")
-//    public String boardListGET(Model model) {
-//        
-//        log.info("게시판 목록 페이지 진입");
-//        Iboard board=sqlSession.getMapper(Iboard.class);
-//        model.addAttribute("list",board.getBList());
-//        
-//        return "Notice/list";
-//    }
     
+    //공지사항용
+    
+    
+    
+    
+    //커뮤니티용
     @RequestMapping("/list")
     public String boardListGET(Model model,Criteria cri,HttpServletRequest hsr) {
         
@@ -50,43 +47,35 @@ public class nBoardController {
         model.addAttribute("pageMaker", pageMake);
         
     	HttpSession session = hsr.getSession(true);
-//        String userid = (String)session.getAttribute("userid");
-//       
-//        model.addAttribute("member",board.getuserid(userid));
         
         session_call(hsr, model);
         
-//        System.out.println("userid : "+nickname);
-        
-        return "Notice/list";
+        return "Notice/Notice";
         
     }
     
     @RequestMapping("/enroll")
-    // => @RequestMapping(value="enroll", method=RequestMethod.GET)
     public String boardEnrollGET(Model model,HttpServletRequest hsr) {
-        
-//        log.info("게시판 등록 페이지 진입");
     	
        	HttpSession session = hsr.getSession(true);
        	
+       	
        	Iboard board=sqlSession.getMapper(Iboard.class);
         String userid = (String)session.getAttribute("userid");
-       
-        model.addAttribute("userid",board.getuserid(userid));
-        
-        System.out.println("userid : "+userid);
+        session_call(hsr, model);
     	return "Notice/enroll";
     }
-//    
+    
     @RequestMapping(value="/enroll",method=RequestMethod.POST)
-    public String boardEnrollPOST(BoardVO board, RedirectAttributes rttr) {
+    public String boardEnrollPOST(BoardVO board, RedirectAttributes rttr,HttpServletRequest hsr,Model model) {
         
         log.info("BoardVO : " + board);
 
         Iboard board1=sqlSession.getMapper(Iboard.class);
         board1.enroll(board);
         
+        HttpSession session = hsr.getSession(true);
+        session_call(hsr, model);
         rttr.addFlashAttribute("result", "enrol success");
         
         return "redirect:/list";
@@ -102,15 +91,13 @@ public class nBoardController {
     	
     	model.addAttribute("cri",cri);
     	
-//    	HttpSession session = hsr.getSession(true);
-//        String userid = (String)session.getAttribute("userid");
+    	HttpSession session = hsr.getSession(true);
         
         List<p_reply> p1 = board.getreply(bno);
         model.addAttribute("p1",p1);
         session_call(hsr, model);
-//        model.addAttribute("userid",board.getuserid(userid));
-//         
-//        System.out.println("userid : "+userid);
+        
+        
          
     	return "Notice/get";
     }
@@ -184,6 +171,23 @@ public class nBoardController {
         
         
     }
+//    //댓글 삭제
+//    @ResponseBody
+//    @RequestMapping(value="/replyDelete",method=RequestMethod.POST)
+//    public String replydelete(HttpServletRequest hsr,RedirectAttributes rttr) {
+//        int no = Integer.parseInt(hsr.getParameter("no"));
+//        
+//        System.out.println(no);
+//        Iboard board1=sqlSession.getMapper(Iboard.class);
+//        
+//
+//        board1.deleteReply(no);
+//
+//        return "ok";
+//       
+//        
+//        
+//    }
     //댓글 삭제
     @ResponseBody
     @RequestMapping(value="/replyDelete",method=RequestMethod.POST)
@@ -221,7 +225,7 @@ public class nBoardController {
     }
     //대댓글 작성
     @ResponseBody
-    @RequestMapping(value="/replyUpdate",method=RequestMethod.POST)
+    @RequestMapping(value="/reply2",method=RequestMethod.POST)
     public String reply_insert2(HttpServletRequest hsr,RedirectAttributes rttr) {
         int bno = Integer.parseInt(hsr.getParameter("bno"));
         int grp = Integer.parseInt(hsr.getParameter("grp"));
