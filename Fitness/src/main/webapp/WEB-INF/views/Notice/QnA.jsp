@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>커뮤니티</title>
+<title>문의사항</title>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
        <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
@@ -258,13 +258,13 @@ section.notice {
 <section class="notice">
   <div class="page-title">
       <div class="container" align=center>
-          <h2>커뮤니티</h2>
+          <h2>문의 사항</h2>
       </div>
   </div>
     
 <div class="table_wrap" align=center>
-   <c:if test="${nickname!='null'}">
-      <a href="/fit/enroll" class="top_btn">글 등록</a>
+   <c:if test="${type==2}">
+      <a href="/fit/QnA_enroll" class="top_btn">게시판 등록</a>
    </c:if>
        <!-- board seach area -->
     <div id="board-search">
@@ -383,14 +383,14 @@ $(".move").on("click", function(e){
     e.preventDefault();
     
     moveForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href")+ "'>");
-    moveForm.attr("action", "/fit/get");
+    moveForm.attr("action", "/fit/QnA_get");
     moveForm.submit();
 });
 
 $(".pageInfo a").on("click", function(e){
     e.preventDefault();
     moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-    moveForm.attr("action", "/fit/list");
+    moveForm.attr("action", "/fit/QnA_list");
     moveForm.submit();
     
 });

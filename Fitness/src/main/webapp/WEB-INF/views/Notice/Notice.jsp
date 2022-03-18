@@ -258,13 +258,13 @@ section.notice {
 <section class="notice">
   <div class="page-title">
       <div class="container" align=center>
-          <h2>공지사항</h2>
+          <h2>공지 사항</h2>
       </div>
   </div>
     
 <div class="table_wrap" align=center>
-   <c:if test="${nickname!='null'}">
-      <a href="/fit/enroll" class="top_btn">게시판 등록</a>
+   <c:if test="${type==1}">
+      <a href="/fit/N_enroll" class="top_btn">공지사항 등록</a>
    </c:if>
        <!-- board seach area -->
     <div id="board-search">
@@ -342,7 +342,7 @@ section.notice {
         <input type="hidden" name="type" value="${pageMaker.cri.type }">
     </form>
 </div>
-
+<jsp:include page="../footer.jsp"/>
 </section>
 <script src="<c:url value='/resources/js/scripts.js' />"></script>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
@@ -383,14 +383,14 @@ $(".move").on("click", function(e){
     e.preventDefault();
     
     moveForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href")+ "'>");
-    moveForm.attr("action", "/fit/get");
+    moveForm.attr("action", "/fit/N_get");
     moveForm.submit();
 });
 
 $(".pageInfo a").on("click", function(e){
     e.preventDefault();
     moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-    moveForm.attr("action", "/fit/list");
+    moveForm.attr("action", "/fit/N_list");
     moveForm.submit();
     
 });

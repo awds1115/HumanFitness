@@ -3,14 +3,121 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.human.fit.Iboard">
 
+<!-- 공지사항 -->
+    <select id="N_getListPaging" resultType="com.human.fit.BoardVO">
+    
+        select * from (
+                select bno, title, writer, regdate, updatedate  
+                from N_board 
+                <if test="keyword != null">
+                    <include refid="criteria"></include>
+                </if>
+                order by bno desc) as T1
+        limit #{skip},#{amount}
+    
+    </select>
+    <select id="N_getTotal" resultType="int">
+    
+        select count(*) from N_board
+        
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>    
+    
+    </select>   
+<insert id="N_enroll">
+	insert into N_board(title, content, writer) values (#{title}, #{content}, #{writer})
+</insert>
+<select id="N_getPage" resultType="com.human.fit.BoardVO">
+    
+    select * from N_board where bno = #{bno}
+    
+</select>
+<update id="N_modify">
+		update N_board set title = #{title}, content = #{content}, updatedate = now()
+        where bno = #{bno}
+</update>
+<delete id="N_delete"> 
+        delete from N_board where bno = #{bno}
+</delete>
+
+
+
+<!-- 문의사항 -->
+    <select id="QnA_getListPaging" resultType="com.human.fit.BoardVO">
+    
+        select * from (
+                select bno, title, writer, regdate, updatedate  
+                from QnA_board 
+                <if test="keyword != null">
+                    <include refid="criteria"></include>
+                </if>
+                order by bno desc) as T1
+        limit #{skip},#{amount}
+    
+    </select>
+    <select id="QnA_getTotal" resultType="int">
+    
+        select count(*) from QnA_board
+        
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>    
+    
+    </select>   
+	<insert id="QnA_enroll">
+		insert into QnA_board(title, content, writer) values (#{title}, #{content}, #{writer})
+	</insert>
+	<select id="QnA_getPage" resultType="com.human.fit.BoardVO">
+	    
+	    select * from QnA_board where bno = #{bno}
+	    
+	</select>
+	<update id="QnA_modify">
+			update QnA_board set title = #{title}, content = #{content}, updatedate = now()
+	        where bno = #{bno}
+	</update>
+	<delete id="QnA_delete"> 
+	        delete from QnA_board where bno = #{bno}
+	</delete>
+	<select id="QnA_getreply" resultType="com.human.fit.p_reply">
+		select * from QnA_reply where bno= #{param1} order by grp,grps
+	</select>
+	
+	<select id="QnA_getGrp" resultType="int">
+		select ifnull (max(grp),0)
+			from QnA_reply where bno=#{bno}
+	</select>
+	<select id="QnA_getMaxNo" resultType="int">
+		select max(no) from QnA_reply where bno=#{bno}
+	</select>
+	<insert id="QnA_insertReply">
+		insert into QnA_reply (bno,grp,grps,grpl,writer,content,wdate) values (#{param1},#{param2},0,0,#{param3},#{param4},now());
+	</insert>
+	<update id="QnA_updateReply">
+		update QnA_reply set content = #{param2} , wdate = now()
+	        where no = #{no};
+	</update>
+	<update id="QnA_deleteReply">
+		update QnA_reply set content = "삭제된 댓글입니다." , wdate = now()
+	        where no = #{param1}
+	</update>
+
+
+
+
+
+
+
+<!-- 커뮤니티 -->
 <insert id="enroll">
 	insert into board(title, content, writer) values (#{title}, #{content}, #{writer})
 </insert>
 
 <!-- 게시판 목록 -->
-<select id="getBList" resultType="com.human.fit.BoardVO">
-	select * from board
-</select>
+<!-- <select id="getBList" resultType="com.human.fit.BoardVO"> -->
+<!-- 	select * from board -->
+<!-- </select> -->
 
 <select id="getPage" resultType="com.human.fit.BoardVO">
     

@@ -9,7 +9,7 @@
         <meta charset="UTF-8">
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Insert title here</title>
+        <title>N_get</title>
 
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
@@ -49,14 +49,11 @@ textarea{
            
                 <div class="col-md-10">
                   <hr/>
-                  <form id="modifyForm" action="/fit/modify" method="post">
                     <table class="table table-condensed">
-                    
                         <thead>
                             <tr align="center">
                                 <th width="10%">제목</th>
                                 <th width="60%"><c:out value="${pageInfo.title}"/> </th>
-                                
                             </tr>
                         </thead>
                         <tbody>
@@ -78,17 +75,12 @@ textarea{
                                 <td>글쓴이
                                 </td>
                                 <td>
-                                <c:out value="${pageInfo.writer}"/> <span style='float:right'>조회 : 0</span>
+                                <c:out value="${pageInfo.writer}"/>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
-                                <input type=hidden name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
-                                 <input type=hidden name="title" value='<c:out value="${pageInfo.title}"/>' >
-                                 <textarea rows="3" name="content"><c:out value="${pageInfo.content}"/></textarea>
-                                 <input type=hidden name="writer" readonly="readonly" value='<c:out value="${pageInfo.writer}"/>' >
-                                 <input type=hidden name="regdater" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.regdate}"/>' >
-                                 <input type=hidden name="updateDate" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.updateDate}"/>' >
+                              <td colspan="2" >
+                                <textarea class="form-control" rows="15" name="content" id="content" readonly>${pageInfo.content}</textarea>
                                 </td>
                             </tr>
                         </tbody>
@@ -102,20 +94,20 @@ textarea{
                                     <span style='float:right'>
                                         <button type="button" id="list_btn" class="btn btn-default">목록</button>
                                         <c:if test="${nickname==pageInfo.writer}">
-                                        <button type="button" id="modify_btn" class="btn btn-default">수정 완료</button>
-                                        <button type="button" id="cancel_btn" class="btn btn-default">수정 취소</button>
+                                        <button type="button" id="modify_btn" class="btn btn-default">수정</button>
+                                        <button type="button" id="delete_btn" class="btn btn-default">삭제</button>
                                         </c:if>	
                                     </span>
                                 </td>
                             </tr>
                         </thead>
                     </table>
-             	</form>
-		</div>
 </div>
+</div>
+	
         
          <hr/>
-    <form id="infoForm" action="/fit/modify" method="get">
+    <form id="infoForm" action="/fit/N_modify" method="get">
 		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
 		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
 		<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
@@ -125,7 +117,7 @@ textarea{
 	<br><br>
 	
  
-				<jsp:include page="../footer.jsp"/>    
+<jsp:include page="../footer.jsp"/>    
             </div>
            
             
@@ -145,27 +137,26 @@ textarea{
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
-let form = $("#infoForm");        // 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
-let mForm = $("#modifyForm");    // 페이지 데이터 수정 from
 
-/* 목록 페이지 이동 버튼 */
-$("#list_btn").on("click", function(e){
-    form.find("#bno").remove();
-    form.attr("action", "/fit/list");
-    form.submit();
-});
+	let form = $("#infoForm");
+	let form_r = $("#replyForm");
 
-/* 수정 하기 버튼 */
-$("#modify_btn").on("click", function(e){
-    mForm.submit();
-});
-
-/* 취소 버튼 */
-$("#cancel_btn").on("click", function(e){
-    form.attr("action", "/fit/get");
-    form.submit();
-});   
-
-</script>	
-</body>
+	
+	$("#list_btn").on("click", function(e){
+		form.find("#bno").remove();
+		form.attr("action", "/fit/N_list");
+		form.submit();
+	});
+	
+	$("#modify_btn").on("click", function(e){
+		form.attr("action", "/fit/N_modify");
+		form.submit();
+	});	
+	/* 삭제 버튼 */
+	$("#delete_btn").on("click", function(e){
+	    form.attr("action", "/fit/N_delete");
+	    form.attr("method", "post");
+	    form.submit();
+	});
+</script>
 </html>

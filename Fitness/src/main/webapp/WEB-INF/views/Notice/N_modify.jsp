@@ -9,7 +9,7 @@
         <meta charset="UTF-8">
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Insert title here</title>
+        <title>N_modify</title>
 
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
@@ -49,7 +49,7 @@ textarea{
            
                 <div class="col-md-10">
                   <hr/>
-                  <form id="modifyForm" action="/fit/modify" method="post">
+                  <form id="modifyForm" action="/fit/N_modify" method="post">
                     <table class="table table-condensed">
                     
                         <thead>
@@ -115,7 +115,7 @@ textarea{
 </div>
         
          <hr/>
-    <form id="infoForm" action="/fit/modify" method="get">
+    <form id="infoForm" action="/fit/N_modify" method="get">
 		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
 		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
 		<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
@@ -151,7 +151,7 @@ let mForm = $("#modifyForm");    // 페이지 데이터 수정 from
 /* 목록 페이지 이동 버튼 */
 $("#list_btn").on("click", function(e){
     form.find("#bno").remove();
-    form.attr("action", "/fit/list");
+    form.attr("action", "/fit/N_list");
     form.submit();
 });
 
@@ -162,7 +162,7 @@ $("#modify_btn").on("click", function(e){
 
 /* 취소 버튼 */
 $("#cancel_btn").on("click", function(e){
-    form.attr("action", "/fit/get");
+    form.attr("action", "/fit/N_get");
     form.submit();
 });   
 

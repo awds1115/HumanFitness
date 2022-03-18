@@ -49,7 +49,7 @@ textarea{
            
                 <div class="col-md-10">
                   <hr/>
-                  <form id="modifyForm" action="/fit/modify" method="post">
+                  <form id="modifyForm" action="/fit/QnA_modify" method="post">
                     <table class="table table-condensed">
                     
                         <thead>
@@ -85,7 +85,7 @@ textarea{
                                 <td colspan="2">
                                 <input type=hidden name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
                                  <input type=hidden name="title" value='<c:out value="${pageInfo.title}"/>' >
-                                 <textarea rows="3" name="content"><c:out value="${pageInfo.content}"/></textarea>
+                                 <textarea name="content"><c:out value="${pageInfo.content}"/></textarea>
                                  <input type=hidden name="writer" readonly="readonly" value='<c:out value="${pageInfo.writer}"/>' >
                                  <input type=hidden name="regdater" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.regdate}"/>' >
                                  <input type=hidden name="updateDate" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.updateDate}"/>' >
@@ -151,7 +151,7 @@ let mForm = $("#modifyForm");    // 페이지 데이터 수정 from
 /* 목록 페이지 이동 버튼 */
 $("#list_btn").on("click", function(e){
     form.find("#bno").remove();
-    form.attr("action", "/fit/list");
+    form.attr("action", "/fit/QnA_list");
     form.submit();
 });
 
@@ -162,7 +162,7 @@ $("#modify_btn").on("click", function(e){
 
 /* 취소 버튼 */
 $("#cancel_btn").on("click", function(e){
-    form.attr("action", "/fit/get");
+    form.attr("action", "/fit/QnA_get");
     form.submit();
 });   
 
