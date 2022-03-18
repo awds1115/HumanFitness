@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -43,8 +43,27 @@ ul li {
 }
 
 input::placeholder {
-  font-size: 12px;
+  font-size: 11px;
 }
+/*        input[type=radio]{ */
+/*             background-color: #FFFF; */
+/*             -webkit-appearance: none; */
+/*             -moz-appearance: none; */
+/*             margin-left: 16px; */
+/*             border: 1px solid rgb(216, 216, 216); */
+/*             width: 50px; */
+/*             height: 35px; */
+/*         } */
+/*         input[type=radio]:checked{ */
+/*             background-color: rgb(25, 118, 248); */
+/*             -webkit-appearance: none; */
+/*             -moz-appearance: none; */
+/*             margin-left: 16px; */
+/*             border: none; */
+/*             width: 50px; */
+/*             height: 35px; */
+ 
+/*         } */
 </style>
 <body>
 <div class="m_container" style="color:black;">
@@ -52,6 +71,7 @@ input::placeholder {
                 <a href="home" style="font-size:40px; text-decoration:none">Human Fitness</a>
 </div><br><br>
 	 <h3 style="color:black;">회원가입</h3>
+	 <div style="margin:left; float:left; margin-left:120px">
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <input type="hidden" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
            id=number name=number value=2 readonly>
@@ -59,7 +79,7 @@ input::placeholder {
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >아이디</span>
      <input type="text" class="form-control" aria-label="Sizing example input" style="width:44%;" aria-describedby="inputGroup-sizing-default"
-           id=userid name=userid  maxlength='15' placeholder="최대15자">
+           id=userid name=userid  maxlength='15' placeholder="한글 특수문자 제외 6~15자 사용하세요">
 
      <input type="button" class="form-control" aria-label="Sizing example input" id=check value=중복확인 aria-describedby="inputGroup-sizing-default" onclick="doubleCheck()">
      </div>  
@@ -67,13 +87,13 @@ input::placeholder {
      <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >비밀번호</span>
      <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=password name=password placeholder = "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요." >
+           id="password" name=password placeholder = "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요." maxlength="16" >
 	</div>
 	
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >비밀번호 확인</span>
      <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=passcode name=passcode>
+           id=passcode name=passcode maxlength="16">
 	</div>
 	
      <div class="input-group mb-3" style="width:500px; margin:auto;">
@@ -94,7 +114,7 @@ input::placeholder {
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >나이</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=age name=age maxlength='3'>
+           id=age name=age maxlength='3' placeholder="만 나이를 적어주세요">
 	</div>
 	
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
@@ -102,32 +122,27 @@ input::placeholder {
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
            id=name name=name maxlength='20'>
 	</div>
-	
-	
-	 <div class="input-group mb-3" style="width:500px; margin:auto; ">
-	 <div class="btn-group" data-toggle="buttons">
-     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >성별</span>
-	 
-			<label class="btn btn-info">
-				<input type="radio" name="gender" id="gender"  autocomplete="off" style="width:125px;" value="남성">
-				<span class="glyphicon glyphicon-ok" ></span>
-			</label>
-		
-			<label class="btn btn-danger">
-				<input type="radio" name="gender" id="gender" autocomplete="off" style=" width:125px;" value="여성">
-				<span class="glyphicon glyphicon-ok" ></span>
-			</label>
+</div>
+
+	<div style="margin-top:16px; float:right; margin-right:120px">
+	 <div class="input-group mb-3" style="width:500px; margin:auto;">
+	 <div class="btn-group" data-toggle="buttons" style="height:38px;">
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;">성별</span>
+     <div class="form-control" style="width:371px;padding-top:1px;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+	 <div style="display: inline-block; valign:left; ">남</div><input type="radio" id=gender name=gender value="남자" style="width:185; color:black; font-size:20px; valign:center;margin-top:12px;display: inline-block;">
+     <div style="display: inline-block; margin-left:30px;">여</div><input type="radio"  id=gender name=gender value="여자" style="width:185; color:black; align:center;  valign:center;margin-top:12px;display: inline-block;">
+	</div>
 			</div>
 	</div>
 	
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >전화번호</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=mobile name=mobile placeholder="-없이 입력하세요">-
+           id=mobile name=mobile placeholder="-없이 입력하세요" maxlength="3">-
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=mobile2 name=mobile2  >-
+           id=mobile2 name=mobile2  maxlength="4">-
     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=mobile3 name=mobile3 >
+           id=mobile3 name=mobile3 maxlength="4">
 	</div>
 	
 	<div class="input-group mb-3" style="width:500px; margin:auto;">
@@ -146,7 +161,7 @@ input::placeholder {
 	<div class="input-group mb-3" style="width:500px; margin:auto;">
     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >이메일</span>
     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=email name="email">
+           id=email name="email" maxlength="32">
 	</div>
 	
 	<div class="input-group mb-3" style="width:500px; margin:auto;">
@@ -158,9 +173,10 @@ input::placeholder {
  	<div class="input-group mb-3" style="width:500px; margin:auto;">
     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >답</span>
     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=answer name="answer">
+           id=answer name="answer" maxlength="300">
 	</div>
-	
+	</div>
+	<div>
 		<div style="margin-bottom:15px;">
                <button class="btn btn-secondary" id=frmsign name=frmsign 
                	 style=" font-size:20px; width:300px;">가입완료</button>
@@ -169,7 +185,7 @@ input::placeholder {
       		<li><a href="login" style="text-decoration:none">취소</a></li>
       	</ul>
     </div>
-    
+</div>
 </div>
 <jsp:include page="../footer.jsp"/>
 </body>
@@ -184,13 +200,12 @@ $(document)
 	resi();
 })
 .on('click','#frmsign',function(){ //submit이 공백이면 false 공백이없으면 true
-   if($('input[name=userid]').val()==''){
-	     alert('아이디를 확인해주세요')
-    	 return false;
-   }else if(flag!="true") {
+  if(idcheck($('input[name=userid]').val='')){
+	  	return false;
+  }else if(flag!="true") {
 		alert('ID 중복검사를 진행해주세요.');
 		return false;
-   }if(password_check($('input[name=password]'))){
+  }if(password_check($('input[name=password]'))){
 	     return false;
   }if($('input[name=password]').val()!=$('input[name=passcode]').val()){
 		    alert('비밀번호와 비밀번호확인이 다릅니다.');
@@ -279,8 +294,10 @@ function resi(){
 }
 
 function doubleCheck() {
-	if($('#userid').val()==''){
-		return false;
+     if (idcheck($('input[name=userid]'))){
+			return false;
+	}else if($('input[name=userid]').val()==""){
+		alert("id를 작성하고 눌러주세요")
 	}else{
 		$.post('id_check', /*중복 */
 			{ userid: $('#userid').val() },
@@ -361,9 +378,9 @@ function phoneCheck(){ /*전화번호 정규표현식 */
 }
 
 function idcheck(){ /*아이디 정규식 */
-	var id_regExp = /^[A-Za-z0-9+]*$/;
+	var id_regExp = /^[A-Za-z0-9+]{6,15}$/;
     var uid = $('#userid').val();
-	var userid = id_regExp.test(userid)
+	var userid = id_regExp.test(uid)
     if(!userid){
         alert("아이디를 제대로 입력해주세요")
     	return true;
