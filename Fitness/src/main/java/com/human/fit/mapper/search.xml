@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- <mapper namespace="com.human.fit.iSearch"> -->
 <mapper namespace="com.human.fit.iSearch">
-<select id="getSearchList" resultType="com.human.fit.Fitsearch">
-<!-- select * from kcal where name like CONCAT('%', #{param1}, '%') -->
+<select id="getSearchList1" resultType="com.human.fit.Fitsearch">
+select *
+from kcal
+where name like CONCAT('%', #{param1}, '%')
+order by name asc
+limit 1, 50
 <!-- select * from ( -->
 <!--         select num, name, kcal, carbohydrate, protein, fat, sugars, na, cholesterol, saturated_fatty_acids, transfat -->
 <!--         from kcal) as T1  -->
 <!--         limit ((${pageNum}-1)*${amount}), ${amount} -->
 <!--         limit #{skip},#{amount} -->
-		select * from 
-        (select @rownum := @rownum + 1 as rn, num, name, kcal, carbohydrate, protein, fat, sugars, na, cholesterol, saturated_fatty_acids, transfat
-        from kcal, (select @rownum := 0)  as rowcolumn) as rownum_table  
-		limit 1, 100;
+<!-- 		select * from  -->
+<!--         (select @rownum := @rownum + 1 as rn, num, name, kcal, carbohydrate, protein, fat, sugars, na, cholesterol, saturated_fatty_acids, transfat -->
+<!--         from kcal, (select @rownum := 0)  as rowcolumn) as rownum_table   -->
+<!-- 		limit 0, 100; -->
 </select>
-<!-- 게시물 총 개수 -->
-<select id="getTotal" resultType="int">
-select count(*) from kcal
+<select id="PagingList" resultType="com.human.fit.Fitsearch">
+select *
+from ( select * from kcal where name like CONCAT('%', #{param2}, '%')
+order by name asc) as T1
+limit #{param1},50
+</select>
+
+
+<!-- 데이터 총 개수 -->
+<select id="getDataTotal" resultType="int">
+select count(*) as alldata from kcal where name like CONCAT('%', #{param1}, '%')
 </select>
 </mapper>

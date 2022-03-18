@@ -66,9 +66,12 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0" id=menu1>
                         <li class="nav-item"><a class="nav-link" id="buy">회원권결제</a></li>
-                        <li class="nav-item"><a class="nav-link" href="notice">공지사항</a></li>
-                        <li class="nav-item"><a class="nav-link" href="community">커뮤니티</a></li>
+                        <li class="nav-item"><a class="nav-link" href="N_list">공지사항</a></li>
+                        <li class="nav-item"><a class="nav-link" href="list">커뮤니티</a></li>
+                        <li class="nav-item"><a class="nav-link" href="QnA_list">QnA</a></li>
                         <li class="nav-item"><a class="nav-link" href="map">오시는길</a></li>
+                        <li class="nav-item"><a class="nav-link" href="search">영양정보</a></li>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	        		<c:if test="${type==0 }">
 	                	<li class="nav-item"><a class="nav-link" href="login">로그인</a></li>
 	                	<li class="nav-item"><a class="nav-link" href="signon">회원가입</a></li>
