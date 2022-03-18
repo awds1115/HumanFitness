@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원권 관리</title>
+<title>회원권 관리</title> 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
    <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
-		<!-- Bootstrap Icons-->
+      <!-- Bootstrap Icons-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Google fonts-->
 <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
@@ -23,134 +23,146 @@
 
 </head>
 <style>
-.depth3 > ul{
-	font-size:0;
-	text-align:center;
-
-	}
-.depth3 > ul > li{
-	display:inline-block;
-	vertical-align:top;
-	min-width:180px;
-	box-sizing:border-box;
-	box-shadow: 1px 1px 0 0 #e5e5e5 inset, -1px -1px 0 0 #e5e5e5 inset;
-	}
-.depth3 > ul > li > a{
-	display:block;
-	height:46px;
-	line-height:46px;
-	text-align:center;
-	box-sizing:border-box;
-	color:#cccccc;
-	padding:0 20px;
-	font-size:14px;
-	}
-.depth3 > ul > li.on > a{
-	color:#f7f7e4;
-	font-weight:500;
-	background-color:#A00000;
+.depth3>ul {
+   font-size: 0;
+   text-align: center;
+   padding-left: 0;
 }
-	.tbl {
-		width:90%;
-		height:500px;
-		border: 1px solid white;
-	    border-collapse: collapse;
-	}
-	/* .tbl td {
-		border: 1px solid white;
-	    border-collapse: collapse;
-	} */
-	/* #selsports {
-		padding-left: 25px;
-	} */
-	#selsports td {
-		/* text-align: center; */
-		vertical-align:middle;
-		width: 150px;
-		padding: 3px;
-	}
-	.radio_td {
-		width:50px;
-	}
-	#selsports tbody tr:hover{
-		background-color: rgba(3,3,3,0.5)!important;
-	}
+
+.depth3>ul>li {
+   display: inline-block;
+   vertical-align: top;
+   min-width: 180px;
+   box-sizing: border-box;
+   border: 1px solid #999;
+}
+
+.depth3>ul>li.on {
+   border: 1px solid #A00000;
+}
+
+.depth3>ul>li>a {
+   display: block;
+   height: 46px;
+   line-height: 46px;
+   text-align: center;
+   box-sizing: border-box;
+   color: #555;
+   padding: 0 20px;
+   font-size: 14px;
+}
+
+.depth3>ul>li.on>a {
+   color: #f7f7e4;
+   font-weight: 500;
+   background: #A00000;
+}
+
+.tbl {
+   width: 90%;
+   height: 500px;
+   border: 1px solid white;
+   border-collapse: collapse;
+   background-color: #f9f7f9;
+}
+
+#selsports td {
+   /* text-align: center; */
+   vertical-align: middle;
+   width: 150px;
+   padding: 3px;
+}
+
+.radio_td {
+   width: 50px;
+}
+
+#selsports tbody tr:hover {
+   background-color: rgba(3, 3, 3, 0.5) !important;
+}
+
 a {
-/*   color: rgb(233, 22, 36); */
-  text-decoration: none;
+   /*   color: rgb(233, 22, 36); */
+   text-decoration: none;
 }
 </style>
-<body class="bg-dark">
-	<!-- 요가,헬스,pt,스피닝,필라테스 crud -->
-	<!-- 3,6,9,12 타입 crud -->
-<jsp:include page="../header.jsp" />
-	
-<section class="page-section text-white" id="members">
-<br><br><br><h1 align=center class="text-white font-weight-bold">관리자 페이지</h1><br><br>
-<div class="depth3">
-	<ul>
-		<li><a href="/fit/viewmember" >회원관리</a></li>
-		<li class="on"><a href="/fit/mship" >운동종류 관리</a></li>
-	</ul>
-</div>
+<body>
+<section class="page-section bg-dark text-white">
+<jsp:include page="../header.jsp"/>
+</section>
+
+<section class="page-section" id="members">
+  <div class="page-title">
+      <div class="container" align=center>
+      <h2>관리자페이지</h2><br><br>
+     </div>
+   <div class="depth3">
+      <ul>
+         <li><a href="/fit/viewmember" >회원관리</a></li>
+         <li class="on"><a href="/fit/mship" >운동종류 관리</a></li>
+         <li><a href="/fit/M_contact" >상담문의 관리</a></li>
+      </ul>
+   </div>
+  </div>
+<hr align=center style="width: 90%; margin: auto;;">
 <table align=center class="tbl">
 <tr><td align=center valign='middle'>
 
-	<div class="input-group mb-3" align=center style="width: 500px;">
-		<table class='form-control' id=selsports>
-			<tbody></tbody></table>
-		<button id=showdlg class="btn btn-secondary">운동종류변경</button>
-	</div>
-	
+   <div class="input-group mb-3" align=center style="width: 500px;">
+      <table class='form-control' id=selsports>
+         <tbody></tbody></table>
+      <button id=showdlg class="btn btn-secondary">운동종류변경</button>
+   </div>
+   
 </td><td align=center>
 
-	<div>
-		<div class="input-group mb-3" style="width: 500px;">
-			<span class="input-group-text" id="inputGroup-sizing-default" style="width: 100px;">번호</span> 
-			<input type="text" class="form-control" id=no name=no readonly>
-		</div>
+   <div>
+      <div class="input-group mb-3" style="width: 500px;">
+         <span class="input-group-text" id="inputGroup-sizing-default" style="width: 100px;">번호</span> 
+         <input type="text" class="form-control" id=no name=no readonly>
+      </div>
 
-		<div class="input-group mb-3" style="width: 500px;">
-			<span class="input-group-text" style="width: 100px;">운동명</span> 
-			<select class="form-control" id=code name=code></select>
-		</div>
+      <div class="input-group mb-3" style="width: 500px;">
+         <span class="input-group-text" style="width: 100px;">운동명</span> 
+         <select class="form-control" id=code name=code></select>
+      </div>
 
-		<div class="input-group mb-3" style="width: 500px;">
-			<span class="input-group-text" style="width: 100px;">개월수</span> 
-				<select class="form-control" id=month name=month></select>
-		</div>
+      <div class="input-group mb-3" style="width: 500px;">
+         <span class="input-group-text" style="width: 100px;">개월수</span> 
+            <select class="form-control" id=month name=month></select>
+      </div>
 
-		<div class="input-group mb-3" style="width: 500px;">
-			<span class="input-group-text" id="inputGroup-sizing-default" style="width: 100px;">가격</span> 
-			<input type="text" class="form-control" id=price name=price>
-		</div>
-		
-		<div align=center>
-			<input type=button class="btn btn-secondary" value='확인' id=mship_submit> 
-			<input type=button class="btn btn-secondary" value='초기화' id='reset'> 
-			<input type=button class="btn btn-secondary" value='삭제' id=btnmshipDelete>
-		</div>
-	</div>
+      <div class="input-group mb-3" style="width: 500px;">
+         <span class="input-group-text" id="inputGroup-sizing-default" style="width: 100px;">가격</span> 
+         <input type="text" class="form-control" id=price name=price>
+      </div>
+      
+      <div align=center>
+         <input type=button class="btn btn-secondary" value='확인' id=mship_submit> 
+         <input type=button class="btn btn-secondary" value='초기화' id='reset'> 
+         <input type=button class="btn btn-secondary" value='삭제' id=btnmshipDelete>
+      </div>
+   </div>
 </td></tr>
 </table>
 </section>
 
 <div class="bg-dark text-white"  id='dlgSports' align=center style='display: none; valign:middle' title='운동종류변경'>
-	<!-- display:none;  -->
-	<table align=center valign=middle>
-		<tr><td align=center>
-			<table align=center>
-				<tr><td>운동코드</td><td><input readonly type=number name=Sportscode id=Sportscode><br></td></tr>
-				<tr><td>운동명</td><td><input type=text name=Sportsname id=Sportsname><br></td></tr>
-				
-			</table>
-		</td><td align=center>
-			<select id='SportsType' size=5 style="width: 150px;"></select>
-		</td>
-		</tr>
-	</table>
+   <!-- display:none;  -->
+   <table align=center valign=middle>
+      <tr><td align=center>
+         <table align=center>
+            <tr><td>운동코드</td><td><input readonly type=number name=Sportscode id=Sportscode><br></td></tr>
+            <tr><td>운동명</td><td><input type=text name=Sportsname id=Sportsname><br></td></tr>
+            
+         </table>
+      </td><td align=center>
+         <select id='SportsType' size=5 style="width: 150px;"></select>
+      </td>
+      </tr>
+   </table>
 </div>
-	
+   
 <jsp:include page="../footer.jsp"/>
 </body>
 <script src="<c:url value='/resources/js/scripts.js' />"></script>

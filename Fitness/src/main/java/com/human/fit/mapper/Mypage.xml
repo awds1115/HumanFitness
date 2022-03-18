@@ -29,7 +29,9 @@
 	select userid,weight,height from mypage where userid=#{param1};	
 </select>
 <select id="getticket" resultType="com.human.fit.ticket">
-	select * from ticket where userid=#{param1};
+<![CDATA[
+	select * from ticket where userid=#{param1} and end_dt >= now();
+	]]>
 </select>
 <delete id="ticketed">
 	delete from ticket where userid=#{param1} and sports_name=#{param2};
@@ -68,4 +70,17 @@
 							or mobile like concat('%',#{param2},'%') 
 							or message like concat('%',#{param2},'%') limit #{param1},10;
 </select>
+<select id="getRefundList" resultType="com.human.fit.ticket">
+<![CDATA[
+	select * from ticket where end_dt >= now();
+	]]>
+</select>
+<update id="updateref">
+<![CDATA[
+	update ticket set refund="사용종료" where end_dt<=now();
+	]]>
+</update>
+<delete id="delref">
+	delete from ticket where userid=#{param1} and sports_name=#{param2};
+</delete>
 </mapper>

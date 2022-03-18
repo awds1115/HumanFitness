@@ -1,11 +1,11 @@
-   <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상담문의</title>
+<title>환불관리</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script src="//code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
@@ -25,59 +25,7 @@
 <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
- table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-section.notice {
-  padding: 80px 0;
-}
-
-.page-title {
-  margin-bottom: 60px;
-}
-.page-title h3 {
-  font-size: 28px;
-  color: #333333;
-  font-weight: 400;
-  text-align: center;
-}
-
-#board-search .search-window {
-  padding: 15px 0;
-  background-color: #f9f7f9;
-}
-#board-search .search-window .search-wrap {
-  position: relative;
-/*    padding-right: 124px; */
-   display: block;
-   margin: 20px 0 20px 0;
-   float:right;
-}
-#board-search .search-window .search-wrapper {
-   overflow:hidden;
-   padding:0 1.3rem;
-}
-#board-search .search-window .search-wrap input {
-  height: 40px;
-  font-size: 14px;
-  padding: 7px 14px;
-  border: 1px solid #ccc;
-}
-#board-search .search-window .search-wrap select {
-  height: 40px;
-  width: 300px;
-  align: left;
-  font-size: 14px;
-  padding: 7px 14px;
-  border: 1px solid #ccc;
-}
-#board-search .search-window .search-wrap input:focus {
-  border-color: #333;
-  outline: 0;
-  border-width: 1px;
-}
-#board-search .search-window .search-wrap .btn {
+.ch-window .search-wrap .btn {
   width: 108px;
   padding: 0;
   font-size: 16px;
@@ -185,8 +133,6 @@ section.notice {
   color: #fff;
 }
 
-/* reset */
-
 * {
   list-style: none;
   text-decoration: none;
@@ -211,9 +157,6 @@ section.notice {
   width: 1px;
   height: 1px;
 }
-
-///////////////////////////////////
-
 #search{
    margin-left:45px;
 }
@@ -286,7 +229,8 @@ a {
       <ul>
          <li><a href="/fit/viewmember" >회원관리</a></li>
          <li><a href="/fit/mship" >운동종류 관리</a></li>
-         <li class="on"><a href="/fit/M_contact" >상담문의 관리</a></li>
+         <li><a href="/fit/M_contact" >상담문의 관리</a></li>
+         <li class="on"><a href="/fit/refund" >환불 관리</a></li>
       </ul>
    </div>
   </div>
@@ -299,9 +243,12 @@ a {
                <button class="btn" id=btnDelete>선택삭제</button>
             </div>
             <div id='search' class="search-wrap">
+				<select>
+				</select>
+            </div>
+            <div id='search' class="search-wrap">
                <input type="search" name="findMail" id="findMail"/>
                <button id="btnSearch" class="btn btn-dark">회원검색</button>
-                  <input type="hidden" id=_mno name=_mno>
             </div>
          </div>   
         </div>
@@ -312,11 +259,10 @@ a {
     <div class="container">
     
    <table id=mailtbl class="board-table" align=center>
-      <!-- name,nickname,userid,age,gender,mobile,email,type -->
       <thead>
-      <tr><th>\</th><th>이름</th><th>이메일</th><th>전화번호</th><th>메세지</th><th>전송날짜</th><th>/</th></tr>
+      <tr><th>\</th><th>아이디</th><th>운동명</th><th>개월수</th><th>시작날짜</th><th>끝나는날짜</th><th>상태</th><th>/</th></tr>
       </thead>
-      <tbody id=contacttbl></tbody>
+      <tbody id=reftbl></tbody>
    </table>
    </div>
     <div id="board-search">
@@ -377,181 +323,57 @@ a {
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script src='https://code.jquery.com/ui/1.13.0/jquery-ui.js'></script>
 <script>
-let pageno=0;
+let fitst="";
+let second="";
+let third="";
+let spname="";
 $(document)
 .ready(function(){
-   loadcontact();
-})
-.on('click','#back',function(){
-   pageno=pageno-1;
-                                       
-   if(pageno==-1){
-      alert("처음 페이지 입니다.");
-      pageno=0;
-      return false;
-   } else {
-      $.ajax({url:'/fit/paging',
-         data:{pageno:pageno,find:$('#findMail').val()},
-         dataType:'JSON',
-         method:'GET',
-         beforeSend:function(){
-            $('#contacttbl').empty();
-         },
-         success:function(data){
-            for(i=0;i<data.length;i++){
-               let str="<tr><td><input type=checkbox value='"+data[i]["no"]
-                  +"'name='check' id='check'></td><td id="+data[i]['no']
-                  +">"+data[i]['name']+"</td><td>"+data[i]['email']+"</td><td>"
-                  +data[i]['mobile']+"</td><td id='good'>"+data[i]['message']
-                  +"</td><td>"+data[i]['send_dt']+"</td>"
-               let button='<td><input type="button" class="btn btn-dark" id=btnType value="view" data-userid='+data[i]["no"]+'></td></tr>'
-               $('#contacttbl').append(str+button);
-            }}
-         })
-   }
-})
-.on('click','#next',function(){
-   pageno=pageno+1;
-      $.ajax({url:'/fit/pagecheck',
-            data:{pageno:pageno,find:$('#findMail').val()},
-            datatype:'json',
-            method:'get',
-            success:function(data){
-               console.log(data);
-               if(data.length==0 ){
-                  alert("마지막 페이지 입니다.");
-                  pageno=pageno-1;
-                  return false;
-               } else {
-            $.ajax({url:'/fit/paging',
-                  data:{pageno:pageno,find:$('#findMail').val()},
-                  dataType:'JSON',
-                  method:'GET',
-                beforeSend:function(){
-                  $('#contacttbl').empty();
-               },
-                  success:function(data){
-                  for(i=0;i<data.length;i++){
-                     let str="<tr><td><input type=checkbox value='"+data[i]["no"]+"'name='check' id='check'></td><td id="+data[i]['no']+">"+data[i]['name']+"</td><td>"+data[i]['email']+"</td><td>"
-                     +data[i]['mobile']+"</td><td id='good'>"+data[i]['message']+"</td><td>"+data[i]['send_dt']+"</td>"
-                     let button='<td><input type="button" class="btn btn-dark" id=btnType value="view" data-userid='+data[i]["no"]+'></td></tr>'
-                     $('#contacttbl').append(str+button);
-                  }
-                  }   
-            })
-               }
-          } 
-   }) 
-})
-.on('click','#btnSearch',function(){
-   $.ajax({url:'/fit/findmail',
-      data:{find:$('#findMail').val()},
-      dataType:'json',
-      method:'GET',
-      beforeSend:function(){
-         $('#contacttbl').empty();
-      },
-      success:function(data){
-         for(i=0;i<data.length;i++){
-            let str="<tr><td><input type=checkbox value='"+data[i]["no"]+"'name='check' id='check'></td><td id="+data[i]['no']+">"+data[i]['name']+"</td><td>"+data[i]['email']+"</td><td>"
-            +data[i]['mobile']+"</td><td id='good'>"+data[i]['message']+"</td><td>"+data[i]['send_dt']+"</td>"
-            let button='<td><input type="button" class="btn btn-dark" id=btnType value="view" data-userid='+data[i]["no"]+'></td></tr>'
-            $('#contacttbl').append(str+button);
-         }
-      }
-   })
+	loadticket();
 })
 .on('click','#btnDelete',function(){
    if($('input[name=check]:checked').length==0) {
          alert('하나 이상 체크하세요.');
          return false;
       }
-      let check='';
-      $('input[name=check]:checked').each(function() {
-         check+=$(this).val()+",";
-      })
-      console.log(check);
-      if(confirm("정말 삭제하시겠습니까?")){
-      $.ajax({
-         url:'/fit/muldel',
-         data:{check:check},
-            datatype:'text',
-            method:'GET',
-            success:function(txt) {
-               if(txt=="ok") {
-                  alert('삭제 되었습니다.');
-                  document.location='M_contact';
-               } else { alert('다시 삭제해주세요.'); }
-            }
-      });
-      } else{
-         alert("취소하였습니다.");
-         return false;
-      }
+	$('#reftbl tr').each(function(){
+		if($(this).find('td:eq(0) input:checkbox').prop('checked')==true){
+			first = $(this).find('td:eq(1)').text();
+			second = $(this).find('td:eq(2)').text();
+			third = $(this).find('td:eq(3)').text();
+			spname = second+"  "+third;
+		      $.ajax({
+		          url:'/fit/delref',
+		          data:{userid:first,spname:spname},
+		             datatype:'text',
+		             method:'GET',
+		             success:function(txt) {}
+		       });
+		     }
+	})
+	alert("삭제되었습니다.");
+	document.location="refund";
+
 })   
-.on('click','#btnType',function(){
-   $('#_mno').val($(this).attr('data-userid'));
-   $('#_no').val($(this).attr('data-userid'));
-   $('#mailview').dialog({
-        width: 600,
-        modal: true,
-        draggable: true,
-        buttons: {
-          "Delete": function() { 
-            if(confirm('정말 삭제하시겠습니까?')){
-                $.ajax({url:'/fit/maildel',
-                   data:{no:$('#_no').val()},
-                   dataType:'text',
-                   method:'GET',
-                   success:function(data){
-                      if(data=="ok"){
-                         alert("삭제되었습니다.");
-                         document.location="M_contact";
-                      } else{
-                         alert("삭제에 실패 하였습니다.");
-                         return false;
-                      }
-                   }
-                })
-             } else {
-                alert("취소되었습니다.");
-                return false;
-             }
-          }
-       },
-        open:function(){
-           $.ajax({url:'/fit/mailview',
-                 data:{no:$('#_mno').val()},
-                 dataType:'json',
-                 method:'GET',
-                 success:function(data){
-                    $('#nname').val(data[0]['name']);
-                    $('#_email').val(data[0]['email']);
-                    $('#_mobile').val(data[0]['mobile']);
-                    $('#_message').val(data[0]['message']);
-                    
-                 }
-              })
-           }
-     });
+function loadticket(){
+	$.ajax({url:'/fit/refunding',
+		data:{},
+		dataType:'json',
+		method:'GET',
+		beforeSend:function(){
+			$('#reftbl').empty();
+		},
+		success:function(data){
+			console.log(data);
+			for(i=0;i<data.length;i++){
+				sports_name=data[i]['name'].split("  ");
+				let str="<tr><td><input type=checkbox id='check' name='check' value='"+data[i]['userid']+"'></td><td>"+data[i]['userid']+"</td><td>"+sports_name[0]+"</td><td>"+sports_name[1]+"</td><td>"
+						+data[i]['start']+"</td><td>"+data[i]['end']+"</td><td>"+data[i]['refund']+"</td></tr>"
+				$('#reftbl').append(str);
+			}
+		}
 })
-function loadcontact(){
-   $.ajax({url:'/fit/contacting',
-      data:{},
-      dataType:'json',
-      method:'GET',
-      beforeSend:function(){
-         $('#contacttbl').empty();
-      },
-      success:function(data){
-         for(i=0;i<data.length;i++){
-            let str="<tr><td><input type=checkbox value='"+data[i]["no"]+"'name='check' id='check'></td><td id="+data[i]['no']+">"+data[i]['name']+"</td><td>"+data[i]['email']+"</td><td>"
-                  +data[i]['mobile']+"</td><td id='good'>"+data[i]['message']+"</td><td>"+data[i]['send_dt']+"</td>"
-            let button='<td><input type="button" class="btn btn-dark" id=btnType value="view" data-userid='+data[i]["no"]+'></td></tr>'
-            $('#contacttbl').append(str+button);
-         }
-      }
-   })
 }
 </script>
+</body>
 </html>

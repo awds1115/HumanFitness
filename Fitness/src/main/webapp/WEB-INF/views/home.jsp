@@ -2,9 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-<!--     dd -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -56,7 +55,7 @@
                         <h2 class="text-white mt-0">Human Fitness</h2>
                         <hr class="divider divider-light" />
                         <p class="text-white-75 mb-4">Human Fitness ! 당신의 피트니스. 당신의 건강한 목표를 응원합니다! 고객님들의 건강한 목표달성을 응원하기 위해 건강한 목표를 가진 젊은 사람들이 모여 만든 휴먼 피트니스입니다. 고객님 한분한분 가족같이 생각하며, 언제나 초심과 진정성을 가지고 내집과 같은 편안한 분위기 속에서 건강한 몸을 만드실 수 있는 공간을 제공 해드릴 것을 약속합니다. 어렵게 가진 목표, 어렵지 않게 해드리겠습니다.</p>
-                        <a class="btn btn-light btn-xl" href="M_contact">지점찾기</a>
+                        <a class="btn btn-light btn-xl" href="map">지점찾기</a>
                     </div>
                 </div>
             </div>
@@ -100,7 +99,7 @@
         </div>
         <br><br>
             <div class="container px-4 px-lg-5 text-center">
-                <a class="btn btn-primary btn-xl" href="buyMship">회원권 구매</a>
+                <a class="btn btn-primary btn-xl" id=buy href="buyMship">회원권 구매</a>
             </div>
 
         <!-- Contact-->
@@ -109,7 +108,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8 col-xl-6 text-center">
                      	<h3 class="mt-0">Human Fitness</h3>
-                        <h2 class="mt-0" style="co	lor:#F00000;">상담문의</h2>
+                        <h2 class="mt-0" style="color:#F00000;">상담문의</h2>
                         <hr class="divider" />
                         <p class="text-muted mb-5">Human Fitness는 고객 여러분의 의견을 소중히 생각합니다.<br>
 												   보내주시는 문의 사항은 최대한 신속하게 고객님의 메일이나 전화로 답변해 드리겠습니다.</p>
@@ -143,16 +142,14 @@
                             </div>
                         </form>
                     </div>
+                    <input type=hidden id=userid2 name=userid2 value=${userid }>
                 </div>
              
             </div>
         </section>
-        <!-- Footer-->
+
         <jsp:include page="footer.jsp"/>
-<!--         <footer class="bg-light py-5"> -->
-<!--             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2021 - Company Name</div></div> -->
-<!--         </footer> -->
-        <!-- Bootstrap core JS-->
+ <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- SimpleLightbox plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
@@ -174,6 +171,18 @@ $(document)
 	} else {
 		alert("상담문의가 성공적으로 전송 되었습니다.");
 		return true;
+	}
+})
+.on('click','#buy',function(){
+	if($('#userid2').val()=="null"){
+		if(confirm("로그인이 필요한 서비스 입니다.\n로그인을 하시겠습니까?")){
+			document.location="login";
+		} else{
+			return false;
+		}
+
+	} else{
+		document.location="buyMship";
 	}
 })
 </script>

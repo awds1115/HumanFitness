@@ -22,10 +22,11 @@ public class AdminController {
 	@Autowired
 	private SqlSession sqlSession;
 	/* private ServletRequest session; */
-	
+	 
 	
 	@RequestMapping("/viewmember")
-	public String Member() {
+	public String Member(HttpServletRequest hsr, Model model) {
+		session_call(hsr, model);
 		return "Member/Member";
 	}
 	
@@ -34,10 +35,11 @@ public class AdminController {
     public String FidnMember(HttpServletRequest hsr) {
        iAdmin admin = sqlSession.getMapper(iAdmin.class);
        String keyword = hsr.getParameter("keyword");
+       JSONArray ja= new JSONArray();
         ArrayList<membersA> Flist=admin.findMem(keyword);
         System.out.println("Flist:"+Flist);
         
-        JSONArray ja= new JSONArray();
+       
          for(int i=0; i<Flist.size(); i++) { 
             JSONObject jo=new JSONObject();
             jo.put("name",Flist.get(i).getName());
@@ -51,6 +53,75 @@ public class AdminController {
             ja.add(jo);
          }
          return ja.toString(); 
+    }
+	
+	@ResponseBody 
+    @RequestMapping(value="/pagecheck2", produces="application/json;charset=UTF-8")
+    public String pagecheck2(HttpServletRequest hsr) {
+	       iAdmin admin = sqlSession.getMapper(iAdmin.class);
+	       int lines=10;
+	       int pageno=Integer.parseInt(hsr.getParameter("pageno"));
+	       String searchMem=hsr.getParameter("searchmem");
+	       int start=lines*pageno+1;
+	       JSONArray ja=new JSONArray();
+	       if(searchMem.equals("")) {
+	    	   ArrayList<membersA> pageList = admin.paging(start);
+	 	      	for(int i=0; i<pageList.size(); i++) {
+	 	         JSONObject jo=new JSONObject();
+	 	         jo.put("userid",pageList.get(i).getUserid());
+	 	         ja.add(jo);
+	 	      	} 
+	       }else {
+	       ArrayList<membersA> pageList = admin.findMempaging(searchMem,start);
+	      for(int i=0; i<pageList.size(); i++) {
+	         JSONObject jo=new JSONObject();
+	         jo.put("userid",pageList.get(i).getUserid());
+	         ja.add(jo);
+	      }
+	       }
+	      return ja.toString();
+    }
+	
+	@ResponseBody
+    @RequestMapping(value="/paging2", produces="application/json;charset=UTF-8")
+    public String getLines(HttpServletRequest hsr, Model model) {
+	       iAdmin admin = sqlSession.getMapper(iAdmin.class);
+       int lines=10;
+       int pageno=Integer.parseInt(hsr.getParameter("pageno"));
+       String searchMem=hsr.getParameter("searchmem");
+       
+       int start=lines*pageno+1;
+       JSONArray ja = new JSONArray();
+       if(searchMem.equals("")) {
+    	   ArrayList<membersA> pageList = admin.paging(start);
+          	for(int i=0; i<pageList.size(); i++) { 
+             JSONObject jo=new JSONObject();
+             jo.put("name",pageList.get(i).getName());
+             jo.put("nickname",pageList.get(i).getNickname());
+             jo.put("userid",pageList.get(i).getUserid());
+             jo.put("age",pageList.get(i).getAge());
+             jo.put("gender",pageList.get(i).getGender());
+             jo.put("mobile",pageList.get(i).getMobile());
+             jo.put("email",pageList.get(i).getEmail());
+             jo.put("mtype",pageList.get(i).getMtype());
+             ja.add(jo);
+          	} 
+       } else {
+    	   ArrayList<membersA> pageList = admin.findMempaging(searchMem,start);
+          	for(int i=0; i<pageList.size(); i++) { 
+             JSONObject jo=new JSONObject();
+             jo.put("name",pageList.get(i).getName());
+             jo.put("nickname",pageList.get(i).getNickname());
+             jo.put("userid",pageList.get(i).getUserid());
+             jo.put("age",pageList.get(i).getAge());
+             jo.put("gender",pageList.get(i).getGender());
+             jo.put("mobile",pageList.get(i).getMobile());
+             jo.put("email",pageList.get(i).getEmail());
+             jo.put("mtype",pageList.get(i).getMtype());
+             ja.add(jo);
+          	}
+       } 
+      return ja.toString(); 
     }
 	
 	@ResponseBody
@@ -208,7 +279,9 @@ public class AdminController {
 				System.out.println("Parameter Name is '"+param+"' and Parameter Value is '"+value+"'");
 				
 				if(param.equals("userid")) {
+					admin.delete_mypage(value);
 					admin.members_delete(value);
+					
 				} else if(param.equals("check")) {
 					String[] userid=value.split(",");
 					
@@ -216,8 +289,8 @@ public class AdminController {
 					try {
 						for(int i=0;i<userid.length;i++) {
 							System.out.println("["+userid[i]+"]");
+							admin.delete_mypage(userid[i]);
 							admin.members_delete(userid[i]);
-							
 						}
 						str="ok";
 					} catch(Exception e) {
@@ -231,10 +304,6 @@ public class AdminController {
 		return "ok";
 	}
 	
-	@RequestMapping("/ex")
-	public String EX() {
-		return "/Member/ex";
-	}
 	@RequestMapping("/buyMship")
 	public String Mship(HttpServletRequest hsr, Model model) {
 		session_call(hsr, model);

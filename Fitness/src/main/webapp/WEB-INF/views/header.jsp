@@ -5,11 +5,58 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Human Fitness</title>
 </head>
 <style>
-#dropdownUser1{color:rgba(255,255,255,0.7);}
-.navbar-shrink #dropdownUser1{color:#212529;}
+#navbarDarkDropdownMenuLink{color:rgba(255,255,255,0.7);}
+.navbar-shrink #navbarDarkDropdownMenuLink{color:#212529;}
+/* ul li태그에 리스트 스타일을 없앰 */
+	ul li{
+		list-style: none;
+	}
+/* a태그에 텍스트 밑줄을 없애고 색상을 #333 */
+	a {
+		text-decoration: none;
+		color:white;
+	}
+	#menu {
+		margin:-3px 0;
+		text-align: center;
+		position:relative;
+		
+	}
+
+	.ulclass {
+		display:none;
+		background:#333;
+		padding:7px;
+		position:absolute;
+		top:120%;
+		left:50%;
+		transform:translateX(-50%);
+		width:120px;
+		overflow:hidden;
+		border-radius:10px;
+	}
+	.ulclass > li > a {
+		display:block;
+		padding:7px 0;
+		transition:0.1s;
+	}
+	#menu > ul > li {
+		
+		font-size:14px;
+		background: #333;
+		
+			
+	}
+	#menu> ul > li:hover {
+		background: #f00000;
+	}
+	#menu > ul > li:hover a{
+		color:#fff;
+		font-weight:700;
+	}
 </style>
 <body>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
@@ -17,59 +64,45 @@
                 <a class="navbar-brand" href="home">Human Fitness</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="buyMship">회원권결제</a></li>
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0" id=menu1>
+                        <li class="nav-item"><a class="nav-link" id="buy">회원권결제</a></li>
                         <li class="nav-item"><a class="nav-link" href="notice">공지사항</a></li>
                         <li class="nav-item"><a class="nav-link" href="community">커뮤니티</a></li>
                         <li class="nav-item"><a class="nav-link" href="map">오시는길</a></li>
-        		  <c:if test="${type==0 }">
-                  <li class="nav-item"><a class="nav-link" href="login">로그인</a></li>
-                  <li class="nav-item"><a class="nav-link" href="signon">회원가입</a></li>
-                  </c:if>
+	        		<c:if test="${type==0 }">
+	                	<li class="nav-item"><a class="nav-link" href="login">로그인</a></li>
+	                	<li class="nav-item"><a class="nav-link" href="signon">회원가입</a></li>
+	                </c:if>
+	                <c:if test="${type==1 }">
+						<li id=menu class="nav-item"><a href="#" id="navbarDarkDropdownMenuLink">${userid}</a>
+							<ul class="ulclass">
+								<li><a href="mypage">마이페이지</a></li>
+								<li><a href="viewmember">관리자페이지</a></li>
+								<li><a href="logout">로그아웃</a></li>
+							</ul>
+						</li>
+					</c:if>
                     </ul>
-                
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 					
-                  
-				<div class="dropdown text-end">
-				<c:if test="${type==1 }">
-                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    ${userid}
-                  </a>
-                 
-                  <ul class="dropdown-menu text-small " aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="mypage">마이페이지</a></li>
-                    <li><a class="dropdown-item" href="viewmember">관리자페이지</a></li>
-                    <li><a class="dropdown-item" href="logout">로그아웃</a></li>
-                  </ul>
-       			</c:if>
+                    
        			<c:if test="${type==2 }">
-       			 
-       			<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                   ${userid}
-                  </a>
-                  <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="mypage">마이페이지</a></li>
-<!--                     <li><a class="dropdown-item" href="#"></a></li> -->
-                    <li><a class="dropdown-item" href="logout">로그아웃</a></li>
-                   
-                  </ul>
-                  </c:if>
+						<li id=menu class="nav-item"><a href="#" id="navbarDarkDropdownMenuLink">${userid}</a>
+							<ul class="ulclass">
+								<li><a href="mypage">마이페이지</a></li>
+								<li><a href="logout">로그아웃</a></li>
+							</ul>
+						</li>
+					</c:if>
                 </div>
                 </div>
-             </div>
 
         </nav>
 </body>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- SimpleLightbox plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-        <!-- Core theme JS-->
-                <script src="<c:url value='/resources/js/scripts.js' />"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!--         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+$(document)
+.on('click','#navbarDarkDropdownMenuLink',function(){
+	$('.ulclass').toggle();
+	
+})
+</script>
 </html>
