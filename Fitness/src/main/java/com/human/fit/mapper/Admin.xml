@@ -68,6 +68,6 @@
 </select>
 
 <insert id="payment">
-	insert into ticket values(#{param1},#{param2},#{param3},#{param4})
+	insert into ticket values(#{param1},#{param2},#{param3},#{param4},"사용중")
 </insert>
 </mapper>

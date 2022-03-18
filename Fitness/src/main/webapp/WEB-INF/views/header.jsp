@@ -20,9 +20,10 @@
 		color:white;
 	}
 	#menu {
-		margin:0 ;
+		margin:-3px 0;
 		text-align: center;
 		position:relative;
+		
 	}
 
 	.ulclass {
@@ -75,25 +76,22 @@
 	                <c:if test="${type==1 }">
 						<li id=menu class="nav-item"><a href="#" id="navbarDarkDropdownMenuLink">${userid}</a>
 							<ul class="ulclass">
-								<li><a href="#">SUB_MENU</a></li>
-								<li><a href="#">SUB_MENU2</a></li>
-								<li><a href="#">SUB_MENU3</a></li>
+								<li><a href="mypage">마이페이지</a></li>
+								<li><a href="viewmember">관리자페이지</a></li>
+								<li><a href="logout">로그아웃</a></li>
 							</ul>
 						</li>
 					</c:if>
                     </ul>
                     
        			<c:if test="${type==2 }">
-       	          <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                         	${userid}
-                  		</a>
-                  <ul class="dropdown-menu dropdown-menu-dark " aria-labelledby="navbarDarkDropdownMenuLink">
-                    <li class="nav-item"><a class="dropdown-item" href="mypage">마이페이지</a></li>
-                    <li class="nav-item"><a class="dropdown-item" href="logout">로그아웃</a></li>
-                  </ul>
-                  </div>
-                  </c:if>
+						<li id=menu class="nav-item"><a href="#" id="navbarDarkDropdownMenuLink">${userid}</a>
+							<ul class="ulclass">
+								<li><a href="mypage">마이페이지</a></li>
+								<li><a href="logout">로그아웃</a></li>
+							</ul>
+						</li>
+					</c:if>
                 </div>
                 </div>
 

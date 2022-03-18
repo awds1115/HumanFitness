@@ -143,7 +143,7 @@ public String login_check(HttpServletRequest hsr, Model model) {
 	return ja.toString();
 }
 @ResponseBody
-@RequestMapping(value="/loginUpdate",method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
+@RequestMapping(value="/loginUpdate",method=RequestMethod.POST,produces = "application/text;charset=UTF-8")
 public String loginUpdate(HttpServletRequest hsr, Model model) {
 	String retval="";
 	try {

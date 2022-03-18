@@ -42,6 +42,12 @@ public interface iMypage {
 
 	ArrayList<contact> findpagingcheck(int start, String find);
 
+	ArrayList<ticket> getRefundList();
+
+	void updateref();
+
+	void delref(String userid, String spname);
+
 
 	
 }

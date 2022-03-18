@@ -209,9 +209,6 @@ section.notice {
   width: 1px;
   height: 1px;
 }
-
-///////////////////////////////////
-
 #search{
    margin-left:45px;
 }
@@ -282,6 +279,7 @@ a {
          <li class="on"><a href="/fit/viewmember" >회원관리</a></li>
          <li><a href="/fit/mship" >운동종류 관리</a></li>
          <li><a href="/fit/M_contact" >상담문의 관리</a></li>
+         <li><a href="/fit/refund" >환불 관리</a></li>
       </ul>
    </div>
   </div>

@@ -55,7 +55,7 @@
                         <h2 class="text-white mt-0">Human Fitness</h2>
                         <hr class="divider divider-light" />
                         <p class="text-white-75 mb-4">Human Fitness ! 당신의 피트니스. 당신의 건강한 목표를 응원합니다! 고객님들의 건강한 목표달성을 응원하기 위해 건강한 목표를 가진 젊은 사람들이 모여 만든 휴먼 피트니스입니다. 고객님 한분한분 가족같이 생각하며, 언제나 초심과 진정성을 가지고 내집과 같은 편안한 분위기 속에서 건강한 몸을 만드실 수 있는 공간을 제공 해드릴 것을 약속합니다. 어렵게 가진 목표, 어렵지 않게 해드리겠습니다.</p>
-                        <a class="btn btn-light btn-xl" href="M_contact">지점찾기</a>
+                        <a class="btn btn-light btn-xl" href="map">지점찾기</a>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
         </div>
         <br><br>
             <div class="container px-4 px-lg-5 text-center">
-                <a class="btn btn-primary btn-xl" href="buyMship">회원권 구매</a>
+                <a class="btn btn-primary btn-xl" id=buy href="buyMship">회원권 구매</a>
             </div>
 
         <!-- Contact-->
@@ -108,7 +108,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8 col-xl-6 text-center">
                      	<h3 class="mt-0">Human Fitness</h3>
-                        <h2 class="mt-0" style="co	lor:#F00000;">상담문의</h2>
+                        <h2 class="mt-0" style="color:#F00000;">상담문의</h2>
                         <hr class="divider" />
                         <p class="text-muted mb-5">Human Fitness는 고객 여러분의 의견을 소중히 생각합니다.<br>
 												   보내주시는 문의 사항은 최대한 신속하게 고객님의 메일이나 전화로 답변해 드리겠습니다.</p>

@@ -28,7 +28,47 @@ public class MypageController {
 	private SqlSession sqlSession;
 	
 	private ServletRequest session;
+		
 	
+	
+		@ResponseBody
+		@RequestMapping(value="/delref", method=RequestMethod.GET,produces="application/text;charset=UTF-8")
+		public String delref(HttpServletRequest request) {
+			String retval="";
+		       try {
+		    	   iMypage mpy=sqlSession.getMapper(iMypage.class);
+		    	   String userid=request.getParameter("userid");
+		    	   String spname=request.getParameter("spname");
+		    	   mpy.delref(userid,spname);
+		    	   retval="ok";
+		       } catch(Exception e) {
+		    	   retval="fail";
+		       }
+		       return retval;	
+		}
+		@ResponseBody
+		@RequestMapping(value="/refunding", method=RequestMethod.GET,produces="application/json;charset=UTF-8")
+		public String refunding(HttpServletRequest request) {
+			iMypage mpy=sqlSession.getMapper(iMypage.class);
+			mpy.updateref();
+	       ArrayList<ticket> refund=mpy.getRefundList();
+	       System.out.println("["+refund.size()+"]");
+	       JSONArray ja= new JSONArray();
+	       for(int i=0; i<refund.size(); i++) { 
+	          JSONObject jo=new JSONObject();
+	          jo.put("userid",refund.get(i).getUserid());
+	          jo.put("name",refund.get(i).getSports_name());
+	          jo.put("start",refund.get(i).getStart_dt());
+	          jo.put("end",refund.get(i).getEnd_dt());
+	          jo.put("refund",refund.get(i).getRefund());
+	          ja.add(jo);
+	       }
+	    return ja.toString(); 
+		}
+		@RequestMapping(value="/refund")
+		public String refund(HttpServletRequest hsr) {
+			return "Member/refund";
+		}
 	 	@ResponseBody 
 	    @RequestMapping(value="/pagecheck", method=RequestMethod.GET,produces="application/json;charset=UTF-8")
 	    public String pagecheck(HttpServletRequest hsr) {
@@ -92,7 +132,7 @@ public class MypageController {
              ja.add(jo);
           }
      }
-     System.out.println(ja);
+//     System.out.println(ja);
       return ja.toString(); 
     }
 	
@@ -102,7 +142,7 @@ public class MypageController {
 		iMypage mpy=sqlSession.getMapper(iMypage.class);
 			String find=request.getParameter("find");
 	       ArrayList<contact> contact=mpy.findmail(find);
-	       System.out.println("["+contact.size()+"]");
+//	       System.out.println("["+contact.size()+"]");
 	       JSONArray ja= new JSONArray();
 	       for(int i=0; i<contact.size(); i++) { 
 	          JSONObject jo=new JSONObject();
@@ -188,11 +228,12 @@ public class MypageController {
 	    return ja.toString(); 
 	}
 	
-	@RequestMapping(value="/delInfo")
+	@RequestMapping(value="/delinfo")
 	public String delInfo(Model model,HttpServletRequest request){
 		session_call(request, model);
+		HttpSession session = request.getSession(true);
 		String userid=(String) session.getAttribute("userid");
-	    
+//	    System.out.println(userid+"good");
 		iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 
 		model.addAttribute("view",view);
@@ -256,7 +297,7 @@ public class MypageController {
 		String id=request.getParameter("id");
 		iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	       ArrayList<ticket> ticket=mpy.getticket(id);
-	       System.out.println(ticket.size());
+//	       System.out.println(ticket.size());
 	       JSONArray ja= new JSONArray();
 	       for(int i=0; i<ticket.size(); i++) { 
 	          JSONObject jo=new JSONObject();
@@ -273,7 +314,7 @@ public class MypageController {
 		HttpSession session = request.getSession(true);
 		session_call(request, model);
 		String userid=(String) session.getAttribute("userid");
-		System.out.println("["+userid+"]");
+//		System.out.println("["+userid+"]");
 		
 	    iMypage mpy=sqlSession.getMapper(iMypage.class); 
 	    Mypage view=mpy.getView(userid); 

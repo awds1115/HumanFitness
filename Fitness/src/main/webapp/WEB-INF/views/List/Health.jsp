@@ -141,9 +141,55 @@ margin-left:15%;
 .noBul{
 	list-style:none;
 }
+.btn {
+  display: inline-block;
+  padding: 5px 30px;
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  float:right;
+  
+}
+#board-search .search-window .search-wrap .btn {
+  width: 108px;
+  padding: 0;
+  font-size: 16px;
+  height:40px;
+  margin-bottom:1px;
+}
+#zzzi{
+	border-radius: 5px;
+   text-align:center;
+   vertical-align:middle;
+   border:1px solid #999;
+   border-radius:0;
+}
+#board-search{
+	padding-left: 19.5%;
+}
 </style>
 <body>
-
+<input type=hidden id=usertype name=usertype value="${type }">
 <section class="page-section bg-dark text-white">
 <jsp:include page="../header.jsp"/>
 </section>
@@ -164,7 +210,7 @@ margin-left:15%;
 		</div>
 	</div>
 	<br><br><br><br><br>
-<h3 class="h_bul">운영시간</h3>
+<h3 class="h_bul">운영시간</h3> 
 	<table class="general" align=center>
   <thead>
     <tr><th class="first" scope="col">구분</th><th scope="col">화~금요일</th><th scope="col">토요일</th><th scope="col">일요일·공휴일</th></tr>
@@ -203,9 +249,18 @@ margin-left:15%;
     </tr>
   </tbody>
 </table>
+<div>
 <p class="c_blue2">
   <b>※ 감면대상자는 관련 증빙자료를 현장방문 하여 안내데스크에 제출바랍니다.</b>
-</p>
+  </p>
+ <div id="board-search" style="margin-bottom: 65px; width: 85%;">
+        	<div class="search-window ">    
+				<div class="search-wrap">
+					<input type="button" class="btn" value="구매하기" id=zzzi name=zzzi>
+				</div>  
+            </div>
+    </div>
+</div>
 <div class="grayBox">
   <ul class="noBul" >
     <li>1. 본 헬스장은 헬스회원 외 입장이 불가하며 기구사용이 불가합니다.</li>
@@ -270,7 +325,14 @@ $(document)
 		}
 		})
 })
-
+.on('click','#zzzi',function(){
+	if($('#usertype').val()==0){
+		alert("로그인을 하셔야 구매가 가능합니다.");
+		document.location="login";
+	} else{
+		document.location="buyMship";
+	}
+})
 </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- SimpleLightbox plugin JS-->

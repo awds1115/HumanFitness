@@ -59,7 +59,7 @@
 		<div class="info" align=center valign=middle>
 		<div class="info1" align=left>
 		<div class="info2">
-		<br><h3>사용하고 계신 아이디(${userid})는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</h3>
+		<br><h3>사용하고 계신 아이디(${view.userid})는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</h3>
 			<p><em>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가</em>하오니 신중하게 선택하시기 바랍니다.</p>
 			<h3>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</h3>
 			<p>회원정보 및 회원권, 북마크, 좋아요 등 개인형 서비스 이용기록은 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.<br>
@@ -71,7 +71,7 @@
 			   탈퇴 후에는 회원정보가 삭제되어 본인 여부를 확인할 수 있는 방법이 없어, 게시글을 임의로 삭제해드릴 수 없습니다.</p>
 
 			<p class="contxt">
-			<strong>탈퇴 후에는 아이디 ${userid} 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.<br>
+			<strong>탈퇴 후에는 아이디 ${view.userid} 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.<br>
 				게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.<br>
 				또한, 휴먼 피트니스를 사용해 다른 서비스를 이용 할 수 없게 됩니다.</strong></p>
 		</div>
@@ -174,10 +174,15 @@ $(document)
 });
 })
 </script>
-<script src="<c:url value='/resources/js/scripts.js' />"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+ <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+                <script src="<c:url value='/resources/js/scripts.js' />"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!--         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
 </html>
