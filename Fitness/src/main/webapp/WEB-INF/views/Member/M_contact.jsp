@@ -287,6 +287,7 @@ a {
          <li><a href="/fit/viewmember" >회원관리</a></li>
          <li><a href="/fit/mship" >운동종류 관리</a></li>
          <li class="on"><a href="/fit/M_contact" >상담문의 관리</a></li>
+         <li><a href="/fit/refund" >환불 관리</a></li>
       </ul>
    </div>
   </div>
