@@ -36,6 +36,10 @@ ul li {
 	 text-align:center;
 	 display:inline-block;
 }
+
+input::placeholder {
+  font-size: 10px;
+}
 </style>
 <body>
 <div class="m_container" >
@@ -46,7 +50,7 @@ ul li {
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >아이디</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=userid name=userid>
+           id=userid name=userid maxlength="15" >
      </div>      
      <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >질문</span>
@@ -70,14 +74,14 @@ ul li {
 
 	 <div id=dlgpw class="input-group mb-3" title="비밀번호 변경" style="width:500px; margin:auto; display:none;">
      	<div class="input-group mb-3" style="width:500px; margin:auto;">
-     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >비밀번호</span>
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px; " >비밀번호</span>
      <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=password name=password>
+           id=password name=password placeholder = "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요." maxlength="16">
      </div>    
      <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;" >비밀번호 확인</span>
      <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=password2 name=password2>
+           id=password2 name=password2 maxlength="16">
      </div>        
      <div style="margin-bottom:15px;">
                <input type="button" class="btn btn-secondary" value="비밀번호 변경" id=pwchange name=pwchange 
@@ -96,21 +100,23 @@ $(document)
 	
 })
 .on('click','#pwchange',function(){
-	if($('#password').val()==$('#password2').val()){
-	$.ajax({
-		url:'/fit/changepw',
-		data:{userid:$('#userid').val(),
-			  password:$('#password').val()},
-		method:'post',
-		dataType:'text',
-		success:function(txt){
-			console.log(txt);
-			if(txt=="ok"){
-			alert('비밀번호가 변경되었습니다.');
-				location.href='/fit/login';
+	if(password_check($('#password').val())){
+	     return false;
+	 }if($('#password').val()==($('#password2').val())){
+		$.ajax({
+			url:'/fit/changepw',
+			data:{userid:$('#userid').val(),
+				  password:$('#password').val()},
+			method:'post',
+			dataType:'text',
+			success:function(txt){
+				console.log(txt);
+				if(txt=="ok"){
+					alert('비밀번호가 변경되었습니다.');
+					location.href='/fit/login';
+				}
 			}
-		}
-	})
+		})
 	}else{
 		alert('비밀번호가 다릅니다');
 		return false;
@@ -178,6 +184,16 @@ function resi(){
 		}
 	});
 }
+
+function password_check(){ /*비밀번호 정규식*/
+    let regex_password = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/
+    var password = $('#password').val();
+    if(!regex_password.test(password) ) {
+    	alert("비밀번호를 제대로 입력해주세요")
+        return true
+    }    
+}
+
 
 </script>
 </html>

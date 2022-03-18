@@ -49,12 +49,12 @@ ul li {
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >이메일</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=email name=email>
+           id=email name=email maxlength="32">
      </div>      
      <div class="input-group mb-3" style="width:500px; margin:auto;">
-     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >실명</span>
+     <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >이름</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-           id=name name=name>
+           id=name name=name maxlength="15">
 	</div>
 	 <div id=dlgid class="input-group mb-3" title="아이디 찾기" style="width:500px; margin:auto; display:none;">
      <table align=center style="font-size:30px"><tr><td>찾으신 아이디는</td><td id=userid></td><td>입니다.</td></tr></table>
@@ -78,7 +78,9 @@ ul li {
 let flag='false'; //이거는 참인지 아닌지 판별하기 위한 도구(변수)
 $(document)
 .on('click','#search',function() {
-	if ($('#email').val()=='') {
+    if (email_check($('input[name=userid]'))){
+		return false;
+	}else if($('#email').val()=='') {
 		alert("이메일이 비었습니다.");
 		return false;
 	}else if($('#name').val()=='') {
@@ -131,5 +133,14 @@ $(document)
 
 	}
 });
+function email_check(){ /*이메일 정규식*/
+    let regex_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    var email = $('#email').val();
+    if(!regex_email.test(email) ) {
+    	alert("email를 제대로 입력해주세요")
+        return true
+    }    
+}
+
     </script>
     </html>
