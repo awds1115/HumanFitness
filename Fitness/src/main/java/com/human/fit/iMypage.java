@@ -46,7 +46,11 @@ public interface iMypage {
 
 	void updateref();
 
-	void delref(String userid, String spname);
+	void delref(String userid, String spname, int ref_no);
+
+	ArrayList<ticket> getref_type();
+
+	ArrayList<ticket> getstatList(String stat);
 
 
 	
