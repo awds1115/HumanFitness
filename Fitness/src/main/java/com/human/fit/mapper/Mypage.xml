@@ -74,7 +74,14 @@
 <![CDATA[
 	select a.userid,a.sports_name,a.start_dt,a.end_dt,b.ref_name 
 	from ticket a,refund b 
-	where a.refund=b.no_type and end_dt >= now();
+	where a.refund=b.no_type and end_dt >= now() limit 1,10;
+	]]>
+</select>
+<select id="getRefundpaging" resultType="com.human.fit.ticket">
+<![CDATA[
+	select a.userid,a.sports_name,a.start_dt,a.end_dt,b.ref_name 
+	from ticket a,refund b 
+	where a.refund=b.no_type and end_dt >= now() limit #{param1},10;
 	]]>
 </select>
 <update id="updateref">
@@ -89,8 +96,21 @@
 	select * from refund;
 </select>
 <select id="getstatList" resultType="com.human.fit.ticket">
-		select a.userid,a.sports_name,a.start_dt,a.end_dt,b.ref_name 
-	from ticket a,refund b 
-	where a.refund=b.no_type and end_dt >= now() and no_type=#{param1};
+	<![CDATA[	select a.userid,a.sports_name,a.start_dt,a.end_dt,b.ref_name from ticket a,refund b where a.refund=b.no_type and a.end_dt >= now() and a.refund=#{param1} limit 1,10; 	]]>
+</select>
+<select id="getstatpaging" resultType="com.human.fit.ticket">
+	<![CDATA[	select a.userid,a.sports_name,a.start_dt,a.end_dt,b.ref_name from ticket a,refund b where a.refund=b.no_type and a.end_dt >= now() and a.refund=#{param1} limit #{param2},10; 	]]>
+</select>
+<select id="getmultipaging" resultType="com.human.fit.ticket">
+	<![CDATA[	select a.userid,a.sports_name,a.start_dt,a.end_dt,b.ref_name from ticket a, refund b where a.refund=b.no_type and a.end_dt >= now() and a.refund=#{param3} and a.userid like concat('%',#{param2},'%') or a.sports_name like concat('%',#{param1},'%') limit #{param1},10; 	]]>
+</select>
+<select id="searchingList" resultType="com.human.fit.ticket">
+	<![CDATA[	select a.userid,a.sports_name,a.start_dt,a.end_dt,b.ref_name from ticket a, refund b where a.refund=b.no_type and a.end_dt >= now() and a.userid like concat('%',#{param2},'%') or a.sports_name like concat('%',#{param1},'%') limit #{param1},10; 	]]>
+</select>
+<select id="findsearching" resultType="com.human.fit.ticket">
+	<![CDATA[	select a.userid,a.sports_name,a.start_dt,a.end_dt,b.ref_name from ticket a, refund b where a.refund=b.no_type and a.end_dt >= now() and a.userid like concat('%',#{param1},'%') or a.sports_name like concat('%',#{param1},'%') limit 1,10; 	]]>
+</select>
+<select id="finddouble" resultType="com.human.fit.ticket">
+	<![CDATA[	select a.userid,a.sports_name,a.start_dt,a.end_dt,b.ref_name from ticket a, refund b where a.refund=b.no_type and a.end_dt >= now() and a.userid like concat('%',#{param1},'%') or a.sports_name like concat('%',#{param1},'%') and b.no_type=#{param2} limit 1,10; 	]]>
 </select>
 </mapper>

@@ -52,6 +52,18 @@ public interface iMypage {
 
 	ArrayList<ticket> getstatList(String stat);
 
+	ArrayList<ticket> searchingList(int start, String find);
+
+	ArrayList<ticket> getRefundpaging(int start);
+
+	ArrayList<ticket> getstatpaging(String stat, int start);
+
+	ArrayList<ticket> getmultipaging(int start, String find, String stat);
+
+	ArrayList<ticket> findsearching(String find);
+
+	ArrayList<ticket> finddouble(String find, String stat);
+
 
 	
 }

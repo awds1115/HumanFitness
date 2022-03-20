@@ -250,7 +250,7 @@ a {
             </div>
             <div id='search' class="search-wrap"></div>
             <div id='search' class="search-wrap">
-               <input type="search" name="findMail" id="findMail"/>
+               <input type="search" name="findstat" id="findstat"/>
                <button id="btnSearch" class="btn btn-dark">회원검색</button>
             </div>
          </div>   
@@ -344,10 +344,87 @@ let fitst="";
 let second="";
 let third="";
 let spname="";
-
+let pageno=0;
 $(document)
 .ready(function(){
 	loadticket();
+})
+.on('click','#btnSearch',function(){
+   $.ajax({url:'/fit/findstating',
+      data:{find:$('#findstat').val(),stat:$("#stat option:selected").val()},
+      dataType:'json',
+      method:'GET',
+      beforeSend:function(){
+         $('#reftbl').empty();
+      },
+      success:function(data){
+			for(i=0;i<data.length;i++){
+				sports_name=data[i]['name'].split("  ");
+				let str="<tr><td><input type=checkbox id='check' name='check' value='"+data[i]['userid']+"'></td><td>"+data[i]['userid']+"</td><td>"+sports_name[0]+"</td><td>"+sports_name[1]+"</td><td>"
+						+data[i]['start']+"</td><td>"+data[i]['end']+"</td><td>"+data[i]['refund']+"</td></tr>"
+				$('#reftbl').append(str);
+			}
+      }
+   })
+})
+.on('click','#back',function(){
+   pageno=pageno-1;
+                                       
+   if(pageno==-1){
+      alert("처음 페이지 입니다.");
+      pageno=0;
+      return false;
+   } else {
+      $.ajax({url:'/fit/paging4',
+         data:{pageno:pageno,find:$('#findstat').val(),stat:$("#stat option:selected").val()},
+         dataType:'JSON',
+         method:'GET',
+         beforeSend:function(){
+            $('#reftbl').empty();
+         },
+         success:function(data){
+				for(i=0;i<data.length;i++){
+					sports_name=data[i]['name'].split("  ");
+					let str="<tr><td><input type=checkbox id='check' name='check' value='"+data[i]['userid']+"'></td><td>"+data[i]['userid']+"</td><td>"+sports_name[0]+"</td><td>"+sports_name[1]+"</td><td>"
+							+data[i]['start']+"</td><td>"+data[i]['end']+"</td><td>"+data[i]['refund']+"</td></tr>"
+					$('#reftbl').append(str);
+				}
+			}
+         })
+   }
+})
+.on('click','#next',function(){
+   pageno=pageno+1;
+      $.ajax({url:'/fit/pagecheck4',
+            data:{pageno:pageno,find:$('#findstat').val(),stat:$("#stat option:selected").val()},
+            datatype:'json',
+            method:'get',
+            success:function(data){
+               console.log(data);
+               if(data.length==0 ){
+                  alert("마지막 페이지 입니다.");
+                  pageno=pageno-1;
+                  return false;
+               } else {
+            $.ajax({url:'/fit/paging4',
+                  data:{pageno:pageno,find:$('#findstat').val(),stat:$("#stat option:selected").val()},
+                  dataType:'JSON',
+                  method:'GET',
+                beforeSend:function(){
+                  $('#reftbl').empty();
+               },
+                  success:function(data){
+      				for(i=0;i<data.length;i++){
+    					sports_name=data[i]['name'].split("  ");
+    					let str="<tr><td><input type=checkbox id='check' name='check' value='"+data[i]['userid']+"'></td><td>"+data[i]['userid']+"</td><td>"+sports_name[0]+"</td><td>"+sports_name[1]+"</td><td>"
+    							+data[i]['start']+"</td><td>"+data[i]['end']+"</td><td>"+data[i]['refund']+"</td></tr>"
+    					$('#reftbl').append(str);
+    				}
+                  }   
+            })
+               }
+          } 
+   }) 
 })
 .on('click','#refund2',function(){
    	$('#reftbl tr').each(function(){
@@ -369,6 +446,7 @@ $(document)
   	document.location="refund";
 })
 .on('change','#stat',function(){
+	console.log($("#stat option:selected").val());
 	if($("#stat option:selected").val() != 0 ){
 		$.ajax({url:'/fit/stating',
 			data:{stat:$("#stat option:selected").val()},

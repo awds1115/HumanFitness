@@ -25,6 +25,138 @@ public class refundController {
 	
 	
 	@ResponseBody
+	@RequestMapping(value="/findstating",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+	public String findmail(HttpServletRequest request, Model model) {
+		iMypage mpy=sqlSession.getMapper(iMypage.class);
+			String find=request.getParameter("find");
+			String stat=request.getParameter("stat");
+			JSONArray ja= new JSONArray();
+			if(stat.equals("0")) {
+	       ArrayList<ticket> pageList=mpy.findsearching(find);
+//	       System.out.println("["+contact.size()+"]");
+	       for(int i=0; i<pageList.size(); i++) { 
+	          JSONObject jo=new JSONObject();
+			    jo.put("userid",pageList.get(i).getUserid());
+			    jo.put("name",pageList.get(i).getSports_name());
+			    jo.put("start",pageList.get(i).getStart_dt());
+			    jo.put("end",pageList.get(i).getEnd_dt());
+			    jo.put("refund",pageList.get(i).getRef_name());
+			   ja.add(jo);
+	       }
+	       } else {
+	    	   ArrayList<ticket> pageList=mpy.finddouble(find,stat);
+		       for(int i=0; i<pageList.size(); i++) { 
+			          JSONObject jo=new JSONObject();
+					    jo.put("userid",pageList.get(i).getUserid());
+					    jo.put("name",pageList.get(i).getSports_name());
+					    jo.put("start",pageList.get(i).getStart_dt());
+					    jo.put("end",pageList.get(i).getEnd_dt());
+					    jo.put("refund",pageList.get(i).getRef_name());
+					   ja.add(jo);
+	       }
+			}
+	    return ja.toString(); 
+	}
+	@ResponseBody 
+    @RequestMapping(value="/pagecheck4", method=RequestMethod.GET,produces="application/json;charset=UTF-8")
+    public String pagecheck(HttpServletRequest hsr) {
+      iMypage mpy=sqlSession.getMapper(iMypage.class);
+      int lines=10;
+       int pageno=Integer.parseInt(hsr.getParameter("pageno"));
+       String find=hsr.getParameter("find"); 
+       String stat=hsr.getParameter("stat");
+       int start=lines*pageno+1;
+       JSONArray ja=new JSONArray();
+       if(find.equals("") && stat.equals("0")) { 
+    	   ArrayList<ticket> pageList = mpy.getRefundpaging(start);
+    	   for(int i=0; i<pageList.size(); i++) {
+    		   JSONObject jo=new JSONObject();
+    		   jo.put("no",pageList.get(i).getUserid());
+    		   ja.add(jo);
+    	   }
+       } else if(!stat.equals("0") && find.equals("")) {
+    	   ArrayList<ticket> pageList=mpy.getstatpaging(stat,start);
+           for(int i=0; i<pageList.size(); i++) { 
+              JSONObject jo=new JSONObject();
+              jo.put("no",pageList.get(i).getUserid());
+              ja.add(jo);
+           }
+       } else if(!stat.equals("0") && !find.equals("")){
+    	   ArrayList<ticket> pageList = mpy.getmultipaging(start,find,stat);
+           for(int i=0; i<pageList.size(); i++) { 
+               JSONObject jo=new JSONObject();
+               jo.put("no",pageList.get(i).getUserid());
+               ja.add(jo);
+            }
+       }else {
+    	   ArrayList<ticket> pageList = mpy.searchingList(start,find);
+    	   for(int i=0; i<pageList.size(); i++) {
+    		   JSONObject jo=new JSONObject();
+    		   jo.put("no",pageList.get(i).getUserid());
+    		   ja.add(jo);
+       } 
+    }
+       return ja.toString();
+ 	}
+@ResponseBody
+@RequestMapping(value="/paging4" ,method=RequestMethod.GET, produces="application/json;charset=UTF-8")
+public String getLines(HttpServletRequest hsr, Model model) {
+	
+	iMypage mpy=sqlSession.getMapper(iMypage.class);
+   int lines=10;
+   int pageno=Integer.parseInt(hsr.getParameter("pageno"));
+   String find=hsr.getParameter("find"); 
+   String stat=hsr.getParameter("stat");
+   int start=lines*pageno+1;
+   JSONArray ja = new JSONArray();
+   if(find.equals("") && stat.equals("0")) { 
+	   ArrayList<ticket> pageList = mpy.getRefundpaging(start);
+	   for(int i=0; i<pageList.size(); i++) {
+		   JSONObject jo=new JSONObject();
+		    jo.put("userid",pageList.get(i).getUserid());
+		    jo.put("name",pageList.get(i).getSports_name());
+		    jo.put("start",pageList.get(i).getStart_dt());
+		    jo.put("end",pageList.get(i).getEnd_dt());
+		    jo.put("refund",pageList.get(i).getRef_name());
+		   ja.add(jo);
+	   }
+   } else if(!stat.equals("0") && find.equals("")) {
+	   ArrayList<ticket> pageList=mpy.getstatpaging(stat,start);
+       for(int i=0; i<pageList.size(); i++) { 
+          JSONObject jo=new JSONObject();
+          jo.put("userid",pageList.get(i).getUserid());
+          jo.put("name",pageList.get(i).getSports_name());
+          jo.put("start",pageList.get(i).getStart_dt());
+          jo.put("end",pageList.get(i).getEnd_dt());
+          jo.put("refund",pageList.get(i).getRef_name());
+          ja.add(jo);
+       }
+   } else if(!stat.equals("0") && !find.equals("")){
+	   ArrayList<ticket> pageList = mpy.getmultipaging(start,find,stat);
+       for(int i=0; i<pageList.size(); i++) { 
+           JSONObject jo=new JSONObject();
+           jo.put("userid",pageList.get(i).getUserid());
+           jo.put("name",pageList.get(i).getSports_name());
+           jo.put("start",pageList.get(i).getStart_dt());
+           jo.put("end",pageList.get(i).getEnd_dt());
+           jo.put("refund",pageList.get(i).getRef_name());
+           ja.add(jo);
+        }
+   }else {
+	   ArrayList<ticket> pageList = mpy.searchingList(start,find);
+	   for(int i=0; i<pageList.size(); i++) {
+		   JSONObject jo=new JSONObject();
+		    jo.put("userid",pageList.get(i).getUserid());
+		    jo.put("name",pageList.get(i).getSports_name());
+		    jo.put("start",pageList.get(i).getStart_dt());
+		    jo.put("end",pageList.get(i).getEnd_dt());
+		    jo.put("refund",pageList.get(i).getRef_name());
+		   ja.add(jo);
+   } 
+}
+  return ja.toString(); 
+}
+	@ResponseBody
 	@RequestMapping(value="/stating", method=RequestMethod.GET,produces="application/json;charset=UTF-8")
 	public String stating(HttpServletRequest request) {
 		iMypage mpy=sqlSession.getMapper(iMypage.class);
