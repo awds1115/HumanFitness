@@ -32,11 +32,30 @@ textarea{
     height: 100px;
     font-size: 15px;
     padding: 10px;
+   resize: none;
+}
+.wdate{
+	padding-left: 2.25rem;
+    padding-bottom: 1rem;
+    color: #BDBDBD;
+    font-size: 0.75rem;
+    
 }
 .rp_child{
 	margin-left: 30px;
 }
-
+.content,
+.writer{
+	padding-left: 2.25rem;
+}
+.icon_p{
+  padding-bottom: 4rem;
+}
+a{ text-decoration:none;} 
+a:hover { 
+text-decoration:none;
+color: #BDBDBD;
+ }
 
 </style>
     <body>
@@ -79,7 +98,6 @@ textarea{
                                 </td>
                             </tr>
                             <tr>
-                            <td>내용
                                 <td colspan="2" >
                                 <textarea readonly class="form-control" rows="15" name="content" id="content"  >${pageInfo.content}</textarea>
                                 </td>
@@ -103,7 +121,7 @@ textarea{
                             </tr>
                         </thead>
                     </table>
-</div>
+	</div>
 </div>
 	<div id=dvReply>
 	댓글<hr>
@@ -113,20 +131,22 @@ textarea{
 				<c:forEach items="${p1}" var="list">
 		            <c:if test="${list.grpl==0 }">
 				    	<table id="table${list.grp}" name="${list.no}" class="rp_parent">
-				            <tr>
-				                <td>${list.writer}</td>
-				                <td>${list.wdate}</td>
-				            </tr>
-				            <tr>
+				            <tr><td class="writer"><strong>${list.writer}</strong></td></tr>
 			            		<c:if test="${nickname=='null' }">
-			            			<td colspan=2 id="${list.no}">${list.content}</td>
+			            			<tr><td class="content" id="no${list.no}">${list.content}</td></tr>
+			            			<tr><td class="wdate">${list.wdate}</td></tr>
 			            		</c:if>
 			            		<c:if test="${nickname!='null' }">
 			            			<c:if test="${list.writer!=nickname }">
-				            			<td id="no${list.no}">${list.content}</td>
-				            			<td id="btn${list.no}">
-				            				<button id="${list.grp}" class="btn btn-default" onClick="reply_insert1(this.id)">댓글</button>
-				            			</td>
+				            			<tr><td class="content" id="no${list.no}">${list.content}</td></tr>
+				            			<tr><td class="wdate">${list.wdate}</td>
+							            	<td id="btn${list.no}" class="wdate">
+								            	<a href='#none' onClick="reply_insert1('${list.no}')" style="color: inherit;" role='button' id="${list.no}">댓글</a>
+							            	</td>
+							            	</tr>
+<%-- 				            			<td id="btn${list.no}"> --%>
+<%-- 				            				<button id="${list.grp}" class="btn btn-default" onClick="reply_insert1(this.id)">댓글</button> --%>
+<!-- 				            			</td> -->
 				            		</c:if>
 				            		<c:if test="${list.writer==nickname }">
 				            			<c:if test="${list.content=='삭제된 댓글입니다.' }">
@@ -144,7 +164,7 @@ textarea{
 				            			</c:if>
 				            		</c:if>
 			            		</c:if>
-			            	</tr>
+			            	
 		            	</table>	
 	            	</c:if>
 	            	<c:if test="${list.grpl!=0 }">
