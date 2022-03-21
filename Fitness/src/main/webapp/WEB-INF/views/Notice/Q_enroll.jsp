@@ -173,6 +173,15 @@ textarea{
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
-
+$("#btnSave").on("click", function(e){
+	if($("#title").val()==''){
+		alert('제목을 입력해주세요.')
+		return false;
+	}
+	if($("#content").val()==''){
+		alert('내용을 입력해주세요.')
+		return false;
+	}
+});
 </script>
 </html>

@@ -299,8 +299,8 @@ color: #BDBDBD;
 	<div class="input_wrap" align="right">
 		<input type="hidden" id="bno" name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
 		<input type="hidden" id="nickname" name="nickname" readonly="readonly" value='<c:out value="${nickname}"/>' >
-		<textarea rows="3" id="p_content" name="p_content" style="resize:none;"></textarea>
-		<a class="btn btn-default" id="p_insert_btn" style="margin-right:1%;">등록</a> 
+		<textarea class="form-control" rows="3" id="p_content" name="p_content" style="resize:none;"></textarea>
+		<a class="btn btn-default" id="p_insert_btn">등록</a> 
 	</div>
         
          <hr/>
