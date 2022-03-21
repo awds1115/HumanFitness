@@ -229,7 +229,6 @@ section.notice {
    min-width:180px;
    box-sizing:border-box;
    border:1px solid #999;
-   border-right:0;
 }
 .depth3 > ul > li.on {
    border:1px solid #A00000;
@@ -278,10 +277,10 @@ a {
 </section>
 
 <section class="page-section" id="members">
-  <div class="page-title">
+  <div class="page-title"><br><br>
       <div class="container" align=center>
-      <h2>관리자페이지</h2><br><br>
-     </div>
+      <h2>관리자페이지</h2>
+     </div><br><br><br>
    <div class="depth3">
       <ul>
          <li><a href="/fit/viewmember" >회원관리</a></li>
@@ -366,15 +365,15 @@ a {
 </body>
 
        
-        <!-- SimpleLightbox plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-        <!-- Core theme JS-->
-                <script src="<c:url value='/resources/js/scripts.js' />"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<!-- SimpleLightbox plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<!-- Core theme JS-->
+<script src="<c:url value='/resources/js/scripts.js' />"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script src='https://code.jquery.com/ui/1.13.0/jquery-ui.js'></script>
 <script>
