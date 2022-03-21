@@ -39,7 +39,14 @@ textarea{
     padding-bottom: 1rem;
     color: #BDBDBD;
     font-size: 0.75rem;
-    
+    width:2%;
+}
+.wbtn{
+/* 	padding-left: 2.25rem; */
+    padding-bottom: 1rem;
+    color: #BDBDBD;
+    font-size: 0.75rem;
+    width:20%;
 }
 .content,
 .writer{
@@ -124,23 +131,23 @@ color: #BDBDBD;
 </div>
 	<div id=dvReply>
 	댓글<hr>
-	<table>
+	<table style="width:100%">
 	<c:forEach items="${p1}" var="list">
 		<tr>
-		<td class="icon_p" colspan="3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+		<td class="icon_p" style="width:1%"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
   			<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 			</svg>
 		</td>
-		<td>
+		<td style="width:90%">
 			<c:if test="${list.grpl==0 }">
-				    	<table width="100%" id="table${list.grp}" name="${list.no}" class="rp_parent">
+				    	<table style="width:100%" id="table${list.grp}" name="${list.no}" class="rp_parent">
 				            <tr>
 				                <td colspan="2" class="writer"><strong>${list.writer}</strong></td>
 				            </tr>
 							<tr><td colspan="2" class="content" id="no${list.no}">${list.content}</td></tr>
 			            	<tr>
-				            	<td width="15%" class="wdate">${list.wdate}</td>
-				            	<td id="btn${list.no}" class="wdate">
+				            	<td class="wdate">${list.wdate}</td>
+				            	<td id="btn${list.no}" class="wbtn">
 					            	<c:if test="${type==1}">
 						            	<a href='#none' onClick="reply_update('${list.no}')" style="color: inherit;" role='button' id="${list.no}">수정&nbsp;</a>
 						            	<a href='#none' onClick="reply_delete('${list.no}')" style="color: inherit;" role='button' id="${list.no}">삭제</a>
@@ -157,11 +164,11 @@ color: #BDBDBD;
 	
 	<br><br>
 	<c:if test="${type==1}">
-		<div class="input_wrap">
+		<div class="input_wrap" align="right">
 			<input type="hidden" id="bno" name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
 			<input type="hidden" id="nickname" name="nickname" readonly="readonly" value='<c:out value="${nickname}"/>' >
 			<textarea class="form-control" rows="4" id="p_content" name="p_content" style="resize:none;"></textarea>
-			<a class="btn btn-default" id="p_insert_btn" >확인</a> 
+			<a class="btn btn-default" id="p_insert_btn" >등록</a> 
 		</div>
 	</c:if>
         
@@ -219,13 +226,17 @@ color: #BDBDBD;
 	});
 	/* 댓글 작성 */
 	$("#p_insert_btn").on("click", function(e){
+		if($("#p_content").val()==''){
+			alert('내용을 입력해주세요.')
+			return false;
+		}
 		$.post('/fit/QnA_reply',{bno:$('#bno').val(), 
 							nickname:$('#nickname').val(), 
 							p_content:$("#p_content").val()},function(txt){
 				if(txt=="fail"){
 					alert('댓글작성 실패');
 				} else {
-
+					
 					location.reload();
 				}
 			},'text');
@@ -272,7 +283,7 @@ color: #BDBDBD;
 	function reply_return(id){
 		R_reply='<td colspan="2" class="content" id=no'+id+'>'+$("#no"+id).text()+'</td>';
 		
-		R_btn='<td id="btn'+id+'" class="wdate">';
+		R_btn='<td id="btn'+id+'" class="wbtn">';
 		R_btn+='<a href='+'#none'+' onClick="reply_update('+id+')" style="color: inherit;" role='+'button'+' id="'+id+'">수정&nbsp;&nbsp;</a>';
 		R_btn+='<a href='+'#none'+' onClick="reply_delete('+id+')" style="color: inherit;" role='+'button'+' id="'+id+'">삭제</a></td>';
 		
