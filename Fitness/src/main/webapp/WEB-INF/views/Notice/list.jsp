@@ -97,9 +97,9 @@ section.notice {
   word-break: break-all;
   vertical-align: middle;
 }
-.board-table a:hover {
-  text-decoration: underline;
-}
+ .board-table > a:hover { 
+   text-decoration: underline; 
+ } 
 .board-table th {
   text-align: center;
 }

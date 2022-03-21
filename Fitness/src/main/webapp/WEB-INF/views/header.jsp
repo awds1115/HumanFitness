@@ -56,6 +56,7 @@
 	#menu > ul > li:hover a{
 		color:#fff;
 		font-weight:700;
+		text-decoration: none;
 	}
 </style>
 <body>

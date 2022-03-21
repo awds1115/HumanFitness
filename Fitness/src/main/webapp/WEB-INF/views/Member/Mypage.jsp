@@ -420,7 +420,7 @@ section.notice {
 		</div>
 	</div>
 </div><br><br> 
-
+ <input type=hidden id=userid2 name=userid2 value=${userid }>
 
 <div id=pscheck title='비밀번호 확인' style="display:none;"><br>
 	<div class="input-group mb-3" style="width:500px; margin:auto;" >
@@ -532,7 +532,18 @@ $(document)
 .on('click','#m_quit',function(){
 	document.location='/fit/delinfo';
 })
+.on('click','#buy',function(){
+	if($('#userid2').val()=="null"){
+		if(confirm("로그인이 필요한 서비스 입니다.\n로그인을 하시겠습니까?")){
+			document.location="login";
+		} else{
+			return false;
+		}
 
+	} else{
+		document.location="buyMship";
+	}
+})
 function loadticket(){
 	$.ajax({url:'/fit/ticketing',
 		data:{id:$('#id').val()},
