@@ -33,9 +33,9 @@
 	select * from ticket where userid=#{param1} and end_dt >= now();
 	]]>
 </select>
-<delete id="ticketed">
-	delete from ticket where userid=#{param1} and sports_name=#{param2};
-</delete>
+<update id="ticketed">
+	update ticket set refund=2 where userid=#{param1} and sports_name=#{param2};
+</update>
 <insert id="newcontact">
 	insert into contact(name,email,mobile,message,send_dt) values(#{param1},#{param2},#{param3},#{param4},date_format(now(),'%Y-%m-%d'));
 </insert>
