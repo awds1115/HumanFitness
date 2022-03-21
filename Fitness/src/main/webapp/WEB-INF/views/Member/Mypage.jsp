@@ -5,36 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-      <!-- Favicon-->
-      <link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
-      <!-- Bootstrap Icons-->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-      <!-- Google fonts-->
-      <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-      <!-- SimpleLightbox plugin CSS-->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-      <!-- Core theme CSS (includes Bootstrap)-->
-      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <!-- Bootstrap core CSS -->
-    <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>마이페이지</title>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+       <!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
+   <!-- Bootstrap Icons-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+       <!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+       <!-- SimpleLightbox plugin CSS-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+       <!-- Core theme CSS (includes Bootstrap)-->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css" />
+
+   <!-- Bootstrap core CSS -->
+<link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
-/* 
-	section {width:100%;height:60px;margin:0 auto;}
-
-	section > p {height:30px; width:20%; text-align:center; vertical-align:middle; display:inline-block; float:left; ont-weight:bold; color:#fff;font-size:13px;}
-	section > p strong { bottom:-20px; display:block; width:100%; text-align:center; color:#777;}
-	section > p em {vertical-align:middle; font-size:15px; padding: 10px 0;}
-	section > p:nth-child(1) {background:#719bb6;}
-	section > p:nth-child(2) {background:#4d74cd;}
-	section > p:nth-child(3) {background:#6c6ec6;}
-	section > p:nth-child(4) {background:#ac6dc9;}
-	section > p:nth-child(5) {background:#ec4d5e;}
-*/
 #imgpush{
 	padding:2rem 0; 
 	background:#fff; 
@@ -434,14 +422,11 @@ section.notice {
 </div><br><br> 
 
 
-<div id=pscheck title='비밀번호 확인' style="display:none;">
+<div id=pscheck title='비밀번호 확인' style="display:none;"><br>
 	<div class="input-group mb-3" style="width:500px; margin:auto;" >
-  			<span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;" >비밀번호</span>
-    		<input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+  		<span class="input-group-text" id="inputGroup-sizing-default"style="width:90px;" >비밀번호</span>
+    	<input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
           id=passw name=passw style="text-overflow: ellipsis;">
-	</div>
-	<div style="margin-bottom: 15px;" align=center>
-		<input type="button" class="btn btn-secondary" value="확인" id=next name=next ><br>
 	</div>
 </div>
 </section>
@@ -449,6 +434,12 @@ section.notice {
 	<jsp:include page="../footer.jsp"/>
 
 </body>
+<script src="<c:url value='/resources/js/scripts.js' />"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script src='https://code.jquery.com/ui/1.13.0/jquery-ui.js'></script>
 <script>
@@ -473,23 +464,6 @@ $(document)
 				}
 		})
 	})
-})
-.on('click','#next',function(){
-	$.ajax({url:'/fit/pwCheck',
-		data:{id:$('#id').val()},
-		dataType:'json',
-		method:'GET',
-		success:function(data){
-			if($('#passw').val()==data[0]['pw']){
-				alert("확인되었습니다.");
-				document.location='/fit/M_update';
-				return true;
-			} else{
-				alert("비밀번호가 맞지 않습니다.");
-				return false;
-			}
-		}
-		})
 })
 .on('click','#bmi',function(){
 	$.ajax({url:'/fit/weight',
@@ -531,11 +505,32 @@ $(document)
 })
 .on('click','#m_update',function(){
 	$('#pscheck').dialog({
-        width: 600
-        })
+        width: 600,
+        modal: true,
+        draggable: true,
+        buttons: {
+     	   "확인": function() {
+     		   $.ajax({url:'/fit/pwCheck',
+	     			data:{id:$('#id').val()},
+	     			dataType:'json',
+	     			method:'GET',
+	     			success:function(data){
+	     				if($('#passw').val()==data[0]['pw']){
+	     					alert("확인되었습니다.");
+	     					document.location='/fit/M_update';
+	     					return true;
+	     				} else {
+	     					alert("비밀번호가 맞지 않습니다.");
+	     					return false;
+	     				}
+	     			}
+     			})
+     	   }
+ 		}
+	})
 })
 .on('click','#m_quit',function(){
-	document.location='/fit/delInfo';
+	document.location='/fit/delinfo';
 })
 
 function loadticket(){
@@ -557,14 +552,4 @@ function loadticket(){
 })
 }
 </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- SimpleLightbox plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-        <!-- Core theme JS-->
-                <script src="<c:url value='/resources/js/scripts.js' />"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </html>
