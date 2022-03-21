@@ -31,44 +31,6 @@ public class MypageController {
 		
 	
 	
-		@ResponseBody
-		@RequestMapping(value="/delref", method=RequestMethod.GET,produces="application/text;charset=UTF-8")
-		public String delref(HttpServletRequest request) {
-			String retval="";
-		       try {
-		    	   iMypage mpy=sqlSession.getMapper(iMypage.class);
-		    	   String userid=request.getParameter("userid");
-		    	   String spname=request.getParameter("spname");
-		    	   mpy.delref(userid,spname);
-		    	   retval="ok";
-		       } catch(Exception e) {
-		    	   retval="fail";
-		       }
-		       return retval;	
-		}
-		@ResponseBody
-		@RequestMapping(value="/refunding", method=RequestMethod.GET,produces="application/json;charset=UTF-8")
-		public String refunding(HttpServletRequest request) {
-			iMypage mpy=sqlSession.getMapper(iMypage.class);
-			mpy.updateref();
-	       ArrayList<ticket> refund=mpy.getRefundList();
-	       System.out.println("["+refund.size()+"]");
-	       JSONArray ja= new JSONArray();
-	       for(int i=0; i<refund.size(); i++) { 
-	          JSONObject jo=new JSONObject();
-	          jo.put("userid",refund.get(i).getUserid());
-	          jo.put("name",refund.get(i).getSports_name());
-	          jo.put("start",refund.get(i).getStart_dt());
-	          jo.put("end",refund.get(i).getEnd_dt());
-	          jo.put("refund",refund.get(i).getRefund());
-	          ja.add(jo);
-	       }
-	    return ja.toString(); 
-		}
-		@RequestMapping(value="/refund")
-		public String refund(HttpServletRequest hsr) {
-			return "Member/refund";
-		}
 	 	@ResponseBody 
 	    @RequestMapping(value="/pagecheck", method=RequestMethod.GET,produces="application/json;charset=UTF-8")
 	    public String pagecheck(HttpServletRequest hsr) {

@@ -456,10 +456,10 @@ $(document)
 				method:'GET',
 				success:function(txt){
 					if(txt=="ok"){
-						alert("환불이 완료되었습니다.");
+						alert("환불신청이 완료되었습니다.");
 						 loadticket()
 					} else{
-						alert("환불이 불가능 합니다.");
+						alert("환불신청이 실패하였습니다.");
 					}
 				}
 		})
