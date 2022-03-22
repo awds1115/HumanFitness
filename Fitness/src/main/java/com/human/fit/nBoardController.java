@@ -56,7 +56,6 @@ public class nBoardController {
        	
        	
        	Iboard board=sqlSession.getMapper(Iboard.class);
-        String userid = (String)session.getAttribute("userid");
         session_call(hsr, model);
     	return "Notice/N_enroll";
     }
@@ -172,7 +171,6 @@ public class nBoardController {
        	
        	
        	Iboard board=sqlSession.getMapper(Iboard.class);
-        String userid = (String)session.getAttribute("userid");
         session_call(hsr, model);
     	return "Notice/Q_enroll";
     }
@@ -348,7 +346,6 @@ public class nBoardController {
        	
        	
        	Iboard board=sqlSession.getMapper(Iboard.class);
-        String userid = (String)session.getAttribute("userid");
         session_call(hsr, model);
     	return "Notice/enroll";
     }
