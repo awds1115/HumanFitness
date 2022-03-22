@@ -71,7 +71,6 @@ input::placeholder {
                 <a href="home" style="font-size:40px; text-decoration:none">Human Fitness</a>
 </div><br><br>
 	 <h3 style="color:black;">회원가입</h3>
-	 <div style="margin:left; float:left; margin-left:120px">
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
      <input type="hidden" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
            id=number name=number value=2 readonly>
@@ -122,9 +121,7 @@ input::placeholder {
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
            id=name name=name maxlength='20'>
 	</div>
-</div>
 
-	<div style="margin-top:16px; float:right; margin-right:120px">
 	 <div class="input-group mb-3" style="width:500px; margin:auto;">
 	 <div class="btn-group" data-toggle="buttons" style="height:38px;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:130px;">성별</span>
@@ -175,8 +172,8 @@ input::placeholder {
     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
            id=answer name="answer" maxlength="300">
 	</div>
-	</div>
-	<div>
+
+
 		<div style="margin-bottom:15px;">
                <button class="btn btn-secondary" id=frmsign name=frmsign 
                	 style=" font-size:20px; width:300px;">가입완료</button>
@@ -186,7 +183,7 @@ input::placeholder {
       	</ul>
     </div>
 </div>
-</div>
+
 <jsp:include page="../footer.jsp"/>
 </body>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
