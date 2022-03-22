@@ -44,8 +44,8 @@ ul li {
 <div class="m_container">
 <div>
                 <a href="home" style="font-size:40px; text-decoration:none">Human Fitness</a>
-</div><br><br>
-	 <h3 style="color:black;">로그인</h3>
+</div><br>
+	 <h2 style="color:black;">Login</h2><br>
 	 <div class="input-group mb-3" style="width:400px; margin:auto;">
      <span class="input-group-text" id="inputGroup-sizing-default" style="width:90px;" >아이디</span>
      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
@@ -57,13 +57,13 @@ ul li {
            id=password name=password maxlength="16">
 	</div>
 		<div style="margin-bottom:15px;">
-               <input type="button" class="btn btn-secondary" value="로그인" id=btnLogin name=btnLogin 
-               		style=" font-size:20px; width:300px;">
+               <input type="button" class="btn btn-secondary" value="로그인 하기" id=btnLogin name=btnLogin 
+               		style="font-size:15px; width:150px;"><br>
       		
       	<ul style="padding-left: 0rem; margin-top:20px;">
-      		<li><a href="ifind" style="text-decoration:none">아이디찾기</a></li>
-      		<li><a href="findpw" style="text-decoration:none">비밀번호찾기</a></li>
-      		<li><a href="signon" style="text-decoration:none">회원가입</a></li>
+      		<li><a href="ifind" style="text-decoration:none; font-size:14px;">아이디 찾기</a></li>
+      		<li><a href="findpw" style="text-decoration:none; font-size:14px;">비밀번호 찾기</a></li>
+      		<li><a href="signon" style="text-decoration:none; font-size:14px;">회원가입</a></li>
       	</ul>
       	</div>
 </div>

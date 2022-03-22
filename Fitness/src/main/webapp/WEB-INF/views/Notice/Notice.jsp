@@ -41,7 +41,6 @@ section.notice {
   font-weight: 400;
   text-align: center;
 }
-
 #board-search .search-window {
   padding: 15px 0;
   background-color: #f9f7f9;
@@ -99,6 +98,7 @@ section.notice {
 }
 .board-table a:hover {
   text-decoration: underline;
+  color: #333;
 }
 .board-table th {
   text-align: center;
@@ -239,8 +239,10 @@ section.notice {
   padding: 7px;
   font-weight: 500;
 }
+
  a:link {color:white; text-decoration: none;}
- a:visited {color:white; text-decoration: none;}
+ a:visited {color:#333; text-decoration: none;}
+
   </style>
 </head>
 <body>
