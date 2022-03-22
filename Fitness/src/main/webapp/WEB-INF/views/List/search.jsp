@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <style>
@@ -240,6 +240,7 @@
         </div>
     </div>
 </section>
+<input type=hidden id=userid2 name=userid2 value=${userid }>
         <!-- Footer-->
 <jsp:include page="../footer.jsp"/>
 <!-- Bootstrap core JS-->
@@ -385,8 +386,7 @@ function search(){
 			}
     	}
 	})
-};
-
+}
 </script>
 </body>
 </html>

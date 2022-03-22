@@ -307,11 +307,11 @@ span {
 <div id="board-list">
     <div class="container">
 		<table class="board-table" id="cheonan_map">
-			<tr><td style="font: normal normal 400 12px/normal dotum, sans-serif; height: 432px; color: #333; position: relative">
-				<div style="width:100%; height: 400px;">
+			<tr><td style="font: normal normal 400 12px/normal dotum, sans-serif; heigh:600px; color: #333; position: relative">
+				<div>
 					<a href="https://map.kakao.com/?urlX=532830.0&amp;urlY=919106.0&amp;itemId=808699153&amp;q=%ED%9C%B4%EB%A8%BC%EA%B5%90%EC%9C%A1%EC%84%BC%ED%84%B0&amp;srcid=808699153&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank">
 					<img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/75d8451c3da3359e6b67c6d663bce97b8cbbd76da37f4d59cd76cab74b36979f"
-						height="400px" style="border: 1px solid #ccc;"></a>
+						width="1100px" height="550px" style="border: 1px solid #ccc;"></a>
 				</div>
 			</td></tr>
 			<tr><td>
@@ -358,12 +358,12 @@ span {
 <div id="board-list">
     <div class="container">
 		<table class="board-table" id="seoul_map" style="display: none;">
-			<tr><td style="font: normal normal 400 12px/normal dotum, sans-serif; width: 800px; height: 432px; color: #333; position: relative">
-				<div style="height: 400px;">
+			<tr><td style="font: normal normal 400 12px/normal dotum, sans-serif; heigh:600px; color: #333; position: relative">
+				<div>
 					<a href="https://map.kakao.com/?urlX=479321.0&amp;urlY=1116340.0&amp;itemId=1742826337&amp;q=%ED%9C%B4%EB%A8%BC%EA%B5%90%EC%9C%A1%EC%84%BC%ED%84%B0%20%EC%84%9C%EC%9A%B8&amp;srcid=1742826337&amp;map_type=TYPE_MAP&amp;from=roughmap"
 						target="_blank">
 					<img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/a9b4f0fb89c1c1fb71a3bc155de5de11433f6b61de8699be98a946d72aef4dc3"
-						width="798px" height="398px" style="border: 1px solid #ccc;"></a>
+						width="1100px" height="550px" style="border: 1px solid #ccc;"></a>
 				</div>
 			</td></tr>
 			<tr><td>
@@ -414,12 +414,12 @@ span {
 <div id="board-list">
     <div class="container">
 		<table class="board-table" id=suwon_map style="display: none;">
-			<tr><td style="font: normal normal 400 12px/normal dotum, sans-serif; width: 800px; height: 432px; color: #333; position: relative">
-				<div style="height: 400px;">
+			<tr><td style="font: normal normal 400 12px/normal dotum, sans-serif; height: 600px; color: #333; position: relative">
+				<div>
 					<a href="https://map.kakao.com/?urlX=506100.0&amp;urlY=1049382.0&amp;itemId=322722768&amp;q=%ED%9C%B4%EB%A8%BC%EA%B5%90%EC%9C%A1%EC%84%BC%ED%84%B0&amp;srcid=322722768&amp;map_type=TYPE_MAP&amp;from=roughmap"
 						target="_blank">
 					<img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/f91b863b109e74ffcb5590b2a328a8d7ee5e48cfe6bc3123b6018b10672fc0bc"
-						width="798px" height="398px" style="border: 1px solid #ccc;"></a>
+						width="1100px" height="550px" style="border: 1px solid #ccc;"></a>
 				</div>
 			</td></tr>
 			<tr><td>
@@ -503,5 +503,4 @@ $(document)
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </html>

@@ -31,7 +31,7 @@
 
 ul li {
 	list-style-type: none;
-	 width:10%;
+	 width:7%;
 	 height:50px;
 	 text-align:center;
 	 display:inline-block;
@@ -62,7 +62,7 @@ ul li {
       		
       	<ul style="padding-left: 0rem; margin-top:20px;">
       		<li><a href="ifind" style="text-decoration:none">아이디찾기</a></li>
-      		<li><a href="findpw" style="text-decoration:none">비밀번호찾기</a></li><br>
+      		<li><a href="findpw" style="text-decoration:none">비밀번호찾기</a></li>
       		<li><a href="signon" style="text-decoration:none">회원가입</a></li>
       	</ul>
       	</div>

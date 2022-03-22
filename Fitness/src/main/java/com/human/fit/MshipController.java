@@ -24,17 +24,13 @@ public class MshipController {
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value="/mship", produces="application/json;charset=utf-8")
-    public String MtypeList(HttpServletRequest hsr) {
-	       
+    public String MtypeList(HttpServletRequest request, Model model) {
+		session_call(request, model);
          return "Member/Mship"; 
     }
 	@RequestMapping(value="/map", produces="application/json;charset=utf-8")
     public String Map(HttpServletRequest request,Model model) {
-		HttpSession session=request.getSession();
 		session_call(request, model);
-		String userid=(String) session.getAttribute("userid");
-		model.addAttribute("userid",userid);
-		
          return "map"; 
     }
 	@ResponseBody

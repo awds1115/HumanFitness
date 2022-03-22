@@ -102,9 +102,9 @@ section.notice {
   word-break: break-all;
   vertical-align: middle;
 }
-.board-table a:hover {
-  text-decoration: underline;
-}
+ .board-table > a:hover { 
+   text-decoration: underline; 
+ } 
 .board-table th {
   text-align: center;
 }
@@ -242,9 +242,8 @@ section.notice {
   padding: 7px;
   font-weight: 500;
 }
- a:link {color:black; text-decoration: none;}
- a:visited {color:black; text-decoration: none;}
- a:hover {color:black; text-decoration: underline;}
+ a:link {color:white; text-decoration: none;}
+ a:visited {color:white; text-decoration: none;}
   
  </style>
 </head>

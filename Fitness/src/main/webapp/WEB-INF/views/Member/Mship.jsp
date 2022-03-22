@@ -100,10 +100,10 @@ a {
 </section>
 
 <section class="page-section" id="members">
-  <div class="page-title">
+  <div class="page-title"><br><br>
       <div class="container" align=center>
-      <h2>관리자페이지</h2><br><br>
-     </div>
+      <h2>관리자페이지</h2>
+     </div><br><br><br>
    <div class="depth3">
       <ul>
          <li><a href="/fit/viewmember" >회원관리</a></li>
