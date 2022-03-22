@@ -17,9 +17,10 @@
 /* a태그에 텍스트 밑줄을 없애고 색상을 #333 */
 	a {
 		text-decoration: none;
-		color:white;
+/* 		color:white; */
 	}
 	#menu {
+	
 		margin:-3px 0;
 		text-align: center;
 		position:relative;
@@ -42,6 +43,7 @@
 		display:block;
 		padding:7px 0;
 		transition:0.1s;
+		color:white;
 	}
 	#menu > ul > li {
 		
@@ -60,6 +62,7 @@
 	}
 </style>
 <body>
+<input type=hidden id=userid2 name=userid2 value=${userid }>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="home">Human Fitness</a>
@@ -107,6 +110,18 @@ $(document)
 .on('click','#navbarDarkDropdownMenuLink',function(){
 	$('.ulclass').toggle();
 	
+})
+.on('click','#buy',function(){
+	if($('#userid2').val()=="null"){
+		if(confirm("로그인이 필요한 서비스 입니다.\n로그인을 하시겠습니까?")){
+			document.location="login";
+		} else{
+			return false;
+		}
+
+	} else{
+		document.location="buyMship";
+	}
 })
 </script>
 </html>

@@ -193,7 +193,10 @@ margin-left:15%;
 <input type=hidden id=usertype name=usertype value="${type }">
 <section class="page-section bg-dark text-white">
 <jsp:include page="../header.jsp"/>
-</section>
+</section><br><br><br>
+      <div class="container" align=center>
+      <h1>PT</h1>
+     </div>
 <div class="depth3">
 	<ul>
 		<li><a href="/fit/health" >헬스</a></li>

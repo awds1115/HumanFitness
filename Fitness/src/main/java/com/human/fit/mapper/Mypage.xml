@@ -30,7 +30,9 @@
 </select>
 <select id="getticket" resultType="com.human.fit.ticket">
 <![CDATA[
-	select * from ticket where userid=#{param1} and end_dt >= now();
+	select a.sports_name,a.start_dt,a.end_dt,b.ref_name 
+from ticket a, refund b 
+where a.refund=b.no_type and a.userid=#{param1} and a.end_dt >= now();
 	]]>
 </select>
 <update id="ticketed">

@@ -21,39 +21,41 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css"/>
-        <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-       
-        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    
     </head>
-<style>
 
+<style>
+.container{
+padding: 0 100px;
+}
 textarea{
 	width: 1100px;
-    height: 100px;
-    font-size: 15px;
-    padding: 10px;
-   resize: none;
+    font-size: 15px; 
+    resize: none;
+    background-color: white;
+}
+form-control:disabled, .form-control[readonly] {
+    background-color: #fafafa;
+    opacity: 1;
 }
 .wdate{
 	padding-left: 2.25rem;
-    padding-bottom: 1rem;
+    padding-bottom: 1rem;`
     color: #BDBDBD;
-    font-size: 0.75rem;
+     font-size: 0.75rem; 
     width:3%;
 }
 .wbtn{
 	padding-left: 2.25rem;
     padding-bottom: 1rem;
     color: #BDBDBD;
-    font-size: 0.75rem;
+     font-size: 0.75rem; 
     width:20%;
 }
 .rp_parent{
 	margin-left: -30px;
 }
-/* .rp_child{ */
-/* 	margin-left: 10px; */
-/* } */
 .content,
 .writer{
 	padding-left: 2.25rem;
@@ -71,20 +73,124 @@ text-decoration:none;
 color: #BDBDBD;
  }
 #p_content{
-    font-size: 15px;
+     font-size: 15px; 
     padding: 10px;
     margin-right:1%;
+}
+////////////
+
+#board-search .search-window {
+  padding: 15px 0;
+  background-color: #f9f7f9;
+}
+#board-search .search-window .search-wrap {
+  position: relative;
+/* 	padding-right: 124px; */
+	display: block;
+	margin: 20px 0 20px 0;
+	float:right;
+}
+#board-search .search-window .search-wrapper {
+	overflow:hidden;
+	padding:0 1.3rem;
+}
+#board-search .search-window .search-wrap input {
+  height: 40px;
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid #ccc;
+}
+#board-search .search-window .search-wrap select {
+  height: 40px;
+  width: 300px;
+  align: left;
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid #ccc;
+}
+#board-search .search-window .search-wrap input:focus {
+  border-color: #333;
+  outline: 0;
+  border-width: 1px;
+}
+#board-search .search-window .search-wrap .btn {
+  width: 108px;
+  padding: 0;
+  font-size: 16px;
+  height:40px;
+  margin-bottom:1px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 5px 30px;
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  float:right;
+  
+}
+
+.btn-dark {
+  background: #555;
+  color: #fff;
+}
+
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+
+.btn-dark {
+  background: #555;
+  color: #fff;
+}
+
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+#list_btn,#modify_btn,#delete_btn,#p_insert_btn {
+	border-radius: 5px;
+	text-align:center;
+	vertical-align:middle;
+	border:1px solid #999;
+	border-radius:0;
+	padding-left: 19.5%;
 }
 </style>
     <body>
      <section class="page-section bg-dark text-white">
 		<jsp:include page="../header.jsp"/>
 	</section>
-        <div class="container2">
+	<br><br>
+        <div class="container">
            
-            <div class="row2">
+            <div class="row" align=center>
            
-                <div class="col-md-10">
+                <div align=center>
                   <hr/>
                     <table class="table table-condensed">
                         <thead>
@@ -124,108 +230,21 @@ color: #BDBDBD;
                     </table>
                     <table id="commentTable" class="table table-condensed"></table>
                 
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <td>
-                                    <span style='float:right'>
-                                        <button type="button" id="list_btn" class="btn btn-default">목록</button>
+					<div id="board-search">
+					        <div class="search-window">
+								<div class="search-wrapper">
+									<div style="width: 350px;" class="search-wrap">
+                                        <button type="button" id="list_btn" class="btn">목록</button>
                                         <c:if test="${nickname==pageInfo.writer}">
-                                        <button type="button" id="modify_btn" class="btn btn-default">수정</button>
-                                        <button type="button" id="delete_btn" class="btn btn-default">삭제</button>
+	                                        <button type="button" id="modify_btn" class="btn btn-default">수정</button>
+	                                        <button type="button" id="delete_btn" class="btn btn-default">삭제</button>
                                         </c:if>	
-                                    </span>
-                                </td>
-                            </tr>
-                        </thead>
-                    </table>
+                                     </div>
+								</div>
+							</div>
+					</div>
 	</div>
 </div>
-<!-- 	<div id=dvReply> -->
-<!-- 	댓글<hr> -->
-<!-- 	<table> -->
-<!-- 		<tr> -->
-<!-- 			<td> -->
-<%-- 				<c:forEach items="${p1}" var="list"> --%>
-<%-- 		            <c:if test="${list.grpl==0 }"> --%>
-<%-- 				    	<table id="table${list.grp}" name="${list.no}" class="rp_parent"> --%>
-<%-- 				            <tr><td class="writer"><strong>${list.writer}</strong></td></tr> --%>
-<%-- 			            		<c:if test="${nickname=='null' }"> --%>
-<%-- 			            			<tr><td class="content" id="no${list.no}">${list.content}</td></tr> --%>
-<%-- 			            			<tr><td class="wdate">${list.wdate}</td></tr> --%>
-<%-- 			            		</c:if> --%>
-<%-- 			            		<c:if test="${nickname!='null' }"> --%>
-<%-- 			            			<c:if test="${list.writer!=nickname }"> --%>
-<%-- 				            			<tr><td class="content" id="no${list.no}">${list.content}</td></tr> --%>
-<%-- 				            			<tr><td class="wdate">${list.wdate}</td> --%>
-<%-- 							            	<td id="btn${list.no}" class="wdate"> --%>
-<%-- 								            	<a href='#none' onClick="reply_insert1('${list.no}')" style="color: inherit;" role='button' id="${list.no}">댓글</a> --%>
-<!-- 							            	</td> -->
-<!-- 							            	</tr> -->
-<%-- 				            			<td id="btn${list.no}"> --%>
-<%-- 				            				<button id="${list.grp}" class="btn btn-default" onClick="reply_insert1(this.id)">댓글</button> --%>
-<!-- 				            			</td> -->
-<%-- 				            		</c:if> --%>
-<%-- 				            		<c:if test="${list.writer==nickname }"> --%>
-<%-- 				            			<c:if test="${list.content=='삭제된 댓글입니다.' }"> --%>
-<%-- 					            			<td id="no${list.no}">${list.content}</td> --%>
-<%-- 					            			<td id="btn${list.no}"> --%>
-<!-- 					            			</td> -->
-<%-- 				            			</c:if> --%>
-<%-- 				            				<c:if test="${list.content!='삭제된 댓글입니다.' }"> --%>
-<%-- 					            			<td id="no${list.no}">${list.content}</td> --%>
-<%-- 					            			<td id="btn${list.no}"> --%>
-<%-- 					            				<button id="${list.grp}" class="btn btn-default" onClick="reply_insert1(this.id)">댓글</button> --%>
-<%-- 					            				<button id="${list.no}" class="btn btn-default" onClick="reply_update(this.id)">수정</button> --%>
-<%-- 					            				<button id="${list.no}" class="btn btn-default" onClick="reply_delete(this.id)">삭제</button> --%>
-<!-- 					            			</td> -->
-<%-- 				            			</c:if> --%>
-<%-- 				            		</c:if> --%>
-<%-- 			            		</c:if> --%>
-			            	
-<!-- 		            	</table>	 -->
-<%-- 	            	</c:if> --%>
-<%-- 	            	<c:if test="${list.grpl!=0 }"> --%>
-<%-- 						<table id="table${list.grp}" name="${list.no}" class="rp_child" > --%>
-<!-- 		            		<tr> -->
-<%-- 				                <td>${list.writer}</td> --%>
-<%-- 				                <td>${list.wdate}</td> --%>
-<!-- 				            </tr> -->
-<!-- 				            <tr> -->
-<%-- 			            		<c:if test="${nickname=='null' }"> --%>
-<%-- 			            			<td colspan=2>${list.content}</td> --%>
-<%-- 			            		</c:if> --%>
-<%-- 			            		<c:if test="${nickname!='null' }"> --%>
-<%-- 			            			<c:if test="${list.writer!=nickname }"> --%>
-<%-- 				            			<td id="no${list.no}">${list.content}</td> --%>
-<%-- 				            			<td id="btn${list.no}"> --%>
-
-<!-- 				            			</td> -->
-<%-- 				            		</c:if> --%>
-<%-- 				            		<c:if test="${list.writer==nickname }"> --%>
-<%-- 				            			<c:if test="${list.content=='삭제된 댓글입니다.' }"> --%>
-<%-- 					            			<td id="no${list.no}">${list.content}</td> --%>
-<%-- 					            			<td id="btn${list.no}"> --%>
-
-<!-- 					            			</td> -->
-<%-- 				            			</c:if> --%>
-<%-- 				            				<c:if test="${list.content!='삭제된 댓글입니다.' }"> --%>
-<%-- 					            			<td id="no${list.no}">${list.content}</td> --%>
-<%-- 					            			<td id="btn${list.no}"> --%>
-<%-- 					            				<button id="${list.no}" class="btn btn-default" onClick="reply_update(this.id)">수정</button> --%>
-<%-- 					            				<button id="${list.no}" class="btn btn-default" onClick="reply_delete(this.id)">삭제</button> --%>
-<!-- 					            			</td> -->
-<%-- 				            			</c:if> --%>
-<%-- 				            		</c:if> --%>
-<%-- 			            		</c:if> --%>
-<!-- 			            	</tr> -->
-<!-- 			            </table>	 -->
-<%-- 	            	</c:if> --%>
-<%-- 	        	</c:forEach> --%>
-<!-- 	        </td> -->
-<!-- 		</tr> -->
-<!-- 	</table> -->
-<!-- 	</div> -->
 	<div id=dvReply style="width:100%">
 	댓글<hr>
 	<table style="width:100%">
@@ -295,15 +314,25 @@ color: #BDBDBD;
 	</table>
 	</div>
 	<br><br>
-
+	
 	<div class="input_wrap" align="right">
 		<input type="hidden" id="bno" name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
 		<input type="hidden" id="nickname" name="nickname" readonly="readonly" value='<c:out value="${nickname}"/>' >
 		<textarea class="form-control" rows="3" id="p_content" name="p_content" style="resize:none;"></textarea>
-		<a class="btn btn-default" id="p_insert_btn">등록</a> 
+	</div>
+	
+	<div id="board-search">
+	        <div class="search-window">
+				<div class="search-wrapper">
+					<div style="width: 350px;" class="search-wrap">
+						<button class="btn" id="p_insert_btn">등록</button> 
+                    </div>
+				</div>
+			</div>
 	</div>
         
          <hr/>
+</div>
     <form id="infoForm" action="/fit/modify" method="get">
 		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
 		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
@@ -315,7 +344,6 @@ color: #BDBDBD;
 	
  
 <jsp:include page="../footer.jsp"/>    
-            </div>
            
             
             

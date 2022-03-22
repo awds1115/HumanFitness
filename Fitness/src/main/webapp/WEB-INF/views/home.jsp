@@ -142,7 +142,6 @@
                             </div>
                         </form>
                     </div>
-                    <input type=hidden id=userid2 name=userid2 value=${userid }>
                 </div>
              
             </div>
@@ -171,18 +170,6 @@ $(document)
 	} else {
 		alert("상담문의가 성공적으로 전송 되었습니다.");
 		return true;
-	}
-})
-.on('click','#buy',function(){
-	if($('#userid2').val()=="null"){
-		if(confirm("로그인이 필요한 서비스 입니다.\n로그인을 하시겠습니까?")){
-			document.location="login";
-		} else{
-			return false;
-		}
-
-	} else{
-		document.location="buyMship";
 	}
 })
 </script>

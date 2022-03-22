@@ -266,6 +266,7 @@ public class MypageController {
 	          jo.put("name",ticket.get(i).getSports_name());
 	          jo.put("start",ticket.get(i).getStart_dt());
 	          jo.put("end",ticket.get(i).getEnd_dt());
+	          jo.put("refname",ticket.get(i).getRef_name());
 	          ja.add(jo);
 	       }
 	    return ja.toString(); 

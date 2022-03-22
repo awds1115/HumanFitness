@@ -286,9 +286,10 @@ section.notice {
 <jsp:include page="../header.jsp"/>
 </section>
 <section class="page-section" id="mypage">
+  <br><br>
   <div class="page-title">
       <div class="container" align=center>
-		<h1>마이페이지</h1><br><br>
+		<h1>마이페이지</h1><br>
 	  </div>
   </div>
   <div class="container" align=center>
@@ -332,7 +333,7 @@ section.notice {
     <div class="container">
 	<table class="board-table">
 		<thead>
-			<tr><th>\</th><th>운동명</th><th>기간</th><th>시작날짜</th><th>끝나는날짜</th></tr>
+			<tr><th>\</th><th>운동명</th><th>기간</th><th>시작날짜</th><th>끝나는날짜</th><th>상태</th></tr>
 		</thead>
 		<tbody id="ticket"></tbody>
 	</table>
@@ -556,7 +557,7 @@ function loadticket(){
 			for(i=0;i<data.length;i++){
 				sports_name=data[i]['name'].split("  ");
 				let str="<tr><td><input type=radio id='ticketed' name='ticketed' value='"+data[i]['name']+"'></td><td>"+sports_name[0]+"</td><td>"+sports_name[1]+"</td><td>"
-						+data[i]['start']+"</td><td>"+data[i]['end']+"</td></tr>"
+						+data[i]['start']+"</td><td>"+data[i]['end']+"</td><td>"+data[i]['refname']+"</td></tr>"
 				$('#ticket').append(str);
 			}
 		}

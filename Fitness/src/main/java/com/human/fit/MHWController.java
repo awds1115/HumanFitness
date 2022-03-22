@@ -2,6 +2,8 @@ package com.human.fit;
 
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,7 +83,7 @@ public class MHWController {
     
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchlist(HttpServletRequest hsr, Model model) {
-	
+		session_call(hsr,model);
         return "List/search";
     }
 	
@@ -117,4 +119,30 @@ public class MHWController {
 		ja.add(alldata);
 		return ja.toString();
 	}
+	public void session_call(HttpServletRequest request, Model model) {
+	      HttpSession session = request.getSession(true);
+	         int type1=0;
+	         String userid="";
+	         String nickname="";
+	         
+	         if(session.getAttribute("userid")==null) {
+	            userid="null";
+	         } else {
+	            userid=(String) session.getAttribute("userid");
+	         }
+	         if(session.getAttribute("type")==null){
+	            type1=0;
+	         } else {
+	            type1=(int) session.getAttribute("type");
+	         }
+	         if(session.getAttribute("nickname")==null) {
+	            nickname="null";
+	         } else {
+	            nickname=(String) session.getAttribute("nickname");
+	         }
+//	         int type=Integer.parseInt(type1);
+	         model.addAttribute("userid",userid);
+	         model.addAttribute("type",type1);
+	         model.addAttribute("nickname",nickname);
+	   }
 }

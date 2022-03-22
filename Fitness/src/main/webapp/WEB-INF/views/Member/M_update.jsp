@@ -260,7 +260,7 @@ section.notice {
 				style="width: 140px;">닉네임</span> 
 			<input type="text" class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id=nname name=nname
-				value="${view.nickname }"> 
+				value="${view.nickname }" readonly> 
 			<input type=button class="btn btn-dark" id=change name=change value="닉네임변경">
 		</div>
 		<div class="input-group mb-3" style="width: 800px; margin: auto;">
