@@ -99,7 +99,7 @@
         </div>
         <br><br>
             <div class="container px-4 px-lg-5 text-center">
-                <a class="btn btn-primary btn-xl" id=buy href="buyMship">회원권 구매</a>
+                <a class="btn btn-primary btn-xl" id=buy>회원권 구매</a>
             </div>
 
         <!-- Contact-->
