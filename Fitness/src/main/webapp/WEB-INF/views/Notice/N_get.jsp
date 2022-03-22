@@ -93,7 +93,7 @@ textarea{
                                 <td>
                                     <span style='float:right'>
                                         <button type="button" id="list_btn" class="btn btn-default">목록</button>
-                                        <c:if test="${nickname==pageInfo.writer}">
+                                        <c:if test="${type==1}">
                                         <button type="button" id="modify_btn" class="btn btn-default">수정</button>
                                         <button type="button" id="delete_btn" class="btn btn-default">삭제</button>
                                         </c:if>	

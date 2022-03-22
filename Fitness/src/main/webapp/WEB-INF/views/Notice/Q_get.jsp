@@ -34,15 +34,19 @@ textarea{
     padding: 10px;
    resize: none;
 }
-.rp_child{
-	padding-left: 200px;
-}
 .wdate{
 	padding-left: 2.25rem;
     padding-bottom: 1rem;
     color: #BDBDBD;
     font-size: 0.75rem;
-    
+    width:2%;
+}
+.wbtn{
+/* 	padding-left: 2.25rem; */
+    padding-bottom: 1rem;
+    color: #BDBDBD;
+    font-size: 0.75rem;
+    width:20%;
 }
 .content,
 .writer{
@@ -51,9 +55,7 @@ textarea{
 .icon_p{
   padding-bottom: 4rem;
 }
-a{ text-decoration:none;
-	color: inherit;
-	} 
+a{ text-decoration:none;} 
 a:hover { 
 text-decoration:none;
 color: #BDBDBD;
@@ -61,6 +63,7 @@ color: #BDBDBD;
 
 
 </style>
+
     <body>
      <section class="page-section bg-dark text-white">
 		<jsp:include page="../header.jsp"/>
@@ -128,57 +131,31 @@ color: #BDBDBD;
 </div>
 	<div id=dvReply>
 	댓글<hr>
-	<table>
+	<table style="width:100%">
 	<c:forEach items="${p1}" var="list">
 		<tr>
-		<td class="icon_p" colspan="3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+		<td class="icon_p" style="width:1%"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
   			<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 			</svg>
 		</td>
-		<td>
+		<td style="width:90%">
 			<c:if test="${list.grpl==0 }">
-				    	<table id="table${list.grp}" name="${list.no}" class="rp_parent">
+				    	<table style="width:100%" id="table${list.grp}" name="${list.no}" class="rp_parent">
 				            <tr>
-				                <td class="writer"><strong>${list.writer}</strong></td>
+				                <td colspan="2" class="writer"><strong>${list.writer}</strong></td>
 				            </tr>
-				            <tr>
-			            		<c:if test="${nickname=='null' }">
-			            			<td class="content" colspan=2 id="${list.no}">${list.content}</td>
-			            		</c:if>
-			            		<c:if test="${nickname!='null' }">
-			            			<c:if test="${list.writer!=nickname }">
-				            			<td class="content" id="no${list.no}">${list.content}</td>
-				            			<td id="btn${list.no}">
-				            				<button id="${list.grp}" class="btn btn-default" onClick="reply_insert1(this.id)">댓글</button>
-				            			</td>
-				            		</c:if>
-				            		<c:if test="${list.writer==nickname }">
-				            			<c:if test="${list.content=='삭제된 댓글입니다.' }">
-					            			<td class="content" id="no${list.no}">${list.content}</td>
-					            			<td id="btn${list.no}">
-					            			</td>
-				            			</c:if>
-				            				<c:if test="${list.content!='삭제된 댓글입니다.' }">
-					            			<td class="content" id="no${list.no}">${list.content}</td>
-<%-- 					            			<td id="btn${list.no}"> --%>
-<%-- 					            				<button id="${list.no}" class="btn btn-default" onClick="reply_update(this.id)">수정</button> --%>
-<%-- 					            				<button id="${list.no}" class="btn btn-default" onClick="reply_delete(this.id)">삭제</button> --%>
-<!-- 					            			</td> -->
-				            			</c:if>
-				            		</c:if>
-			            		</c:if>
-			            	</tr>
+							<tr><td colspan="2" class="content" id="no${list.no}">${list.content}</td></tr>
 			            	<tr>
-			            	<td id="btn${list.no}" class="wdate">${list.wdate}&nbsp;&nbsp;&nbsp;&nbsp;
-			            	<a href='#none' onClick="reply_delete('${list.no}')" role='button' id="${list.no}">삭제&nbsp;</a>
-			            	<a href='#none' onClick="reply_update('${list.no}')" role='button' id="${list.no}">수정</a>
-			            	</td>
-<!-- 			            	<td class="wdate"></td> -->
-<!-- 			            	<td class="wdate"></td> -->
+				            	<td class="wdate">${list.wdate}</td>
+				            	<td id="btn${list.no}" class="wbtn">
+					            	<c:if test="${type==1}">
+						            	<a href='#none' onClick="reply_update('${list.no}')" style="color: inherit;" role='button' id="${list.no}">수정&nbsp;</a>
+						            	<a href='#none' onClick="reply_delete('${list.no}')" style="color: inherit;" role='button' id="${list.no}">삭제</a>
+					            	</c:if>
+				            	</td>
 			            	</tr>
 		            	</table>	
-	            	</c:if>
-	        	
+	            	</c:if> 	
 	        </td>
 		</tr>
 		</c:forEach>
@@ -187,11 +164,11 @@ color: #BDBDBD;
 	
 	<br><br>
 	<c:if test="${type==1}">
-		<div class="input_wrap">
+		<div class="input_wrap" align="right">
 			<input type="hidden" id="bno" name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
 			<input type="hidden" id="nickname" name="nickname" readonly="readonly" value='<c:out value="${nickname}"/>' >
 			<textarea class="form-control" rows="4" id="p_content" name="p_content" style="resize:none;"></textarea>
-			<a class="btn btn-default" id="p_insert_btn" >확인</a> 
+			<a class="btn btn-default" id="p_insert_btn" >등록</a> 
 		</div>
 	</c:if>
         
@@ -249,13 +226,17 @@ color: #BDBDBD;
 	});
 	/* 댓글 작성 */
 	$("#p_insert_btn").on("click", function(e){
+		if($("#p_content").val()==''){
+			alert('내용을 입력해주세요.')
+			return false;
+		}
 		$.post('/fit/QnA_reply',{bno:$('#bno').val(), 
 							nickname:$('#nickname').val(), 
 							p_content:$("#p_content").val()},function(txt){
 				if(txt=="fail"){
 					alert('댓글작성 실패');
 				} else {
-
+					
 					location.reload();
 				}
 			},'text');
@@ -272,33 +253,40 @@ color: #BDBDBD;
 	}
 	/* 댓글 수정 창 띄우기*/
 	function reply_update(id){
-		console.log("updateid : "+id);
-		R_reply='<td id=no'+id+'>';
-		R_reply+='<textarea class="form-control" rows="4" id="p_content" name="p_content" style="resize:none;">'+$("#no"+id).text();
+// 		console.log("updateid : "+id);
+		R_reply='<td colspan="2" id=no'+id+'>';
+		R_reply+='<textarea class="form-control" rows="4" id="p_content2" name="p_content2" style="width: 900px;">'+$("#no"+id).text();
 		R_reply+='</textarea></td>';
-		R_btn='<td id=btn'+id+'>';
-		R_btn+='<button id="'+id+'" class="btn btn-default"  onClick="reply_update2('+id+')">완료</button>';
-		R_btn+='<button id="'+id+'" class="btn btn-default" onClick="reply_return('+id+')">취소</button></td>';
-		console.log($("#no"+id).text());
-		console.log(R_reply+"<br>"+R_btn);
+// 		R_btn='<td id=btn'+id+'>';
+// 		R_btn+='<button id="'+id+'" class="btn btn-default"  onClick="reply_update2('+id+')">완료</button>';
+// 		R_btn+='<button id="'+id+'" class="btn btn-default" onClick="reply_return('+id+')">취소</button></td>';
+// 		console.log($("#no"+id).text());
+// 		console.log(R_reply+"<br>"+R_btn);
+		R_btn='<td id="btn'+id+'" class="wdate">';
+		R_btn+='<a href='+'#none'+' onClick="reply_return('+id+')" style="color: inherit;" role='+'button'+' id="'+id+'">취소&nbsp;&nbsp;</a>';
+		R_btn+='<a href='+'#none'+' onClick="reply_update2('+id+')" style="color: inherit;" role='+'button'+' id="'+id+'">완료</a></td>';
+		
+    	
+
 		$("#no"+id).html(R_reply);
 		$("#btn"+id).html(R_btn);
 		return false;
 	}
 	/* 댓글 업데이트 */
 	function reply_update2(id){
-			$.post('/fit/replyUpdate',{no:id,p_content:$("#p_content2").val()},function(txt){
+			$.post('/fit/QnA_replyUpdate',{no:id,p_content:$("#p_content2").val()},function(txt){
+// 				alert("업데이트?");
 				location.reload();
 				},'text');
 		}
 	/* 댓글 수정 취소 */
 	function reply_return(id){
-		R_reply='<td id=no'+id+'>'+$("#no"+id).text()+'</td>';
+		R_reply='<td colspan="2" class="content" id=no'+id+'>'+$("#no"+id).text()+'</td>';
 		
-		R_btn='<td id=btn'+id+'>';
-		R_btn+='<button id="'+id+'" class="btn btn-default" onClick="reply_insert1(this.id)">답글달기</button>';
-		R_btn+='<button id="'+id+'" class="btn btn-default" onClick="reply_update(this.id)">댓글수정</button>';
-		R_btn+='<button id="'+id+'" class="btn btn-default" onClick="reply_delete(this.id)">댓글삭제</button></td>';
+		R_btn='<td id="btn'+id+'" class="wbtn">';
+		R_btn+='<a href='+'#none'+' onClick="reply_update('+id+')" style="color: inherit;" role='+'button'+' id="'+id+'">수정&nbsp;&nbsp;</a>';
+		R_btn+='<a href='+'#none'+' onClick="reply_delete('+id+')" style="color: inherit;" role='+'button'+' id="'+id+'">삭제</a></td>';
+		
 		$("#no"+id).replaceWith(R_reply);
 		$("#btn"+id).replaceWith(R_btn);
 	}

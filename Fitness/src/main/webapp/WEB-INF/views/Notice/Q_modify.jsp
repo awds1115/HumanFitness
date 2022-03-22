@@ -27,15 +27,7 @@
     </head>
 <style>
 
-textarea{
-	width: 1100px;
-    height: 100px;
-    font-size: 15px;
-    padding: 10px;
-}
-.rp_child{
-	padding-left: 200px;
-}
+
 
 
 </style>
@@ -55,7 +47,8 @@ textarea{
                         <thead>
                             <tr align="center">
                                 <th width="10%">제목</th>
-                                <th width="60%"><c:out value="${pageInfo.title}"/> </th>
+                                <th width="60%">
+                                <textarea class="form-control" style="resize: none;" rows="1" name="content"><c:out value="${pageInfo.title}"/></textarea></th>
                                 
                             </tr>
                         </thead>
@@ -85,7 +78,7 @@ textarea{
                                 <td colspan="2">
                                 <input type=hidden name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
                                  <input type=hidden name="title" value='<c:out value="${pageInfo.title}"/>' >
-                                 <textarea name="content"><c:out value="${pageInfo.content}"/></textarea>
+                                 <textarea rows="3" class="form-control" name="content" style="resize: none; height: 400px;"><c:out value="${pageInfo.content}"/></textarea>
                                  <input type=hidden name="writer" readonly="readonly" value='<c:out value="${pageInfo.writer}"/>' >
                                  <input type=hidden name="regdater" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.regdate}"/>' >
                                  <input type=hidden name="updateDate" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.updateDate}"/>' >
