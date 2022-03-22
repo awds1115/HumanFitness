@@ -85,6 +85,14 @@ a {
    /*   color: rgb(233, 22, 36); */
    text-decoration: none;
 }
+#sptype li{
+	width:150px;
+	float:right;
+	margin-top: 8px;
+}
+#sptype li:hover{
+	color: #999999;
+}
 </style>
 <body>
 <section class="page-section bg-dark text-white">
@@ -148,22 +156,29 @@ a {
 </table>
 </section>
 
-<div class="bg-dark text-white"  id='dlgSports' align=center style='display: none; valign:middle' title='운동종류변경'>
+<div id='dlgSports' align=center style='display: none; valign:middle' title='운동종류변경'>
    <!-- display:none;  -->
-   <table align=center valign=middle>
-      <tr><td align=center>
-         <table align=center>
-            <tr><td>운동코드</td><td><input readonly type=number name=Sportscode id=Sportscode><br></td></tr>
-            <tr><td>운동명</td><td><input type=text name=Sportsname id=Sportsname><br></td></tr>
-            
-         </table>
-      </td><td align=center>
-         <select id='SportsType' size=5 style="width: 150px;"></select>
-      </td>
-      </tr>
-   </table>
+<!--    <table align=center valign=middle> -->
+<!--       <tr><td align=center> -->
+<!--          <table align=center> -->
+
+<div style="float:left;background-color:white;color:black;">
+<!-- <select id='SportsType' size=5 style="width: 150px;"></select> -->
+<ul id='sptype' style="width:150px;"></ul>
+
+
+
+</div><div style="float:right;">            
+
+<div style="text-align:right;vertical-align:middle;margin-top: 25px;">
+운동코드
+<input readonly type=number name=Sportscode id=Sportscode><br>
+운동명
+         <input type=text name=Sportsname id=Sportsname><br>
 </div>
-   
+</div>
+</div>
+   <input type=hidden id=userid2 name=userid2 value=${userid }>
 <jsp:include page="../footer.jsp"/>
 </body>
 <script src="<c:url value='/resources/js/scripts.js' />"></script>
@@ -224,10 +239,18 @@ $(document)
 
 		return false;
 	})
+.on('click', '#sptype li', function() {
+		console.log($(this).text());
+		$('#Sportscode').val($(this).val());
+		let str = $(this).text();
+		$('input[name=Sportsname]').val(str);
+
+		return false;
+	})
 .on('click', '#showdlg', function() {
 		$('#dlgSports').dialog({
-			width: 700,
-			height: 400,
+			width: 500,
+			height: 300,
 		    modal: true,
 		    draggable: true,
 		    buttons: {
@@ -240,7 +263,8 @@ $(document)
 		    			datatype : 'json',
 		    			method : "GET",
 		    			success : function(txt) {
-		    				code('#SportsType');
+// 		    				code('#SportsType');
+							ulcode('#sptype');
 		    				$('#Sportscode,#Sportsname').val('');
 		    			}
 		    		});
@@ -258,14 +282,16 @@ $(document)
 		    			datatype : 'json',
 		    			method : "GET",
 		    			success : function(txt) {
-		    				code('#SportsType');
+// 		    				code('#SportsType');
+							ulcode('#sptype');
 		    				$('#Sportscode,#Sportsname').val('');
 		    			}
 		    		});
 		    	}
 		    },
 			open : function() {
-				code('#SportsType');
+// 				code('#SportsType');
+				ulcode('#sptype');
 			},
 			close : function() {
 				sports();
@@ -307,7 +333,18 @@ $(document)
 		})
 		return false;
 	})
-	
+	.on('click','#buy',function(){
+   if($('#userid2').val()=="null"){
+      if(confirm("로그인이 필요한 서비스 입니다.\n로그인을 하시겠습니까?")){
+         document.location="login";
+      } else{
+         return false;
+      }
+
+   } else{
+      document.location="buyMship";
+   }
+})
 function sports() {
 		$('#selsports tbody').empty();
 		$.ajax({
@@ -344,5 +381,22 @@ function code(sel) {
 
 		});
 	}
+function ulcode(sel) {
+	$(sel).empty();
+	$.ajax({
+		url : "/fit/sportslist",
+		data : {},
+		datatype : 'json',
+		method : "GET",
+		success : function(txt) {
+			for (i = 0; i < txt.length; i++) {
+				let str = '<li value='+txt[i]['code']+'>'
+						+ txt[i]['s_name'] + '</li>';
+				$(sel).append(str);
+			}
+		}
+
+	});
+}
 </script>
 </html>

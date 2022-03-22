@@ -96,11 +96,10 @@
 	</insert>
 	<update id="QnA_updateReply">
 		update QnA_reply set content = #{param2} , wdate = now()
-	        where no = #{no};
+	        where no = #{param1};
 	</update>
 	<update id="QnA_deleteReply">
-		update QnA_reply set content = "삭제된 댓글입니다." , wdate = now()
-	        where no = #{param1}
+	        delete from QnA_reply where no = #{param1};
 	</update>
 
 
@@ -209,7 +208,7 @@
 <!-- </delete> -->
 <update id="updateReply">
 	update p_reply set content = #{param2} , wdate = now()
-        where no = #{no};
+        where no = #{param1};
 </update>
 <update id="deleteReply">
 	update p_reply set content = "삭제된 댓글입니다." , wdate = now()

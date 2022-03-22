@@ -46,12 +46,16 @@ section.notice {
   padding: 15px 0;
   background-color: #f9f7f9;
 }
+#board-search .search-window .search-wrapper {
+	overflow:hidden;
+	width: max-content;
+}
 #board-search .search-window .search-wrap {
   position: relative;
 /*    padding-right: 124px; */
    display: inline-block;
    margin: 20px 0 20px 0;
-  max-width: 564px;
+  max-width: 700px;
 }
 #board-search .search-window .search-wrap input {
   height: 40px;
@@ -81,6 +85,7 @@ section.notice {
   width: 108px;
   padding: 0;
   font-size: 16px;
+  float: right;
 }
 
 .board-table {
@@ -135,7 +140,7 @@ section.notice {
 
 .btn {
   display: inline-block;
-  padding: 0 30px;
+  padding: 5px 30px;
   font-size: 15px;
   font-weight: 400;
   background: transparent;
@@ -159,6 +164,7 @@ section.notice {
   -ms-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
+  
 }
 
 .btn-dark {
@@ -222,34 +228,25 @@ section.notice {
      width: 15%;
   }
 
-.top_btn{
-   font-size: 20px;
-  padding: 6px 12px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  font-weight: 600;
-}
-.pageInfo_wrap .pageInfo_area {
-  padding: 15px 0;
-  background-color: #f9f7f9;
-  width: 1078px;
-}
+
   .pageInfo{
     list-style : none;
     display: inline-block;
-   margin: 20px 0 20px 0;
+    margin: 0 20px 0 20px;
+    width: 100%
 }
 .pageInfo li{
     float: left;
-  font-size: 20px;
-/*   margin-left: 18px; */
+  font-size: 18px;
+   margin-left: 10px; 
   padding: 7px;
   font-weight: 500;
 }
  a:link {color:black; text-decoration: none;}
  a:visited {color:black; text-decoration: none;}
  a:hover {color:black; text-decoration: underline;}
-  </style>
+  
+ </style>
 </head>
 <body>
 <section class="page-section bg-dark text-white">
@@ -258,14 +255,19 @@ section.notice {
 <section class="notice">
   <div class="page-title">
       <div class="container" align=center>
-          <h2>커뮤니티</h2>
+          <h2>
+          	<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+			  <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+			  <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+			</svg>&nbsp;&nbsp;커뮤니티</h2>
       </div>
+		  	<div class="search-wrap">
+			   <c:if test="${nickname!='null'}">
+			      <a href="/fit/enroll" style="float:right;margin-right:15%;">글 쓰기</a>
+			   </c:if>
+			</div>
   </div>
-    
 <div class="table_wrap" align=center>
-   <c:if test="${nickname!='null'}">
-      <a href="/fit/enroll" class="top_btn">글 등록</a>
-   </c:if>
        <!-- board seach area -->
     <div id="board-search">
         <div class="container">
@@ -314,27 +316,34 @@ section.notice {
         </c:forEach>
             </table>
         </div>
-    </div>   
-    
-   <div class="pageInfo_wrap" >
-        <div class="pageInfo_area">
-          <ul id="pageInfo" class="pageInfo">
-              <!-- 이전페이지 버튼 -->
-                <c:if test="${pageMaker.prev}">
-                    <li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
-                </c:if>
-                <!-- 각 번호 페이지 버튼 -->
-                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li>
-                </c:forEach>
-
-                <!-- 다음페이지 버튼 -->
-                <c:if test="${pageMaker.next}">
-                    <li class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
-                </c:if>    
-            </ul>
-        </div>
     </div>
+
+	<div id="board-search">
+	    <div class="container">
+	        <div class="search-window">
+	        <div class="search-wrapper">
+		        <div class="search-wrap">
+		          <ul id="pageInfo" class="pageInfo">
+		              <!-- 이전페이지 버튼 -->
+		                <c:if test="${pageMaker.prev}">
+		                    <li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">이전</a></li>
+		                </c:if>
+		                <!-- 각 번호 페이지 버튼 -->
+		                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+		                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li>
+		                </c:forEach>
+		
+		                <!-- 다음페이지 버튼 -->
+		                <c:if test="${pageMaker.next}">
+		                    <li class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">다음</a></li>
+		                </c:if>    
+		            </ul>
+		        </div>
+	        </div>
+	        </div>
+	    </div>
+	</div>
+
    <form id="moveForm" method="get">    
        <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
         <input type="hidden" name="amount" value="${pageMaker.cri.amount }">   
@@ -342,8 +351,10 @@ section.notice {
         <input type="hidden" name="type" value="${pageMaker.cri.type }">
     </form>
 </div>
-<jsp:include page="../footer.jsp"/>
+
 </section>
+<jsp:include page="../footer.jsp"/>
+</body>
 <script src="<c:url value='/resources/js/scripts.js' />"></script>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <!-- * *                               SB Forms JS                               * *-->
@@ -395,7 +406,29 @@ $(".pageInfo a").on("click", function(e){
     
 });
 
-
+$(".search-wrap input[name='keyword']").keypress(function(e){
+	if(e.keyCode == 13) {
+	    e.preventDefault();
+	    
+	    let type = $(".search-wrap select").val();
+	    let keyword = $(".search-wrap input[name='keyword']").val();
+	    
+	    if(!type){
+	        alert("검색 종류를 선택하세요.");
+	        return false;
+	    }
+	    
+	    if(!keyword){
+	        alert("키워드를 입력하세요.");
+	        return false;
+	    }        
+	    
+	    moveForm.find("input[name='type']").val(type);
+	    moveForm.find("input[name='keyword']").val(keyword);
+	    moveForm.find("input[name='pageNum']").val(1);
+	    moveForm.submit();
+	  }
+ })
 $(".search-wrap button").on("click", function(e){
     e.preventDefault();
     
@@ -419,5 +452,4 @@ $(".search-wrap button").on("click", function(e){
 });
 
 </script>
-</body>
 </html>

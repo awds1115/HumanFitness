@@ -25,7 +25,59 @@
 <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
-.ch-window .search-wrap .btn {
+ table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+section.notice {
+  padding: 80px 0;
+}
+
+.page-title {
+  margin-bottom: 60px;
+}
+.page-title h3 {
+  font-size: 28px;
+  color: #333333;
+  font-weight: 400;
+  text-align: center;
+}
+
+#board-search .search-window {
+  padding: 15px 0;
+  background-color: #f9f7f9;
+}
+#board-search .search-window .search-wrap {
+  position: relative;
+/*    padding-right: 124px; */
+   display: block;
+   margin: 20px 0 20px 0;
+   float:right;
+}
+#board-search .search-window .search-wrapper {
+   overflow:hidden;
+   padding:0 1.3rem;
+}
+#board-search .search-window .search-wrap input {
+  height: 40px;
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid #ccc;
+}
+#board-search .search-window .search-wrap select {
+  height: 40px;
+  width: 300px;
+  align: left;
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid #ccc;
+}
+#board-search .search-window .search-wrap input:focus {
+  border-color: #333;
+  outline: 0;
+  border-width: 1px;
+}
+#board-search .search-window .search-wrap .btn {
   width: 108px;
   padding: 0;
   font-size: 16px;
@@ -133,6 +185,8 @@
   color: #fff;
 }
 
+/* reset */
+
 * {
   list-style: none;
   text-decoration: none;
@@ -157,6 +211,9 @@
   width: 1px;
   height: 1px;
 }
+
+///////////////////////////////////
+
 #search{
    margin-left:45px;
 }
@@ -172,7 +229,6 @@
    min-width:180px;
    box-sizing:border-box;
    border:1px solid #999;
-   border-right:0;
 }
 .depth3 > ul > li.on {
    border:1px solid #A00000;
@@ -221,10 +277,10 @@ a {
 </section>
 
 <section class="page-section" id="members">
-  <div class="page-title">
+  <div class="page-title"><br><br>
       <div class="container" align=center>
-      <h2>관리자페이지</h2><br><br>
-     </div>
+      <h2>관리자페이지</h2>
+     </div><br><br><br>
    <div class="depth3">
       <ul>
          <li><a href="/fit/viewmember" >회원관리</a></li>
@@ -310,36 +366,53 @@ a {
 </div>
 
 <div id=refchange title='상태변경' style="display:none;">
-		<div>변경하실 상태를 고른 후 완료 를 눌러주세요.</div>
-			<select class="btn btn-dark" id=changeref>
-				<c:forEach items="${stat }" var="st">
-					<option value="${st.no_type }">${st.ref_name }</option>
-				</c:forEach>
-			</select>
-	<div style="margin-bottom: 15px;" align=center>
-		<input type="button" class="btn btn-dark" value="확인" id=refund2 name=refund2 ><br>
+	<br><p style="margin-left: 15px;">변경하실 상태를 고른 후 확인을 눌러주세요.</p>
+		<select style="margin-left: 20px; width:90%; height:45px;" class="btn btn-dark" id=changeref>
+			<c:forEach items="${stat }" var="st">
+				<option style="font-size:18; padding:5px;" value="${st.no_type }">${st.ref_name }</option>
+			</c:forEach>
+		</select><br><br>
+	<div style="margin-bottom: 15px;" align=right>
+		<input style=" border-radius: 5px;" type="button" class="btn btn-dark" value="확인" id=refund2 name=refund2 ><br>
 	</div>
 </div>
-
 
 <footer>
 <jsp:include page="../footer.jsp"/>
 </footer>
 </body>
-
-       
-        <!-- SimpleLightbox plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-        <!-- Core theme JS-->
-                <script src="<c:url value='/resources/js/scripts.js' />"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<!-- SimpleLightbox plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<!-- Core theme JS-->
+        <script src="<c:url value='/resources/js/scripts.js' />"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
 <script src='https://code.jquery.com/ui/1.13.0/jquery-ui.js'></script>
 <script>
+$("#findstat").keypress(function(e){
+	if(e.keyCode == 13) {
+		   $.ajax({url:'/fit/findstating',
+			      data:{find:$('#findstat').val(),stat:$("#stat option:selected").val()},
+			      dataType:'json',
+			      method:'GET',
+			      beforeSend:function(){
+			         $('#reftbl').empty();
+			      },
+			      success:function(data){
+						for(i=0;i<data.length;i++){
+							sports_name=data[i]['name'].split("  ");
+							let str="<tr><td><input type=checkbox id='check' name='check' value='"+data[i]['userid']+"'></td><td>"+data[i]['userid']+"</td><td>"+sports_name[0]+"</td><td>"+sports_name[1]+"</td><td>"
+									+data[i]['start']+"</td><td>"+data[i]['end']+"</td><td>"+data[i]['refund']+"</td></tr>"
+							$('#reftbl').append(str);
+						}
+			      }
+			})
+	  }
+ })
 let fitst="";
 let second="";
 let third="";
@@ -475,8 +548,9 @@ $(document)
          return false;
       }
 	$('#refchange').dialog({
-        width: 600,
+        width: 500,
         modal: true,
+        draggable: true
         })
 })   
 function loadticket(){
@@ -496,7 +570,7 @@ function loadticket(){
 				$('#reftbl').append(str);
 			}
 		}
-})
+	})
 }
 </script>
 </body>

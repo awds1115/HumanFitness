@@ -222,13 +222,6 @@ section.notice {
      width: 15%;
   }
 
-.top_btn{
-   font-size: 20px;
-  padding: 6px 12px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  font-weight: 600;
-}
 .pageInfo_wrap .pageInfo_area {
   padding: 15px 0;
   background-color: #f9f7f9;
@@ -258,14 +251,17 @@ section.notice {
 <section class="notice">
   <div class="page-title">
       <div class="container" align=center>
-          <h2>문의 사항</h2>
+          <h2><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-question-square" viewBox="0 0 16 16">
+			  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+			  <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+			</svg>&nbsp;&nbsp;문의 사항</h2>
       </div>
+	   <c:if test="${type==2}">
+	      <a href="/fit/QnA_enroll" style="float:right;margin-right:15%;">게시판 등록</a>
+	   </c:if>
   </div>
     
 <div class="table_wrap" align=center>
-   <c:if test="${type==2}">
-      <a href="/fit/QnA_enroll" class="top_btn">게시판 등록</a>
-   </c:if>
        <!-- board seach area -->
     <div id="board-search">
         <div class="container">
@@ -334,7 +330,7 @@ section.notice {
                 </c:if>    
             </ul>
         </div>
-    </div>
+    </div><br><br><br><br>
    <form id="moveForm" method="get">    
        <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
         <input type="hidden" name="amount" value="${pageMaker.cri.amount }">   
@@ -395,7 +391,29 @@ $(".pageInfo a").on("click", function(e){
     
 });
 
-
+$(".search-wrap input[name='keyword']").keypress(function(e){
+	if(e.keyCode == 13) {
+	    e.preventDefault();
+	    
+	    let type = $(".search-wrap select").val();
+	    let keyword = $(".search-wrap input[name='keyword']").val();
+	    
+	    if(!type){
+	        alert("검색 종류를 선택하세요.");
+	        return false;
+	    }
+	    
+	    if(!keyword){
+	        alert("키워드를 입력하세요.");
+	        return false;
+	    }        
+	    
+	    moveForm.find("input[name='type']").val(type);
+	    moveForm.find("input[name='keyword']").val(keyword);
+	    moveForm.find("input[name='pageNum']").val(1);
+	    moveForm.submit();
+	  }
+ })
 $(".search-wrap button").on("click", function(e){
     e.preventDefault();
     
