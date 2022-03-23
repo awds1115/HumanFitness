@@ -22,6 +22,9 @@
 <delete id="quitMember">
 	delete from Members where userid=#{param1};
 </delete>
+<delete id="quitMember2">
+	delete from mypage where userid=#{param1};
+</delete>
 <update id="bmicheck">
 	update mypage set weight=#{param2}, height=#{param3} where userid=#{param1};
 </update>
