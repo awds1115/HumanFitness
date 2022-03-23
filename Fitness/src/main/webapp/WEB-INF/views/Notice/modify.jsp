@@ -26,7 +26,160 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
     </head>
 <style>
+.container{
+padding: 0 100px;
+}
+textarea{
+	width: 1100px;
+    font-size: 15px; 
+    resize: none;
+    background-color: white;
+}
+form-control:disabled, .form-control[readonly] {
+    background-color: #fafafa;
+    opacity: 1;
+}
+.wdate{
+	padding-left: 2.25rem;
+    padding-bottom: 1rem;`
+    color: #BDBDBD;
+     font-size: 0.75rem; 
+    width:3%;
+}
+.wbtn{
+	padding-left: 2.25rem;
+    padding-bottom: 1rem;
+    color: #BDBDBD;
+     font-size: 0.75rem; 
+    width:20%;
+}
+.rp_parent{
+	margin-left: -30px;
+}
+.content,
+.writer{
+	padding-left: 2.25rem;
+}
+.icon_p{
+  padding-bottom: 4rem;
+}
+.icon_p2{
+   margin-left: 30px;
+  padding-bottom: 4rem;
+}
+a{ text-decoration:none;} 
+a:hover { 
+text-decoration:none;
+color: #BDBDBD;
+ }
+#p_content{
+     font-size: 15px; 
+    padding: 10px;
+    margin-right:1%;
+}
+////////////
 
+#board-search .search-window {
+  padding: 15px 0;
+  background-color: #f9f7f9;
+}
+#board-search .search-window .search-wrap {
+  position: relative;
+/* 	padding-right: 124px; */
+	display: block;
+	margin: 20px 0 20px 0;
+	float:right;
+}
+#board-search .search-window .search-wrapper {
+	overflow:hidden;
+	padding:0 1.3rem;
+}
+#board-search .search-window .search-wrap input {
+  height: 40px;
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid #ccc;
+}
+#board-search .search-window .search-wrap select {
+  height: 40px;
+  width: 300px;
+  align: left;
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid #ccc;
+}
+#board-search .search-window .search-wrap input:focus {
+  border-color: #333;
+  outline: 0;
+  border-width: 1px;
+}
+#board-search .search-window .search-wrap .btn {
+  width: 108px;
+  padding: 0;
+  font-size: 16px;
+  height:40px;
+  margin-bottom:1px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 5px 30px;
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  float:right;
+  
+}
+
+.btn-dark {
+  background: #555;
+  color: #fff;
+}
+
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+
+.btn-dark {
+  background: #555;
+  color: #fff;
+}
+
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+#list_btn,#modify_btn,#delete_btn,#p_insert_btn,#cancel_btn {
+	border-radius: 5px;
+	text-align:center;
+	vertical-align:middle;
+	border:1px solid #999;
+	border-radius:0;
+	padding-left: 19.5%;
+}
 
 
 
@@ -35,11 +188,11 @@
      <section class="page-section bg-dark text-white">
 		<jsp:include page="../header.jsp"/>
 	</section>
-        <div class="container2">
+        <div class="container">
            
-            <div class="row2">
+            <div class="row" align=center>
            
-                <div class="col-md-10">
+                <div align=center>
                   <hr/>
                   <form id="modifyForm" action="/fit/modify" method="post">
                     <table class="table table-condensed">
@@ -72,7 +225,7 @@
                                 <td>글쓴이
                                 </td>
                                 <td>
-                                <c:out value="${pageInfo.writer}"/> <span style='float:right'>조회 : 0</span>
+                                <c:out value="${pageInfo.writer}"/>
                                 </td>
                             </tr>
                             <tr>
@@ -89,21 +242,34 @@
                     </table>
                     <table id="commentTable" class="table table-condensed"></table>
                 
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <td>
-                                    <span style='float:right'>
-                                        <button type="button" id="list_btn" class="btn btn-default">목록</button>
+<!--                     <table class="table table-condensed"> -->
+<!--                         <thead> -->
+<!--                             <tr> -->
+<!--                                 <td> -->
+<!--                                     <span style='float:right'> -->
+<!--                                         <button type="button" id="list_btn" class="btn">목록</button> -->
+<%--                                         <c:if test="${nickname==pageInfo.writer}"> --%>
+<!--                                         <button type="button" id="modify_btn" class="btn btn-default">수정 완료</button> -->
+<!--                                         <button type="button" id="cancel_btn" class="btn btn-default">수정 취소</button> -->
+<%--                                         </c:if>	 --%>
+<!--                                     </span> -->
+<!--                                 </td> -->
+<!--                             </tr> -->
+<!--                         </thead> -->
+<!--                     </table> -->
+                    <div id="board-search">
+					        <div class="search-window">
+								<div class="search-wrapper">
+									<div style="width: 350px;" class="search-wrap">
+                                        <button type="button" id="list_btn" class="btn">목록</button>
                                         <c:if test="${nickname==pageInfo.writer}">
-                                        <button type="button" id="modify_btn" class="btn btn-default">수정 완료</button>
-                                        <button type="button" id="cancel_btn" class="btn btn-default">수정 취소</button>
+	                                        <button type="button" id="modify_btn" class="btn btn-default">완료</button>
+	                                        <button type="button" id="cancel_btn" class="btn btn-default">취소</button>
                                         </c:if>	
-                                    </span>
-                                </td>
-                            </tr>
-                        </thead>
-                    </table>
+                                     </div>
+								</div>
+							</div>
+					</div>
              	</form>
 		</div>
 </div>

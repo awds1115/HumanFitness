@@ -240,7 +240,7 @@ section.notice {
   font-weight: 500;
 }
 
- a:link {color:white; text-decoration: none;}
+ a:link {color:black; text-decoration: none;}
  a:visited {color:#333; text-decoration: none;}
 
   </style>
