@@ -64,6 +64,8 @@ public interface iMypage {
 
 	ArrayList<ticket> finddouble(String find, String stat);
 
+	void quitMember2(String userid);
+
 
 	
 }

@@ -337,19 +337,22 @@ public class MypageController {
 	    return ja.toString(); 
 	}
 	@ResponseBody
-	@RequestMapping(value="/quitMember",method=RequestMethod.POST)
+	@RequestMapping(value="/quitMember",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	public String quitMember(HttpServletRequest request, Model model) {
 		String retval="";
 	       try {
 	    	   String userid=request.getParameter("id");
 	    	   iMypage member=sqlSession.getMapper(iMypage.class);
+	    	   member.quitMember2(userid);
 	    	   member.quitMember(userid);
 	    	   
-//	    	   HttpSession session = request.getSession(true);
-//		       session.invalidate();
+	    	   
+	    	   HttpSession session = request.getSession(true);
+		       session.invalidate();
 	    	   retval="ok";
 	          
 	       } catch(Exception e) {
+	    	   System.out.println(e);
 	    	   retval="fail";
 	       }
 	       return retval;
