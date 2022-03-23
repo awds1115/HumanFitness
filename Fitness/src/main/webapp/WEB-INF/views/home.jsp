@@ -25,9 +25,9 @@
     <link type="text/css" href="${pageContext.request.contextPath}/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     
-    <!-- Custom styles for this template -->
-<!--     <link href="headers.css" rel="stylesheet"> -->
-<!-- https://www.bodychannel.co.kr/dist/img/main/slide_bg_4.jpg -->
+<style>
+
+</style>
     </head>
     <body id="page-top">
         <!-- Navigation-->

@@ -10,14 +10,13 @@
 <style>
 #navbarDarkDropdownMenuLink{color:rgba(255,255,255,0.7);}
 .navbar-shrink #navbarDarkDropdownMenuLink{color:#212529;}
-/* ul li태그에 리스트 스타일을 없앰 */
 	ul li{
 		list-style: none;
 	}
-/* a태그에 텍스트 밑줄을 없애고 색상을 #333 */
+
 	a {
 		text-decoration: none;
-/* 		color:white; */
+
 	}
 	#menu {
 	
@@ -81,7 +80,8 @@
 	                	<li class="nav-item"><a class="nav-link" href="signon">회원가입</a></li>
 	                </c:if>
 	                <c:if test="${type==1 }">
-						<li id=menu class="nav-item"><a href="#" id="navbarDarkDropdownMenuLink">${userid}</a>
+						<li id=menu class="nav-item">
+							<a href="#" id="navbarDarkDropdownMenuLink">${userid}</a>
 							<ul class="ulclass">
 								<li><a href="mypage">마이페이지</a></li>
 								<li><a href="viewmember">관리자페이지</a></li>
@@ -89,16 +89,16 @@
 							</ul>
 						</li>
 					</c:if>
-                    </ul>
-                    
-       			<c:if test="${type==2 }">
-						<li id=menu class="nav-item"><a href="#" id="navbarDarkDropdownMenuLink">${userid}</a>
+                	<c:if test="${type==2 }">
+						<li id=menu class="nav-item">
+							<a href="#" id="navbarDarkDropdownMenuLink">${userid}</a>
 							<ul class="ulclass">
 								<li><a href="mypage">마이페이지</a></li>
 								<li><a href="logout">로그아웃</a></li>
 							</ul>
 						</li>
 					</c:if>
+					</ul>
                 </div>
                 </div>
 

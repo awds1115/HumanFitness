@@ -45,25 +45,6 @@ ul li {
 input::placeholder {
   font-size: 11px;
 }
-/*        input[type=radio]{ */
-/*             background-color: #FFFF; */
-/*             -webkit-appearance: none; */
-/*             -moz-appearance: none; */
-/*             margin-left: 16px; */
-/*             border: 1px solid rgb(216, 216, 216); */
-/*             width: 50px; */
-/*             height: 35px; */
-/*         } */
-/*         input[type=radio]:checked{ */
-/*             background-color: rgb(25, 118, 248); */
-/*             -webkit-appearance: none; */
-/*             -moz-appearance: none; */
-/*             margin-left: 16px; */
-/*             border: none; */
-/*             width: 50px; */
-/*             height: 35px; */
- 
-/*         } */
 </style>
 <body>
 <div class="m_container" style="color:black;">
